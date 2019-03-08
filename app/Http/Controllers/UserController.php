@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\User;
+use App\Child;
 
 class UserController extends Controller
 {
@@ -13,7 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = Auth::user();
+        return view('admin.client.index')->with('users', $users);
     }
 
     /**
@@ -23,7 +27,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.client.create');
     }
 
     /**
@@ -34,7 +38,24 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'birthdate' => 'required',
+            'level' => 'required',
+            'batting' => 'required',
+            'throwing_hand' => 'required',
+            'condition' => 'required',
+        ]);
+            
+        $users = new Child;
+        $users->name = $request->name;
+        $users->birthdate = $request->birthdate;
+        $users->level = $request->level;
+        $users->batting = $request->batting;
+        $users->throwing_hand = $request->throwing_hand;
+        $users->special_medical_condition = $request->condition;
+        $users->save();
+        return redirect()->back();
     }
 
     /**

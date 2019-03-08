@@ -19,7 +19,7 @@ class CreateChildrenTable extends Migration
             $table->string('birthdate');
             $table->string('level');
             $table->string('batting');
-            $table->string('throwing_hard');
+            $table->string('throwing_hand');
             $table->string('special_medical_condition');
             $table->timestamps();
         });
