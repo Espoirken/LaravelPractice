@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Child;
 
 class ChildController extends Controller
 {
@@ -11,9 +12,15 @@ class ChildController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        //
+        $children = Child::all();
+        return view('admin.client.children.index')->with('children', $children);
     }
 
     /**
@@ -56,7 +63,8 @@ class ChildController extends Controller
      */
     public function edit($id)
     {
-        //
+        $child = Child::find($id);
+        return view('admin.client.children.edit')->with('child', $child);
     }
 
     /**
@@ -79,6 +87,8 @@ class ChildController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = Child::find($id);
+        $user->delete();
+        return redirect('admin/children');
     }
 }

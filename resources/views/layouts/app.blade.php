@@ -15,13 +15,14 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -33,7 +34,9 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('children')}}"><i class="fa fa-address-book" aria-hidden="true"></i> Children</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -76,5 +79,60 @@
             @yield('content')
         </main>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/additional-methods.min.js"></script>
+   <script>
+    $(document).ready(function () {
+    $('#client_create').validate({ // initialize the plugin
+        rules: {
+            name: {
+                required: true
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            number: {
+                required: true,
+                digits: true
+                
+            },
+            minlength: {
+                required: true,
+                minlength: 5
+                
+            },
+            maxlength: {
+                required: true,
+                maxlength: 8
+                
+            },
+            minvalue: {
+                required: true,
+                min: 1
+                
+            },
+            maxvalue: {
+                required: true,
+                max: 100
+                
+            },
+            range: {
+                required: true,
+                range: [20, 40]
+                
+            },
+            url: {
+            required: true,
+            url: true
+            },
+            filename: {
+                required: true,
+                extension: "jpeg|png"
+            },
+        }
+    });
+});
+</script>
 </body>
 </html>

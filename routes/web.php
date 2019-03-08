@@ -21,6 +21,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
 
+//Client Controller
 Route::get('/client', [
     'uses' => 'UserController@index',
     'as' => 'client',
@@ -51,7 +52,36 @@ Route::get('/client/delete/{id}', [
     'as' => 'client.delete',
 ]);
 
+//Children Controller
+Route::get('/children', [
+    'uses' => 'ChildController@index',
+    'as' => 'children',
+]);
 
+Route::get('/child/create', [
+    'uses' => 'ChildController@create',
+    'as' => 'child.create',
+]);
+
+Route::post('/child/store', [
+    'uses' => 'ChildController@store',
+    'as' => 'child.store',
+]);
+
+Route::get('/child/edit/{id}', [
+    'uses' => 'ChildController@edit',
+    'as' => 'child.edit',
+]);
+
+Route::post('/child/update/{id}', [
+    'uses' => 'ChildController@update',
+    'as' => 'child.update',
+]);
+
+Route::get('/child/delete/{id}', [
+    'uses' => 'ChildController@destroy',
+    'as' => 'child.delete',
+]);
 
 });
     

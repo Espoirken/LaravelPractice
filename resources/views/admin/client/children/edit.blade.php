@@ -1,29 +1,29 @@
 @extends('layouts.app')
 @section('content')
-@include('inc.messages')
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-8 offset-lg-2">
             <div class="card">
                 <div class="card-body">
-                    {{-- <a href="{{ route('client')}}" class="btn btn-sm btn-primary float-right"><i class="fa fa-search"></i> Show all books</a> --}}
-                    <div class="card-title"><h2>Create a new Child</h2></div>
+                    <a href="{{ route('children')}}" class="btn btn-sm btn-primary float-right"><i class="fa fa-arrow-left"></i> Back</a>
+                    <div class="card-title"><h2>Edit Child</h2></div>
                     <hr>
-                    <form action="{{ route('client.store') }}" id="client_create" method="POST">
+                    <form action="{{ route('client.store') }}" method="POST">
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input type="text" name="name" class="form-control">
+                            <input type="text" name="name" class="form-control" value="{{$child->name}}">
                         </div>
                         <div class="form-group">
                             <label for="birthdate">Date of Birth</label>
-                            <input type="datetime-local" name="birthdate" class="form-control">
+                            <input type="datetime-local" name="birthdate" class="form-control" value="{{$child->birthdate}}">
                         </div>
 
                         <div class="form-group">
                             <label for="status">Level</label>
                             <select class="form-control" name="level">
-                                <option value="" hidden></option>
+                                <option value="{{$child->level}}" hidden>{{$child->level}}</option>
                                 <option value="Admin">Admin</option>
                                 <option value="Coach">Coach</option>
                             </select>
@@ -31,7 +31,7 @@
                         <div class="form-group">
                             <label for="batting">Batting</label>
                             <select class="form-control" name="batting">
-                                <option value="" hidden></option>
+                                <option value="{{$child->batting}}">{{$child->batting}}</option>
                                 <option value="Left">Left</option>
                                 <option value="Right">Right</option>
                                 <option value="Both">Both</option>
@@ -40,7 +40,7 @@
                         <div class="form-group">
                             <label for="throwing_hand">Throwing Hand</label>
                             <select class="form-control" name="throwing_hand">
-                                <option value="" hidden></option>
+                                <option value="{{$child->throwing_hand}}" hidden>{{$child->throwing_hand}}</option>
                                 <option value="Left">Left</option>
                                 <option value="Right">Right</option>
                                 <option value="Both">Both</option>
@@ -48,7 +48,7 @@
                         </div>
                         <div class="form-group">
                             <label for="condition">Special or Medical Condition</label>
-                            <input type="text" name="condition" class="form-control">
+                            <input type="text" name="condition" class="form-control" value="{{$child->special_medical_condition}}">
                         </div>
                         <div class="form-group">
                             <div class="text-center">

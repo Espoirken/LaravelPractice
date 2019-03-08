@@ -2,11 +2,12 @@
 @section('content')
 <div class="container-fluid">
     <div class="card">
+    <div class="card-header">
+            <h3 class="card-title">View Account Information</h3>
+    </div>
         <div class="card-body">
             <div class="row">
-            <div class="col-lg-4"><h3 class="card-title">View Account Information</h3></div>
-            <hr>
-            <div class="col-lg-4">
+            <div class="col-lg-8">
             {{-- <form class="form-inline" action="{{ route('search.client')}}" method="POST">
                 <div class="form-group">
                     @csrf

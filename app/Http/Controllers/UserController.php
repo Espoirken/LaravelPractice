@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\User;
 use App\Child;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -14,6 +14,11 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $users = Auth::user();
@@ -46,16 +51,17 @@ class UserController extends Controller
             'throwing_hand' => 'required',
             'condition' => 'required',
         ]);
-            
         $users = new Child;
+        // dd($request->expiration);
         $users->name = $request->name;
-        $users->birthdate = $request->birthdate;
+        $users->birthdate = Carbon::parse($request->birthdate);
         $users->level = $request->level;
         $users->batting = $request->batting;
         $users->throwing_hand = $request->throwing_hand;
+        $users->expiration = Carbon::parse($request->expiration);
         $users->special_medical_condition = $request->condition;
         $users->save();
-        return redirect()->back();
+        return redirect('admin/children');
     }
 
     /**
@@ -100,6 +106,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+
     }
 }
