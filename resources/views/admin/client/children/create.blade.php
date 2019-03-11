@@ -9,7 +9,7 @@
                     {{-- <a href="{{ route('client')}}" class="btn btn-sm btn-primary float-right"><i class="fa fa-search"></i> Show all books</a> --}}
                     <div class="card-title"><h2>Create a new Child</h2></div>
                     <hr>
-                    <form action="{{ route('client.store') }}" id="client_create" method="POST">
+                    <form action="{{ route('child.store') }}" id="child_create" method="POST">
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label for="name">Name</label>
@@ -19,9 +19,8 @@
                             <label for="birthdate">Date of Birth</label>
                             <input type="date" name="birthdate" class="form-control">
                         </div>
-
                         <div class="form-group">
-                            <label for="status">Level</label>
+                            <label for="level">Level</label>
                             <select class="form-control" name="level">
                                 <option value="" hidden></option>
                                 <option value="Admin">Admin</option>

@@ -22,9 +22,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
 
 //Client Controller
-Route::get('/client', [
+Route::get('/clients', [
     'uses' => 'UserController@index',
-    'as' => 'client',
+    'as' => 'clients',
+]);
+
+Route::get('/', [
+    'uses' => 'UserController@detail',
+    'as' => 'info',
 ]);
 
 Route::get('/client/create', [
@@ -50,6 +55,11 @@ Route::post('/client/update/{id}', [
 Route::get('/client/delete/{id}', [
     'uses' => 'UserController@destroy',
     'as' => 'client.delete',
+]);
+
+Route::any('/client/search', [
+    'uses' => 'UserController@search',
+    'as' => 'client.search',
 ]);
 
 //Children Controller
@@ -86,6 +96,42 @@ Route::get('/child/delete/{id}', [
 Route::any('/child/search', [
     'uses' => 'ChildController@search',
     'as' => 'child.search',
+]);
+
+//Event Controller
+Route::get('/events', [
+    'uses' => 'EventController@index',
+    'as' => 'events',
+]);
+
+Route::get('/event/create', [
+    'uses' => 'EventController@create',
+    'as' => 'event.create',
+]);
+
+Route::post('/event/store', [
+    'uses' => 'EventController@store',
+    'as' => 'event.store',
+]);
+
+Route::get('/event/edit/{id}', [
+    'uses' => 'EventController@edit',
+    'as' => 'event.edit',
+]);
+
+Route::post('/event/update/{id}', [
+    'uses' => 'EventController@update',
+    'as' => 'event.update',
+]);
+
+Route::get('/event/delete/{id}', [
+    'uses' => 'EventController@destroy',
+    'as' => 'event.delete',
+]);
+
+Route::any('/events/search', [
+    'uses' => 'EventController@search',
+    'as' => 'event.search',
 ]);
 
 });

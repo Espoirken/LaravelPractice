@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Child;
+use App\User;
 use Carbon\Carbon;
+use Symfony\Component\HttpKernel\Client;
 
 class UserController extends Controller
 {
@@ -21,8 +22,8 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = Auth::user();
-        return view('admin.client.index')->with('users', $users);
+        $clients = User::paginate(10);
+        return view('admin.client.index')->with('clients', $clients);
     }
 
     /**
@@ -32,7 +33,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        // return view('admin.client.create');
+        return view('admin.client.create');
     }
 
     /**
@@ -43,26 +44,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        // $this->validate($request, [
-        //     'name' => 'required',
-        //     'birthdate' => 'required',
-        //     'level' => 'required',
-        //     'batting' => 'required',
-        //     'throwing_hand' => 'required',
-        //     'condition' => 'required',
-        // ]);
-        // $users = new Child;
-        // // dd($request->expiration);
-        // $users->name = $request->name;
-        // $users->birthdate = $request->birthdate;
-        // $users->level = $request->level;
-        // $users->batting = $request->batting;
-        // $users->throwing_hand = $request->throwing_hand;
-        // $users->expiration = Carbon::parse($request->expiration);
-        // $users->special_medical_condition = $request->condition;
-        // $users->save();
-        // toastr()->success('Child was created successfully!');
-        // return redirect('admin/children');
+        //
     }
 
     /**
@@ -108,5 +90,23 @@ class UserController extends Controller
     public function destroy($id)
     {
 
+    }
+
+    public function detail()
+    {
+        $users = Auth::user();
+        return view('admin.index')->with('users', $users);
+    }
+    
+    public function search(Request $request)
+    {       
+        $clients = User::where('username', 'like', '%' . request('search') . '%')
+        ->orWhere('first_name', 'like', '%' . request('search') . '%')
+        ->orWhere('middle_name', 'like', '%' . request('search') . '%')
+        ->orWhere('last_name', 'like', '%' . request('search') . '%')
+        ->orWhere('email', 'like', '%' . request('search') . '%')
+        ->orWhere('status', 'like', '%' . request('search') . '%')
+        ->paginate(10);
+        return view('admin.client.index')->with('clients', $clients);
     }
 }

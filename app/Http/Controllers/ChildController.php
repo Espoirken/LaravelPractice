@@ -130,6 +130,7 @@ class ChildController extends Controller
     {
         $user = Child::find($id);
         $user->delete();
+        toastr()->success('Child was deleted successfully!');
         return redirect('admin/children');
     }
     
@@ -143,7 +144,6 @@ class ChildController extends Controller
         ->orWhere('throwing_hand', 'like', '%' . request('search') . '%')
         ->orWhere('special_medical_condition', 'like', '%' . request('search') . '%')
         ->paginate(10);
-        toastr()->success('Child was deleted successfully!');
         return view('admin.client.children.index')->with('children', $children);
     }
 }

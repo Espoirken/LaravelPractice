@@ -26,7 +26,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ route('info') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -41,6 +41,12 @@
                             <a class="nav-link" href="{{ route('children')}}"><i class="fa fa-address-book" aria-hidden="true"></i> Children</a>
                             @endcan
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('events')}}"><i class="fa fa-address-book" aria-hidden="true"></i> Events</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('clients')}}"><i class="fa fa-users" aria-hidden="true"></i> Clients</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -50,11 +56,13 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
+                            @can('isClient')
                             @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
+                            @endcan
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -87,7 +95,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/additional-methods.min.js"></script>
    <script>
     $(document).ready(function () {
-    $('#client_create').validate({
+    $('#child_create').validate({
         rules: {
             name: {
                 required: true
@@ -103,10 +111,39 @@
             },
             throwing_hand: {
                 required: true,
-                maxlength: 8
-                
             },
             condition: {
+                required: true,
+            },
+        }
+    });
+    $('#client_create').validate({
+        rules: {
+            username: {
+                required: true
+            },
+            email: {
+                required: true,
+            },
+            password: {
+                required: true,
+            },
+            first_name: {
+                required: true,
+            },
+            last_name: {
+                required: true,
+            },
+            landline: {
+                required: true,
+            },
+            mobile: {
+                required: true,
+            },
+            expiration: {
+                required: true,
+            },
+            status: {
                 required: true,
             },
         }
