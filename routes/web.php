@@ -62,6 +62,11 @@ Route::any('/client/search', [
     'as' => 'client.search',
 ]);
 
+Route::get('/client/view/{id}', [
+    'uses' => 'UserController@show',
+    'as' => 'client.show',
+]);
+
 //Children Controller
 Route::get('/children', [
     'uses' => 'ChildController@index',
@@ -132,6 +137,37 @@ Route::get('/event/delete/{id}', [
 Route::any('/events/search', [
     'uses' => 'EventController@search',
     'as' => 'event.search',
+]);
+
+//Super Admin Controller
+Route::get('/admins', [
+    'uses' => 'AdminController@index',
+    'as' => 'admin',
+]);
+
+Route::get('/create', [
+    'uses' => 'AdminController@create',
+    'as' => 'admin.create',
+]);
+
+Route::post('/store', [
+    'uses' => 'AdminController@store',
+    'as' => 'admin.store',
+]);
+
+Route::get('/edit/{id}', [
+    'uses' => 'AdminController@edit',
+    'as' => 'admin.edit',
+]);
+
+Route::post('/update/{id}', [
+    'uses' => 'AdminController@update',
+    'as' => 'admin.update',
+]);
+
+Route::get('/delete/{id}', [
+    'uses' => 'AdminController@destroy',
+    'as' => 'admin.delete',
 ]);
 
 });

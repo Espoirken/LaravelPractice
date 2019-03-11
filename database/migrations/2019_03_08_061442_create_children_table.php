@@ -23,6 +23,7 @@ class CreateChildrenTable extends Migration
             $table->string('batting');
             $table->string('throwing_hand');
             $table->string('special_medical_condition');
+            $table->string('status')->default('Active');
             $table->timestamps();
         });
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Child;
 use Gate;
+use Carbon\Carbon;
 
 class ChildController extends Controller
 {
@@ -54,16 +55,16 @@ class ChildController extends Controller
             'throwing_hand' => 'required',
             'condition' => 'required',
         ]);
-        $users = new Child;
-        // dd($request->expiration);
-        $users->name = $request->name;
-        $users->birthdate = $request->birthdate;
-        $users->level = $request->level;
-        $users->batting = $request->batting;
-        $users->throwing_hand = $request->throwing_hand;
-        $users->expiration = Carbon::parse($request->expiration);
-        $users->special_medical_condition = $request->condition;
-        $users->save();
+        $child = new Child;
+        $child->name = $request->name;
+        $child->birthdate = $request->birthdate;
+        $child->level = $request->level;
+        $child->batting = $request->batting;
+        $child->throwing_hand = $request->throwing_hand;
+        $child->expiration = Carbon::parse($request->expiration);
+        $child->special_medical_condition = $request->condition;
+        $child->status = 'Active';
+        $child->save();
         toastr()->success('Child was created successfully!');
         return redirect('admin/children');
     }
@@ -115,6 +116,7 @@ class ChildController extends Controller
         $child->batting = $request->batting;
         $child->throwing_hand = $request->throwing_hand;
         $child->special_medical_condition = $request->condition;
+        $child->status = 'Active';
         $child->save();
         toastr()->success('Child was updated successfully!');
         return redirect()->back();

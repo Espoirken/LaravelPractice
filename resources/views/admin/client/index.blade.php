@@ -24,6 +24,7 @@
                         <th>NAME</th>
                         <th>EMAIL</th>
                         <th>STATUS</th>
+                        <th>VIEW</th>
                         <th>EDIT</th>
                         <th>DELETE</th>
                     </tr>
@@ -36,6 +37,7 @@
                         <td>{{$client->first_name}} {{$client->middle_name}} {{$client->last_name}}</td>
                         <td>{{$client->email}}</td>
                         <td>{{$client->status}}</td>
+                        <td><a class="btn btn-sm btn-primary" href="{{ route('client.show', ['id' => $client->id ])}}"><i class="fa fa-search"></i> Show Children</a></td>
                         <td><a class="btn btn-sm btn-primary" href="{{ route('client.edit', ['id' => $client->id ])}}"><i class="fa fa-edit"></i> Edit</a></td>
                         <td><a class="btn btn-sm btn-danger" href="{{ route('client.delete', ['id' => $client->id])}}" onclick="return confirm('Are you sure?')"><i class="fa fa-trash" aria-hidden="true"></i> Trash</a></td>
                     </tr>
