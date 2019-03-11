@@ -24,7 +24,7 @@ class ChildController extends Controller
             abort(404);
         }
 
-        $children = Child::all();
+        $children = Child::paginate(10);
         return view('admin.client.children.index')->with('children', $children);
     }
 
@@ -35,7 +35,7 @@ class ChildController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.client.children.create');
     }
 
     /**
@@ -46,7 +46,26 @@ class ChildController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'birthdate' => 'required',
+            'level' => 'required',
+            'batting' => 'required',
+            'throwing_hand' => 'required',
+            'condition' => 'required',
+        ]);
+        $users = new Child;
+        // dd($request->expiration);
+        $users->name = $request->name;
+        $users->birthdate = $request->birthdate;
+        $users->level = $request->level;
+        $users->batting = $request->batting;
+        $users->throwing_hand = $request->throwing_hand;
+        $users->expiration = Carbon::parse($request->expiration);
+        $users->special_medical_condition = $request->condition;
+        $users->save();
+        toastr()->success('Child was created successfully!');
+        return redirect('admin/children');
     }
 
     /**
@@ -95,9 +114,10 @@ class ChildController extends Controller
         $child->level = $request->level;
         $child->batting = $request->batting;
         $child->throwing_hand = $request->throwing_hand;
-        $child->condition = $request->condition;
+        $child->special_medical_condition = $request->condition;
         $child->save();
-        return redirect('/admin/children');
+        toastr()->success('Child was updated successfully!');
+        return redirect()->back();
     }
 
     /**
@@ -111,5 +131,19 @@ class ChildController extends Controller
         $user = Child::find($id);
         $user->delete();
         return redirect('admin/children');
+    }
+    
+    public function search(Request $request)
+    {       
+        $children = Child::where('name', 'like', '%' . request('search') . '%')
+        ->orWhere('credits', 'like', '%' . request('search') . '%')
+        ->orWhere('expiration', 'like', '%' . request('search') . '%')
+        ->orWhere('level', 'like', '%' . request('search') . '%')
+        ->orWhere('batting', 'like', '%' . request('search') . '%')
+        ->orWhere('throwing_hand', 'like', '%' . request('search') . '%')
+        ->orWhere('special_medical_condition', 'like', '%' . request('search') . '%')
+        ->paginate(10);
+        toastr()->success('Child was deleted successfully!');
+        return view('admin.client.children.index')->with('children', $children);
     }
 }

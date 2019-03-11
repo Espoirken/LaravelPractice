@@ -32,7 +32,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.client.create');
+        // return view('admin.client.create');
     }
 
     /**
@@ -43,25 +43,26 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'birthdate' => 'required',
-            'level' => 'required',
-            'batting' => 'required',
-            'throwing_hand' => 'required',
-            'condition' => 'required',
-        ]);
-        $users = new Child;
-        // dd($request->expiration);
-        $users->name = $request->name;
-        $users->birthdate = Carbon::parse($request->birthdate);
-        $users->level = $request->level;
-        $users->batting = $request->batting;
-        $users->throwing_hand = $request->throwing_hand;
-        $users->expiration = Carbon::parse($request->expiration);
-        $users->special_medical_condition = $request->condition;
-        $users->save();
-        return redirect('admin/children');
+        // $this->validate($request, [
+        //     'name' => 'required',
+        //     'birthdate' => 'required',
+        //     'level' => 'required',
+        //     'batting' => 'required',
+        //     'throwing_hand' => 'required',
+        //     'condition' => 'required',
+        // ]);
+        // $users = new Child;
+        // // dd($request->expiration);
+        // $users->name = $request->name;
+        // $users->birthdate = $request->birthdate;
+        // $users->level = $request->level;
+        // $users->batting = $request->batting;
+        // $users->throwing_hand = $request->throwing_hand;
+        // $users->expiration = Carbon::parse($request->expiration);
+        // $users->special_medical_condition = $request->condition;
+        // $users->save();
+        // toastr()->success('Child was created successfully!');
+        // return redirect('admin/children');
     }
 
     /**

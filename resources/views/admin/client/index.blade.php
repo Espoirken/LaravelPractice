@@ -16,7 +16,7 @@
                 </div>
             </form> --}}
             </div>
-            <div class="col-lg-1 offset-lg-3"><a href="{{ route('client.create')}}"  class="btn btn-sm btn-success float-right"><i class="fa fa-plus"></i> Create New Client</a></div>
+            <div class="col-lg-1 offset-lg-3"><a href="{{ route('child.create')}}"  class="btn btn-sm btn-success float-right"><i class="fa fa-plus"></i> Create New Client</a></div>
             </div>
             <div class="form-group row">
                 <label for="staticEmail" class="col-sm-2 col-form-label">Username</label>

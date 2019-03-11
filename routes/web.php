@@ -83,5 +83,10 @@ Route::get('/child/delete/{id}', [
     'as' => 'child.delete',
 ]);
 
+Route::any('/child/search', [
+    'uses' => 'ChildController@search',
+    'as' => 'child.search',
+]);
+
 });
     

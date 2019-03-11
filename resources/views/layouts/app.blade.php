@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    @toastr_js
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -19,6 +20,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @toastr_css
 </head>
 <body>
     <div id="app">
@@ -85,7 +87,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/additional-methods.min.js"></script>
    <script>
     $(document).ready(function () {
-    $('#client_create').validate({ // initialize the plugin
+    $('#client_create').validate({
         rules: {
             name: {
                 required: true
@@ -111,5 +113,6 @@
     });
 });
 </script>
+@toastr_render
 </body>
 </html>

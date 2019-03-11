@@ -9,7 +9,7 @@
                     <a href="{{ route('children')}}" class="btn btn-sm btn-primary float-right"><i class="fa fa-arrow-left"></i> Back</a>
                     <div class="card-title"><h2>Edit Child</h2></div>
                     <hr>
-                    <form action="{{ route('client.update', ['id' => $child->id]) }}" method="POST">
+                    <form action="{{ route('child.update', ['id' => $child->id]) }}" id="client_create" method="POST">
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label for="name">Name</label>
@@ -17,24 +17,38 @@
                         </div>
                         <div class="form-group">
                             <label for="birthdate">Date of Birth</label>
-                            <input type="text" name="birthdate" class="form-control" value="{{$child->birthdate}}">
+                            <input type="date" name="birthdate" class="form-control" value="{{$child->birthdate}}">
                         </div>
-
+                        
                         <div class="form-group">
                             <label for="status">Level</label>
                             <select class="form-control" name="level">
-                                <option value="{{$child->level}}" hidden>{{$child->level}}</option>
-                                <option value="Admin">Admin</option>
-                                <option value="Coach">Coach</option>
+                                @php
+                                    $levels = array("Admin", "Coach");
+                                @endphp
+                                @foreach ($levels as $level)
+                                @if ($child->level == $level)
+                                <option value="{{$level}}" selected>{{$level}}</option>
+                                @else
+                                <option value="{{$level}}">{{$level}}</option>
+                                @endif
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="batting">Batting</label>
                             <select class="form-control" name="batting">
-                                <option value="{{$child->batting}}">{{$child->batting}}</option>
-                                <option value="Left">Left</option>
-                                <option value="Right">Right</option>
-                                <option value="Both">Both</option>
+                                @php
+                                    $battings = array("Left", "Right", "Both");
+                                @endphp 
+
+                                @foreach ($battings as $batting)
+                                @if ( $child->batting == $batting)
+                                    <option value="{{$batting}}" selected>{{$batting}}</option>
+                                @else
+                                    <option value="{{$batting}}">{{$batting}}</option>
+                                @endif  
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
@@ -46,12 +60,11 @@
 
                                 @foreach ($throwing_hand as $throw)
                                 @if ( $child->throwing_hand == $throw)
-                                    <option value="{{$child->throwing_hand}}">{{$child->throwing_hand}}</option>
+                                    <option value="{{$throw}}" selected>{{$throw}}</option>
                                 @else
                                     <option value="{{$throw}}">{{$throw}}</option>
                                 @endif  
                                 @endforeach
-                                
                             </select>
                         </div>
                         <div class="form-group">
@@ -60,7 +73,7 @@
                         </div>
                         <div class="form-group">
                             <div class="text-center">
-                                <button class="btn btn-success" type="submit">Add Child</button>
+                                <button class="btn btn-success" type="submit">Update Child</button>
                             </div>
                         </div>
                     </form>

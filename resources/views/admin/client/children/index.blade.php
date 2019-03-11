@@ -4,17 +4,17 @@
     <div class="card">
         <div class="card-body">
             <div class="row">
-            <div class="col-lg-2"><h2 class="card-title">Clients</h2></div>
+            <div class="col-lg-2"><h2 class="card-title">Children</h2></div>
             <div class="col-lg-6">
-            {{-- <form class="form-inline" action="{{ route('search.client')}}" method="POST">
+            <form class="form-inline" action="{{ route('child.search')}}" method="POST">
                 <div class="form-group">
                     @csrf
-                    <input type="text" name="search" class="form-control mx-sm-3" style="width:600px" placeholder="Search a book...">
+                    <input type="text" name="search" class="form-control mx-sm-3" style="width:600px" placeholder="Search a child...">
                     <input type="submit" class="btn btn-primary" class="form-control" value="Search">
                 </div>
-            </form> --}}
+            </form>
             </div>
-            <div class="col-lg-1 offset-lg-3"><a href="{{ route('client.create')}}"  class="btn btn-sm btn-success float-right"><i class="fa fa-plus"></i> Create New Children</a></div>
+            <div class="col-lg-1 offset-lg-3"><a href="{{ route('child.create')}}"  class="btn btn-sm btn-success float-right"><i class="fa fa-plus"></i> Create New Children</a></div>
             </div>
             <table class="table">
                 
@@ -32,7 +32,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    
+                    @if (count($children) > 0)
                     @foreach ($children as $child)
                     <tr>
                         <td>{{$child->name}}</td>
@@ -46,12 +46,15 @@
                         <td><a class="btn btn-sm btn-danger" href="{{ route('child.delete', ['id' => $child->id])}}" onclick="return confirm('Are you sure?')"><i class="fa fa-trash" aria-hidden="true"></i> Trash</a></td>
                     </tr>
                     @endforeach
-                        {{-- <tr>
-                            <th colspan="10" class="text-center">No books found</th>
-                        </tr> --}}
+                    @else
+                        <tr>
+                            <th colspan="10" class="text-center">No children found</th>
+                        </tr>
+                    @endif
                 </tbody>
             </table>
         </div>
+        <div class="d-flex justify-content-center" >{{$children->links()}}</div> 
     </div>
 </div>
 @endsection

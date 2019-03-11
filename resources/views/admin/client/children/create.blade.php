@@ -17,7 +17,7 @@
                         </div>
                         <div class="form-group">
                             <label for="birthdate">Date of Birth</label>
-                            <input type="datetime-local" name="birthdate" class="form-control">
+                            <input type="date" name="birthdate" class="form-control">
                         </div>
 
                         <div class="form-group">
