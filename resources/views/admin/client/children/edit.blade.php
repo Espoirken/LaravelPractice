@@ -9,7 +9,7 @@
                     <a href="{{ route('children')}}" class="btn btn-sm btn-primary float-right"><i class="fa fa-arrow-left"></i> Back</a>
                     <div class="card-title"><h2>Edit Child</h2></div>
                     <hr>
-                    <form action="{{ route('client.store') }}" method="POST">
+                    <form action="{{ route('client.update', ['id' => $child->id]) }}" method="POST">
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label for="name">Name</label>
@@ -17,7 +17,7 @@
                         </div>
                         <div class="form-group">
                             <label for="birthdate">Date of Birth</label>
-                            <input type="datetime-local" name="birthdate" class="form-control" value="{{$child->birthdate}}">
+                            <input type="text" name="birthdate" class="form-control" value="{{$child->birthdate}}">
                         </div>
 
                         <div class="form-group">
@@ -40,10 +40,18 @@
                         <div class="form-group">
                             <label for="throwing_hand">Throwing Hand</label>
                             <select class="form-control" name="throwing_hand">
-                                <option value="{{$child->throwing_hand}}" hidden>{{$child->throwing_hand}}</option>
-                                <option value="Left">Left</option>
-                                <option value="Right">Right</option>
-                                <option value="Both">Both</option>
+                                @php
+                                    $throwing_hand = array("Left", "Right", "Both");
+                                @endphp 
+
+                                @foreach ($throwing_hand as $throw)
+                                @if ( $child->throwing_hand == $throw)
+                                    <option value="{{$child->throwing_hand}}">{{$child->throwing_hand}}</option>
+                                @else
+                                    <option value="{{$throw}}">{{$throw}}</option>
+                                @endif  
+                                @endforeach
+                                
                             </select>
                         </div>
                         <div class="form-group">

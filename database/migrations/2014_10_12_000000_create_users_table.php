@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('mobile');
             $table->dateTime('expiration');
             $table->string('status');
+            $table->string('roles')->default('client');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Child;
+use Gate;
 
 class ChildController extends Controller
 {
@@ -19,6 +20,10 @@ class ChildController extends Controller
 
     public function index()
     {
+        if (!Gate::allows('isClient')) {
+            abort(404);
+        }
+
         $children = Child::all();
         return view('admin.client.children.index')->with('children', $children);
     }
@@ -76,7 +81,23 @@ class ChildController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'birthdate' => "required",
+            'level' => 'required',
+            'batting' => 'required',
+            'throwing_hand' => 'required',
+            'condition' => 'required',
+        ]);
+        $child = Child::find($id);
+        $child->name = $request->name;
+        $child->birthdate = $request->birthdate;
+        $child->level = $request->level;
+        $child->batting = $request->batting;
+        $child->throwing_hand = $request->throwing_hand;
+        $child->condition = $request->condition;
+        $child->save();
+        return redirect('/admin/children');
     }
 
     /**

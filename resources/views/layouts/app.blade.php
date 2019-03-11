@@ -10,7 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -35,7 +35,9 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
+                            @can('isClient')
                             <a class="nav-link" href="{{ route('children')}}"><i class="fa fa-address-book" aria-hidden="true"></i> Children</a>
+                            @endcan
                         </li>
                     </ul>
 
@@ -79,8 +81,8 @@
             @yield('content')
         </main>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/additional-methods.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/additional-methods.min.js"></script>
    <script>
     $(document).ready(function () {
     $('#client_create').validate({ // initialize the plugin
@@ -88,47 +90,22 @@
             name: {
                 required: true
             },
-            email: {
+            birthdate: {
                 required: true,
-                email: true
             },
-            number: {
+            level: {
                 required: true,
-                digits: true
-                
             },
-            minlength: {
+            batting: {
                 required: true,
-                minlength: 5
-                
             },
-            maxlength: {
+            throwing_hand: {
                 required: true,
                 maxlength: 8
                 
             },
-            minvalue: {
+            condition: {
                 required: true,
-                min: 1
-                
-            },
-            maxvalue: {
-                required: true,
-                max: 100
-                
-            },
-            range: {
-                required: true,
-                range: [20, 40]
-                
-            },
-            url: {
-            required: true,
-            url: true
-            },
-            filename: {
-                required: true,
-                extension: "jpeg|png"
             },
         }
     });
