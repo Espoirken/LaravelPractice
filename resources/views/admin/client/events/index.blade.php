@@ -25,11 +25,7 @@
                         <th>TITLE</th>
                         <th>DETAILS</th>
                         <th>STATUS</th>
-                        @can('isClient')
                         <th>ATTEND</th>
-                        @else
-                        <th>ATTENDEES</th>
-                        @endcan
                         @can('isAdmin')
                         <th>EDIT</th>
                         <th>DELETE</th>
@@ -46,7 +42,7 @@
                         @can('isClient')
                         <td><a class="btn btn-sm btn-secondary" href="{{ route('event.attend', ['id' => $event->id ]) }}"><i class="fa fa-plus"></i> Attend</a></td>
                         @else
-                        <td><a class="btn btn-sm btn-secondary" href="{{ route('event.attend', ['id' => $event->id ]) }}"><i class="fa fa-search"></i> Attendees</a></td>
+                        <td><a class="btn btn-sm btn-secondary" href="{{ route('event.attendees', ['id' => $event->id ]) }}"><i class="fa fa-search"></i> Attendees</a></td>
                         @endcan
                         @can('isAdmin')
                         <td><a class="btn btn-sm btn-primary" href="{{ route('event.edit', ['id' => $event->id ])}}"><i class="fa fa-edit"></i> Edit</a></td>

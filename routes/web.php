@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 
@@ -141,6 +141,11 @@ Route::any('/events/search', [
 Route::any('/event/attend/{id}', [
     'uses' => 'EventController@attend',
     'as' => 'event.attend',
+]);
+
+Route::any('/event/attendees/{id}', [
+    'uses' => 'EventController@attendees',
+    'as' => 'event.attendees',
 ]);
 
 Route::any('/event/join/{event_id}/child/{child_id}', [

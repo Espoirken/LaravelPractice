@@ -23,11 +23,11 @@ class UserController extends Controller
 
     public function index()
     {
-        if (!Gate::allows('isAdmin')) {
-            abort(404);
+        if (Gate::allows('isAdmin')||Gate::allows('isCoach')) {
+            $clients = User::where('roles', 'Client')->paginate(10);
+            return view('admin.client.index')->with('clients', $clients);
         }
-        $clients = User::paginate(10);
-        return view('admin.client.index')->with('clients', $clients);
+        abort(404);
     }
 
     /**
@@ -90,11 +90,12 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        if (!Gate::allows('isAdmin')) {
-            abort(404);
+        if (Gate::allows('isAdmin')||Gate::allows('isCoach')) {
+            $users = User::find($id);
+            return view('admin.client.show')->with('users', $users);
         }
-        $users = User::find($id);
-        return view('admin.client.show')->with('users', $users);
+        abort(404);
+        
     }
 
     /**

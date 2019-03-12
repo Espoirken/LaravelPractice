@@ -56,7 +56,11 @@
                             <a class="nav-link" href="{{ route('admin') }}"><i class="fa fa-list" aria-hidden="true"></i>List of Admins</a>
                         </li>
                         @endcan
-                        
+                        @can('isCoach')
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('clients')}}"><i class="fa fa-users" aria-hidden="true"></i> Clients</a>
+                        </li>
+                        @endcan
                     </ul>
 
                     <!-- Right Side Of Navbar -->

@@ -20,21 +20,9 @@
                             <label for="birthdate">Date of Birth</label>
                             <input type="date" name="birthdate" class="form-control" value="{{$child->birthdate}}">
                         </div>
-                        
                         <div class="form-group">
                             <label for="status">Level</label>
-                            <select class="form-control" name="level">
-                                @php
-                                    $levels = array("Admin", "Coach");
-                                @endphp
-                                @foreach ($levels as $level)
-                                @if ($child->level == $level)
-                                <option value="{{$level}}" selected>{{$level}}</option>
-                                @else
-                                <option value="{{$level}}">{{$level}}</option>
-                                @endif
-                                @endforeach
-                            </select>
+                            <input type="text" name="level" class="form-control" value="{{$child->level}}" readonly>
                         </div>
                         <div class="form-group">
                             <label for="batting">Batting</label>
@@ -82,7 +70,41 @@
                             <label for="birthdate">Date of Birth</label>
                             <input type="date" name="birthdate" class="form-control" value="{{$child->birthdate}}" readonly>
                         </div>
-                        
+                        @endcan
+                        @can('isCoach')
+                        <div class="form-group">
+                            <label for="status">Level</label>
+                            <select class="form-control" name="level">
+                                @php
+                                    $levels = array("Admin", "Coach");
+                                @endphp
+                                @foreach ($levels as $level)
+                                @if ($child->level == $level)
+                                <option value="{{$level}}" selected>{{$level}}</option>
+                                @else
+                                <option value="{{$level}}">{{$level}}</option>
+                                @endif
+                                @endforeach
+                            </select>
+                        </div>
+                        @endcan
+
+                        @can('isCoach')
+                        <div class="form-group">
+                            <label for="batting">Batting</label>
+                            <input type="text" name="batting" class="form-control" value="{{$child->batting}}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="throwing_hand">Throwing Hand</label>
+                            <input type="text" name="throwing_hand" class="form-control" value="{{$child->throwing_hand}}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="condition">Special or Medical Condition</label>
+                            <input type="text" name="condition" class="form-control" value="{{$child->special_medical_condition}}" readonly>
+                        </div>
+                        @endcan
+
+                        @can('isAdmin')
                         <div class="form-group">
                             <label for="status">Level</label>
                             <input type="text" name="level" class="form-control" value="{{$child->level}}" readonly>
@@ -99,9 +121,6 @@
                             <label for="condition">Special or Medical Condition</label>
                             <input type="text" name="condition" class="form-control" value="{{$child->special_medical_condition}}" readonly>
                         </div>
-                        @endcan
-
-                        @can('isAdmin')
                         <div class="form-group">
                             <label for="expiration">Expiration</label>
                             <input type="text" name="expiration" class="form-control" value="{{$child->expiration}}">

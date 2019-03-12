@@ -33,7 +33,6 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>ATTEND</th>
                             <th>NAME</th>
                             <th>CREDITS</th>
                             <th>EXPIRATION</th>
@@ -42,30 +41,6 @@
                     <tbody>
                         @foreach ($children as $child)
                         <tr>
-                            <td>
-                                {{-- @if ($test->pivot->child_id == $child->id && $test->pivot->attend == "Joined") --}}
-                                @if ($child->credits > 0)
-                                @if ($event->children()->where('child_id', $child->id)->get()->first() == NULL)
-                                <form action="{{ route('event.join', ['event_id' => $event->id, 'child_id' => $child->id ]) }}" method="POST">
-                                    @csrf
-                                    <input type="text" hidden name="attend" value="Joined">
-                                    <input type="submit" class="btn btn-sm btn-success" class="form-control" value="Join">
-                                </form>
-                                @elseif ($event->children()->where('child_id', $child->id)->get()->first()->pivot->attend == 'Joined')
-                                <form action="{{ route('event.cancel', ['event_id' => $event->id, 'child_id' => $child->id ]) }}" method="POST">
-                                    @csrf
-                                    <input type="text" hidden name="attend" value="Cancelled">
-                                    <input type="submit" class="btn btn-sm btn-default" class="form-control" value="Cancel">
-                                </form>
-                                @else
-                                <form action="{{ route('event.join', ['event_id' => $event->id, 'child_id' => $child->id ]) }}" method="POST">
-                                    @csrf
-                                    <input type="text" hidden name="attend" value="Joined">
-                                    <input type="submit" class="btn btn-sm btn-success" class="form-control" value="Join">
-                                </form>
-                                @endif
-                                @endif
-                            </td>
                             <td>{{$child->name}}</td>
                             <td>{{$child->credits}}</td>
                             <td>{{$child->expiration}}</td>

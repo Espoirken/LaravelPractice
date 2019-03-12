@@ -139,10 +139,34 @@ class EventController extends Controller
 
     public function attend($id)
     {      
+        if (!Gate::allows('isClient')) {
+            abort(404);
+        }
         $event = Event::find($id);
         $user = Auth::user();
         $children = $user->children;
+        // dd($events->children()->where('child_id', $id)->get()->first()->pivot->attend);
+        // $hasTask = $events->children()->where('event_id', $id)->exists();
+        // dd($hasTask);
+        // dd($children[0]->id);
+        // dd($events->children[0]);
+        // dd($event->children[0]->pivot->child_id == $id);
+        // $attend = Child::find($id)->events->pivot->attend;
+        // $children = Event::find($id)->children;
+        // dd(Child::find($id)->events[0]->pivot->attend);
+        // dd(Event::find($id)->children[0]->name);
         return view('admin.client.events.attend')->with('event', $event)
+                                                ->with('children', $children);
+    }
+
+    public function attendees($id)
+    {      
+        if (!Gate::allows('isAdmin')) {
+            abort(404);
+        }
+        $event = Event::find($id);
+        $children = $event->children;
+        return view('admin.client.events.attendees')->with('event', $event)
                                                 ->with('children', $children);
     }
 
@@ -152,7 +176,12 @@ class EventController extends Controller
             abort(404);
         }  
         $child = Child::find($child_id);
-        $child->events()->attach($event_id,['attend' => 'Joined']);
+        if($child->events()->where('event_id', $event_id)->exists()){
+            $child->events()->update(['attend' => 'Joined']);
+        } else {
+            $child->events()->attach($event_id,['attend' => 'Joined']);
+        }
+        $child->decrement('credits', 1);
         $child->attend = $request->attend;
         $child->save();
         return redirect()->back();
@@ -164,6 +193,7 @@ class EventController extends Controller
             abort(404);
         }
         $child = Child::find($child_id);
+        $child->increment('credits', 1);
         $child->attend = $request->attend;
         $child->save();
         $child->events()->update(['attend' => 'Cancelled']);

@@ -14,7 +14,9 @@
                 </div>
             </form>
             </div>
+            @can('isAdmin')
             <div class="col-lg-1 offset-lg-3"><a href="{{ route('client.create')}}"  class="btn btn-sm btn-success float-right"><i class="fa fa-plus"></i> Create a New Client</a></div>
+            @endcan
             </div>
             <table class="table">
                 
@@ -25,8 +27,10 @@
                         <th>EMAIL</th>
                         <th>STATUS</th>
                         <th>VIEW</th>
+                        @can('isAdmin')
                         <th>EDIT</th>
                         <th>DELETE</th>
+                        @endcan
                     </tr>
                 </thead>
                 <tbody>
@@ -38,8 +42,10 @@
                         <td>{{$client->email}}</td>
                         <td>{{$client->status}}</td>
                         <td><a class="btn btn-sm btn-primary" href="{{ route('client.show', ['id' => $client->id ])}}"><i class="fa fa-search"></i> Show Children</a></td>
+                        @can('isAdmin')
                         <td><a class="btn btn-sm btn-primary" href="{{ route('client.edit', ['id' => $client->id ])}}"><i class="fa fa-edit"></i> Edit</a></td>
                         <td><a class="btn btn-sm btn-danger" href="{{ route('client.delete', ['id' => $client->id])}}" onclick="return confirm('Are you sure?')"><i class="fa fa-trash" aria-hidden="true"></i> Trash</a></td>
+                        @endcan
                     </tr>
                     @endforeach
                     @else
@@ -50,7 +56,6 @@
                 </tbody>
             </table>
         </div>
-        <div class="d-flex justify-content-center" >{{$clients->links()}}</div> 
     </div>
 </div>
 @endsection
