@@ -84,7 +84,8 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        //
+        $admin = User::find($id);
+        return view('admin.edit')->with('admin', $admin);
     }
 
     /**
@@ -107,7 +108,10 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+        toastr()->success('Admin was deleted successfully!');
+        return redirect('admin/list');
     }
 
     public function search(Request $request)

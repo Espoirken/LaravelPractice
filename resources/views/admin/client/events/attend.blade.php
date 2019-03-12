@@ -43,7 +43,6 @@
                         @foreach ($children as $child)
                         <tr>
                             <td>
-                                {{-- @if ($test->pivot->child_id == $child->id && $test->pivot->attend == "Joined") --}}
                                 @if ($child->credits > 0)
                                 @if ($event->children()->where('child_id', $child->id)->get()->first() == NULL)
                                 <form action="{{ route('event.join', ['event_id' => $event->id, 'child_id' => $child->id ]) }}" method="POST">

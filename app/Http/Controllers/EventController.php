@@ -161,9 +161,6 @@ class EventController extends Controller
 
     public function attendees($id)
     {      
-        if (!Gate::allows('isAdmin')) {
-            abort(404);
-        }
         $event = Event::find($id);
         $children = $event->children;
         return view('admin.client.events.attendees')->with('event', $event)

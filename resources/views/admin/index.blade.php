@@ -24,6 +24,8 @@
                         <th>NAME</th>
                         <th>EMAIL</th>
                         <th>STATUS</th>
+                        <th>EDIT</th>
+                        <th>DELETE</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,6 +37,8 @@
                         <td>{{$admin->first_name}} {{$admin->middle_name}} {{$admin->last_name}}</td>
                         <td>{{$admin->email}}</td>
                         <td>{{$admin->status}}</td>
+                        <td><a class="btn btn-sm btn-primary" href="{{ route('admin.edit', ['id' => $admin->id ])}}"><i class="fa fa-edit"></i> Edit</a></td>
+                        <td><a class="btn btn-sm btn-danger" href="{{ route('admin.delete', ['id' => $admin->id])}}" onclick="return confirm('Are you sure?')"><i class="fa fa-trash" aria-hidden="true"></i> Trash</a></td>
                     </tr>
                     @endforeach
                     @else

@@ -58,6 +58,9 @@
                         @endcan
                         @can('isCoach')
                         <li class="nav-item">
+                            <a class="nav-link" href="{{ route('events')}}"><i class="fa fa-address-book" aria-hidden="true"></i> Events</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('clients')}}"><i class="fa fa-users" aria-hidden="true"></i> Clients</a>
                         </li>
                         @endcan

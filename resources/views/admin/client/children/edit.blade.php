@@ -6,7 +6,7 @@
         <div class="col-lg-8 offset-lg-2">
             <div class="card">
                 <div class="card-body">
-                    <a href="{{ route('children')}}" class="btn btn-sm btn-primary float-right"><i class="fa fa-arrow-left"></i> Back</a>
+                    <a href="{{ url()->previous() }}" class="btn btn-sm btn-primary float-right"><i class="fa fa-arrow-left"></i> Back</a>
                     <div class="card-title"><h2>Edit Child</h2></div>
                     <hr>
                     <form action="{{ route('child.update', ['id' => $child->id]) }}" id="client_create" method="POST">
