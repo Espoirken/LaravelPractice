@@ -16,7 +16,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        //
+        $admins = User::all()->where('roles', 'Admin');
+        return view('admin.index')->with('admins', $admins);
     }
 
     /**
@@ -107,5 +108,19 @@ class AdminController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function search(Request $request)
+    {       
+        //bug
+        $user = User::where('roles', 'Admin');
+        $admins = $user->where('username', 'like', '%' . request('search') . '%')
+        ->orWhere('first_name', 'like', '%' . request('search') . '%')
+        ->orWhere('middle_name', 'like', '%' . request('search') . '%')
+        ->orWhere('last_name', 'like', '%' . request('search') . '%')
+        ->orWhere('email', 'like', '%' . request('search') . '%')
+        ->orWhere('status', 'like', '%' . request('search') . '%')
+        ->paginate(10);
+        return view('admin.index')->with('admins', $admins);
     }
 }

@@ -16,12 +16,12 @@
             </div>
             </div>
             <table class="table">
-                
                 <thead>
                     <tr>
                         <th>NAME</th>
                         <th>CREDITS</th>
-                        <th>EXPIRATION  </th>
+                        <th></th>
+                        <th>EXPIRATION </th>
                         <th>DATE OF BIRTH</th>
                         <th>LEVEL</th>
                         <th>BATTING</th>
@@ -32,30 +32,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (count($children) > 0)
-                    @foreach ($children as $child)
+                    @foreach ($users->children as $user)
                     <tr>
-                        <td>{{$child->name}}</td>
-                        <td>{{$child->credits}}<td>
-                        <td>{{$child->expiration}}</td>
-                        <td>{{$child->birthdate}}</td>
-                        <td>{{$child->level}}</td>
-                        <td>{{$child->batting}}</td>
-                        <td>{{$child->throwing_hand}}</td>
-                        <td>{{$child->special_medical_condition}}</td>
-                        <td><a class="btn btn-sm btn-primary" href="{{ route('child.edit', ['id' => $child->id ])}}"><i class="fa fa-edit"></i> Edit</a></td>
-                        <td><a class="btn btn-sm btn-danger" href="{{ route('child.delete', ['id' => $child->id])}}" onclick="return confirm('Are you sure?')"><i class="fa fa-trash" aria-hidden="true"></i> Trash</a></td>
+                        <td>{{$user->name}}</td>
+                        <td>{{$user->credits}}<td>
+                        <td>{{$user->expiration}}</td>
+                        <td>{{$user->birthdate}}</td>
+                        <td>{{$user->level}}</td>
+                        <td>{{$user->batting}}</td>
+                        <td>{{$user->throwing_hand}}</td>
+                        <td>{{$user->special_medical_condition}}</td>
+                        <td><a class="btn btn-sm btn-primary" href="{{ route('child.edit', ['id' => $user->id ])}}"><i class="fa fa-edit"></i> Edit</a></td>
+                        <td><a class="btn btn-sm btn-danger" href="{{ route('child.delete', ['id' => $user->id])}}" onclick="return confirm('Are you sure?')"><i class="fa fa-trash" aria-hidden="true"></i> Trash</a></td>
                     </tr>
                     @endforeach
-                    @else
-                        <tr>
-                            <th colspan="10" class="text-center">No child found</th>
-                        </tr>
-                    @endif
                 </tbody>
             </table>
         </div>
-        <div class="d-flex justify-content-center" >{{$children->links()}}</div> 
     </div>
 </div>
 @endsection

@@ -15,6 +15,7 @@ class CreateChildrenTable extends Migration
     {
         Schema::create('children', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('user_id');
             $table->string('name');
             $table->string('credits')->default(0);
             $table->dateTime('expiration')->nullable();

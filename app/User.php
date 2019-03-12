@@ -38,4 +38,8 @@ class User extends Authenticatable
     ];
 
     protected $dates = ['expiration'];
+
+    public function children(){
+        return $this->hasMany('App\Child');
+    }
 }

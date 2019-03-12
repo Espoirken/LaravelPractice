@@ -29,7 +29,7 @@ Route::get('/clients', [
 
 Route::get('/', [
     'uses' => 'UserController@detail',
-    'as' => 'info',
+    'as' => 'detail',
 ]);
 
 Route::get('/client/create', [
@@ -140,7 +140,7 @@ Route::any('/events/search', [
 ]);
 
 //Super Admin Controller
-Route::get('/admins', [
+Route::get('/list', [
     'uses' => 'AdminController@index',
     'as' => 'admin',
 ]);
@@ -168,6 +168,11 @@ Route::post('/update/{id}', [
 Route::get('/delete/{id}', [
     'uses' => 'AdminController@destroy',
     'as' => 'admin.delete',
+]);
+
+Route::any('/search', [
+    'uses' => 'AdminController@search',
+    'as' => 'admin.search',
 ]);
 
 });

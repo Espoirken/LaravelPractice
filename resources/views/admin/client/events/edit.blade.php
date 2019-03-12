@@ -6,8 +6,8 @@
         <div class="col-lg-8 offset-lg-2">
             <div class="card">
                 <div class="card-body">
-                    {{-- <a href="{{ route('client')}}" class="btn btn-sm btn-primary float-right"><i class="fa fa-search"></i> Show all books</a> --}}
-                    <div class="card-title"><h2>Create a new Event</h2></div>
+                    <a href="{{ route('events')}}" class="btn btn-sm btn-primary float-right"><i class="fa fa-arrow-left"></i> Back</a>
+                    <div class="card-title"><h2>Edit Event</h2></div>
                     <hr>
                     <form action="{{ route('event.update', ['id' => $event->id]) }}" id="event_create" method="POST">
                         {{ csrf_field() }}
@@ -29,7 +29,7 @@
                         </div>
                         <div class="form-group">
                             <div class="text-center">
-                                <button class="btn btn-success" type="submit">Edit Event</button>
+                                <button class="btn btn-success" type="submit">Update Event</button>
                             </div>
                         </div>
                     </form>

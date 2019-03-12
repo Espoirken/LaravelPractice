@@ -5,6 +5,7 @@ use Faker\Generator as Faker;
 $factory->define(App\Child::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
+        'user_id' => $faker->numberBetween($min = 1, $max = 10),
         'credits' => $faker->numberBetween($min = 1, $max = 4),
         'expiration' => $faker->dateTimeBetween('+0 days', '+2 years'),
         'birthdate' => $faker->dateTimeBetween('+0 days', '+2 years'),

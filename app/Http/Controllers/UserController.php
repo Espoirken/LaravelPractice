@@ -81,8 +81,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $children = Child::paginate(10);
-        return view('admin.client.show')->with('children', $children);
+        $users = User::find($id);
+        return view('admin.client.show')->with('users', $users);
     }
 
     /**
@@ -151,7 +151,7 @@ class UserController extends Controller
     public function detail()
     {
         $users = Auth::user();
-        return view('admin.index')->with('users', $users);
+        return view('admin.detail')->with('users', $users);
     }
     
     public function search(Request $request)
