@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Event;
+use App\Child;
 
 class EventController extends Controller
 {
@@ -117,5 +118,31 @@ class EventController extends Controller
         ->orWhere('detail', 'like', '%' . request('search') . '%')
         ->paginate(10);
         return view('admin.client.events.index')->with('events', $events);
+    }
+
+    public function attend($id)
+    {      
+        $event = Event::find($id);
+        $children = Child::all();
+        return view('admin.client.events.attend')->with('event', $event)
+                                                ->with('children', $children);
+    }
+
+    public function join(Request $request, $event_id, $child_id)
+    {       
+        $child = Child::find($child_id);
+        $child->events()->attach($event_id,['attend' => 'Joined']);
+        $child->attend = $request->attend;
+        $child->save();
+        return redirect()->back();
+    }
+
+    public function cancel(Request $request, $event_id, $child_id)
+    {       
+        $child = Child::find($child_id);
+        $child->attend = $request->attend;
+        $child->save();
+        $child->events()->update(['attend' => 'Cancelled']);
+        return redirect()->back();
     }
 }

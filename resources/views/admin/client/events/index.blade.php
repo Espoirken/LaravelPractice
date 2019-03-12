@@ -23,6 +23,7 @@
                         <th>TITLE</th>
                         <th>DETAILS</th>
                         <th>STATUS</th>
+                        <th>ATTEND</th>
                         <th>EDIT</th>
                         <th>DELETE</th>
                     </tr>
@@ -34,6 +35,19 @@
                         <td>{{$event->title}}</td>
                         <td>{{$event->detail}}</td>
                         <td>{{$event->status}}</td>
+                        {{-- <td>
+                            <form action="{{ route('event.join', ['id' => $user->id ])}}" method="POST">
+                                @csrf
+                                @if ($user->attend == "Joined")
+                                    <input type="text" hidden name="attend" value="Cancelled">
+                                    <input type="submit" class="btn btn-sm btn-default" class="form-control" value="Cancel">
+                                @else
+                                    <input type="text" hidden name="attend" value="Joined">
+                                    <input type="submit" class="btn btn-sm btn-success" class="form-control" value="Join">
+                                @endif
+                            </form>
+                        </td> --}}
+                        <td><a class="btn btn-sm btn-secondary" href="{{ route('event.attend', ['id' => $event->id ]) }}"><i class="fa fa-plus"></i> Attend</a></td>
                         <td><a class="btn btn-sm btn-primary" href="{{ route('event.edit', ['id' => $event->id ])}}"><i class="fa fa-edit"></i> Edit</a></td>
                         <td><a class="btn btn-sm btn-danger" href="{{ route('event.delete', ['id' => $event->id])}}" onclick="return confirm('Are you sure?')"><i class="fa fa-trash" aria-hidden="true"></i> Trash</a></td>
                     </tr>

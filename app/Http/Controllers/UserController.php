@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
-use App\Child;
+use Gate;
 use Hash;
 use Carbon\Carbon;
 
@@ -23,6 +23,9 @@ class UserController extends Controller
 
     public function index()
     {
+        if (!Gate::allows('isAdmin')) {
+            abort(404);
+        }
         $clients = User::paginate(10);
         return view('admin.client.index')->with('clients', $clients);
     }
@@ -34,6 +37,9 @@ class UserController extends Controller
      */
     public function create()
     {
+        if (!Gate::allows('isAdmin')) {
+            abort(404);
+        }
         return view('admin.client.create');
     }
 
@@ -45,6 +51,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        if (!Gate::allows('isAdmin')) {
+            abort(404);
+        }
         $this->validate($request, [
             'username' => 'required',
             'email' => 'required|email|unique:users',
@@ -81,6 +90,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
+        if (!Gate::allows('isAdmin')) {
+            abort(404);
+        }
         $users = User::find($id);
         return view('admin.client.show')->with('users', $users);
     }
@@ -93,6 +105,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        if (!Gate::allows('isAdmin')) {
+            abort(404);
+        }
         $client = User::find($id);
         return view('admin.client.edit')->with('client', $client);
     }
@@ -106,6 +121,9 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (!Gate::allows('isAdmin')) {
+            abort(404);
+        }
         $this->validate($request, [
             'username' => 'required',
             'email' => "email|unique:users,email,$id",
@@ -142,6 +160,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        if (!Gate::allows('isAdmin')) {
+            abort(404);
+        }
         $client = User::find($id);
         $client->delete();
         toastr()->success('Client was deleted successfully!');
@@ -150,12 +171,18 @@ class UserController extends Controller
 
     public function detail()
     {
+        if (!Gate::allows('isAdmin')) {
+            abort(404);
+        }
         $users = Auth::user();
         return view('admin.detail')->with('users', $users);
     }
     
     public function search(Request $request)
     {       
+        if (!Gate::allows('isAdmin')) {
+            abort(404);
+        }
         $clients = User::where('username', 'like', '%' . request('search') . '%')
         ->orWhere('first_name', 'like', '%' . request('search') . '%')
         ->orWhere('middle_name', 'like', '%' . request('search') . '%')

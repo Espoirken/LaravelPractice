@@ -4,7 +4,7 @@
     <div class="card">
         <div class="card-body">
             <div class="row">
-            <div class="col-lg-3"><h2 class="card-title">Child Management</h2></div>
+            <div class="col-lg-3"><h2 class="card-title">Children of {{$users->first_name}} {{$users->middle_name}} {{$users->last_name}}</h2></div>
             <div class="col-lg-5">
             <form class="form-inline" action="{{ route('client.search')}}" method="POST">
                 <div class="form-group">
@@ -14,6 +14,7 @@
                 </div>
             </form>
             </div>
+            <div class="col-lg-1 offset-lg-3"><a href="{{ route('clients')}}"  class="btn btn-sm btn-primary float-right"><i class="fa fa-arrow-left"></i> Back</a></div>
             </div>
             <table class="table">
                 <thead>

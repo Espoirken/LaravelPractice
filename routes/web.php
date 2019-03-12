@@ -139,6 +139,21 @@ Route::any('/events/search', [
     'as' => 'event.search',
 ]);
 
+Route::any('/event/attend/{id}', [
+    'uses' => 'EventController@attend',
+    'as' => 'event.attend',
+]);
+
+Route::any('/event/join/{event_id}/child/{child_id}', [
+    'uses' => 'EventController@join',
+    'as' => 'event.join',
+]);
+
+Route::any('/event/cancel/{event_id}/child/{child_id}', [
+    'uses' => 'EventController@cancel',
+    'as' => 'event.cancel',
+]);
+
 //Super Admin Controller
 Route::get('/list', [
     'uses' => 'AdminController@index',

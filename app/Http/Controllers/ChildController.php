@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Child;
+use App\User;
 use Gate;
 use Carbon\Carbon;
 
@@ -24,8 +26,8 @@ class ChildController extends Controller
         if (!Gate::allows('isClient')) {
             abort(404);
         }
-
-        $children = Child::paginate(10);
+        $user = Auth::user();
+        $children = $user->children;
         return view('admin.client.children.index')->with('children', $children);
     }
 
@@ -148,4 +150,5 @@ class ChildController extends Controller
         ->paginate(10);
         return view('admin.client.children.index')->with('children', $children);
     }
+    
 }
