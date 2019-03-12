@@ -49,6 +49,16 @@
                             <label for="condition">Special or Medical Condition</label>
                             <input type="text" name="condition" class="form-control">
                         </div>
+                        @can('isAdmin')
+                        <div class="form-group">
+                            <label for="expiration">Expiration</label>
+                            <input type="datetime-local" name="expiration" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="credits">Credits</label>
+                            <input type="text" name="credits" class="form-control">
+                        </div>
+                        @endcan
                         <div class="form-group">
                             <div class="text-center">
                                 <button class="btn btn-success" type="submit">Add Child</button>

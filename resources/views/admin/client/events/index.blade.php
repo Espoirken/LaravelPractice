@@ -9,12 +9,14 @@
             <form class="form-inline" action="{{ route('event.search')}}" method="POST">
                 <div class="form-group">
                     @csrf
-                    <input type="text" name="search" class="form-control mx-sm-3" style="width:600px" placeholder="Search a child...">
+                    <input type="text" name="search" class="form-control mx-sm-3" style="width:600px" placeholder="Search an event...">
                     <input type="submit" class="btn btn-primary" class="form-control" value="Search">
                 </div>
             </form>
             </div>
+            @can('isAdmin')
             <div class="col-lg-1 offset-lg-3"><a href="{{ route('event.create')}}"  class="btn btn-sm btn-success float-right"><i class="fa fa-plus"></i> Create a New Event</a></div>
+            @endcan
             </div>
             <table class="table">
                 
@@ -23,9 +25,15 @@
                         <th>TITLE</th>
                         <th>DETAILS</th>
                         <th>STATUS</th>
+                        @can('isClient')
                         <th>ATTEND</th>
+                        @else
+                        <th>ATTENDEES</th>
+                        @endcan
+                        @can('isAdmin')
                         <th>EDIT</th>
                         <th>DELETE</th>
+                        @endcan
                     </tr>
                 </thead>
                 <tbody>
@@ -35,21 +43,15 @@
                         <td>{{$event->title}}</td>
                         <td>{{$event->detail}}</td>
                         <td>{{$event->status}}</td>
-                        {{-- <td>
-                            <form action="{{ route('event.join', ['id' => $user->id ])}}" method="POST">
-                                @csrf
-                                @if ($user->attend == "Joined")
-                                    <input type="text" hidden name="attend" value="Cancelled">
-                                    <input type="submit" class="btn btn-sm btn-default" class="form-control" value="Cancel">
-                                @else
-                                    <input type="text" hidden name="attend" value="Joined">
-                                    <input type="submit" class="btn btn-sm btn-success" class="form-control" value="Join">
-                                @endif
-                            </form>
-                        </td> --}}
+                        @can('isClient')
                         <td><a class="btn btn-sm btn-secondary" href="{{ route('event.attend', ['id' => $event->id ]) }}"><i class="fa fa-plus"></i> Attend</a></td>
+                        @else
+                        <td><a class="btn btn-sm btn-secondary" href="{{ route('event.attend', ['id' => $event->id ]) }}"><i class="fa fa-search"></i> Attendees</a></td>
+                        @endcan
+                        @can('isAdmin')
                         <td><a class="btn btn-sm btn-primary" href="{{ route('event.edit', ['id' => $event->id ])}}"><i class="fa fa-edit"></i> Edit</a></td>
                         <td><a class="btn btn-sm btn-danger" href="{{ route('event.delete', ['id' => $event->id])}}" onclick="return confirm('Are you sure?')"><i class="fa fa-trash" aria-hidden="true"></i> Trash</a></td>
+                        @endcan
                     </tr>
                     @endforeach
                     @else

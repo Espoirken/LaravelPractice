@@ -46,19 +46,19 @@
                         <tr>
                             @can('isClient')
                             <td>
-                                    @if ($child->attend == "Joined")
-                                    <form action="{{ route('event.cancel', ['event_id' => $event->id, 'child_id' => $child->id ]) }}" method="POST">
-                                            @csrf
-                                        <input type="text" hidden name="attend" value="Cancelled">
-                                        <input type="submit" class="btn btn-sm btn-default" class="form-control" value="Cancel">
-                                    </form>
-                                    @else
-                                    <form action="{{ route('event.join', ['event_id' => $event->id, 'child_id' => $child->id ]) }}" method="POST">
+                                @if ($child->attend == "Joined")
+                                <form action="{{ route('event.cancel', ['event_id' => $event->id, 'child_id' => $child->id ]) }}" method="POST">
                                         @csrf
-                                        <input type="text" hidden name="attend" value="Joined">
-                                        <input type="submit" class="btn btn-sm btn-success" class="form-control" value="Join">
-                                    </form>
-                                    @endif
+                                    <input type="text" hidden name="attend" value="Cancelled">
+                                    <input type="submit" class="btn btn-sm btn-default" class="form-control" value="Cancel">
+                                </form>
+                                @else
+                                <form action="{{ route('event.join', ['event_id' => $event->id, 'child_id' => $child->id ]) }}" method="POST">
+                                    @csrf
+                                    <input type="text" hidden name="attend" value="Joined">
+                                    <input type="submit" class="btn btn-sm btn-success" class="form-control" value="Join">
+                                </form>
+                                @endif
                             </td>
                             @endcan
                             <td>{{$child->name}}</td>

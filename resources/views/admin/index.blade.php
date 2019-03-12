@@ -14,6 +14,7 @@
                 </div>
             </form>
             </div>
+            <div class="col-lg-1 offset-lg-3"><a href="{{ route('admin.create')}}"  class="btn btn-sm btn-success float-right"><i class="fa fa-plus"></i> Create a New Admin</a></div>
             </div>
             <table class="table">
                 <thead>

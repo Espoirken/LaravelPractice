@@ -36,19 +36,27 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+                        
                         @can('isClient')
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('events')}}"><i class="fa fa-address-book" aria-hidden="true"></i> Events</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('children')}}"><i class="fa fa-address-book" aria-hidden="true"></i> Children</a>
                         </li>
                         @endcan
+                        @can('isAdmin')
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('events')}}"><i class="fa fa-address-book" aria-hidden="true"></i> Events</a>
                         </li>
-                        @can('isAdmin')
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('clients')}}"><i class="fa fa-users" aria-hidden="true"></i> Clients</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin') }}"><i class="fa fa-list" aria-hidden="true"></i>List of Admins</a>
+                        </li>
                         @endcan
+                        
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -72,8 +80,6 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('admin') }}">List of Admins</a>
-                                    <a class="dropdown-item" href="{{ route('admin.create') }}">Create a New Admin</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

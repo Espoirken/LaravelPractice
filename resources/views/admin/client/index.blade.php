@@ -9,12 +9,12 @@
             <form class="form-inline" action="{{ route('client.search')}}" method="POST">
                 <div class="form-group">
                     @csrf
-                    <input type="text" name="search" class="form-control mx-sm-3" style="width:600px" placeholder="Search a child...">
+                    <input type="text" name="search" class="form-control mx-sm-3" style="width:600px" placeholder="Search a client...">
                     <input type="submit" class="btn btn-primary" class="form-control" value="Search">
                 </div>
             </form>
             </div>
-            <div class="col-lg-1 offset-lg-3"><a href="{{ route('register')}}"  class="btn btn-sm btn-success float-right"><i class="fa fa-plus"></i> Create a New Client</a></div>
+            <div class="col-lg-1 offset-lg-3"><a href="{{ route('client.create')}}"  class="btn btn-sm btn-success float-right"><i class="fa fa-plus"></i> Create a New Client</a></div>
             </div>
             <table class="table">
                 

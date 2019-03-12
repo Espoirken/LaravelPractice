@@ -38,6 +38,9 @@ class ChildController extends Controller
      */
     public function create()
     {
+        if (!Gate::allows('isClient')) {
+            abort(404);
+        }
         return view('admin.client.children.create');
     }
 
@@ -49,6 +52,9 @@ class ChildController extends Controller
      */
     public function store(Request $request)
     {
+        if (!Gate::allows('isClient')) {
+            abort(404);
+        }
         $this->validate($request, [
             'name' => 'required',
             'birthdate' => 'required',
@@ -57,13 +63,16 @@ class ChildController extends Controller
             'throwing_hand' => 'required',
             'condition' => 'required',
         ]);
+        $user = Auth::user();
         $child = new Child;
         $child->name = $request->name;
+        $child->user_id = $user->id;
         $child->birthdate = $request->birthdate;
         $child->level = $request->level;
         $child->batting = $request->batting;
         $child->throwing_hand = $request->throwing_hand;
         $child->expiration = Carbon::parse($request->expiration);
+        $child->credits = $request->credits;
         $child->special_medical_condition = $request->condition;
         $child->status = 'Active';
         $child->save();
@@ -132,6 +141,9 @@ class ChildController extends Controller
      */
     public function destroy($id)
     {
+        if (!Gate::allows('isClient')) {
+            abort(404);
+        }
         $user = Child::find($id);
         $user->delete();
         toastr()->success('Child was deleted successfully!');

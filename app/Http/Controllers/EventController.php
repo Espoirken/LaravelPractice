@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+use Gate;
 use App\Event;
 use App\Child;
 
@@ -26,6 +28,9 @@ class EventController extends Controller
      */
     public function create()
     {
+        if (!Gate::allows('isAdmin')) {
+            abort(404);
+        }
         return view('admin.client.events.create');
     }
 
@@ -37,6 +42,9 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
+        if (!Gate::allows('isAdmin')) {
+            abort(404);
+        }
         $this->validate($request, [
             'title' => 'required',
             'detail' => 'required',
@@ -71,6 +79,9 @@ class EventController extends Controller
      */
     public function edit($id)
     {
+        if (!Gate::allows('isAdmin')) {
+            abort(404);
+        }
         $event = Event::find($id);
         return view('admin.client.events.edit')->with('event', $event);
     }
@@ -84,6 +95,9 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (!Gate::allows('isAdmin')) {
+            abort(404);
+        }
         $this->validate($request, [
             'title' => 'required',
             'detail' => 'required',
@@ -106,6 +120,9 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
+        if (!Gate::allows('isAdmin')) {
+            abort(404);
+        }
         $event = Event::find($id);
         $event->delete();
         toastr()->success('Event was deleted successfully!');
@@ -123,13 +140,17 @@ class EventController extends Controller
     public function attend($id)
     {      
         $event = Event::find($id);
-        $children = Child::all();
+        $user = Auth::user();
+        $children = $user->children;
         return view('admin.client.events.attend')->with('event', $event)
                                                 ->with('children', $children);
     }
 
     public function join(Request $request, $event_id, $child_id)
-    {       
+    {     
+        if (!Gate::allows('isClient')) {
+            abort(404);
+        }  
         $child = Child::find($child_id);
         $child->events()->attach($event_id,['attend' => 'Joined']);
         $child->attend = $request->attend;
@@ -139,6 +160,9 @@ class EventController extends Controller
 
     public function cancel(Request $request, $event_id, $child_id)
     {       
+        if (!Gate::allows('isClient')) {
+            abort(404);
+        }
         $child = Child::find($child_id);
         $child->attend = $request->attend;
         $child->save();

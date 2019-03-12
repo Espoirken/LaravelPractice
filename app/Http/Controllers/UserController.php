@@ -171,9 +171,6 @@ class UserController extends Controller
 
     public function detail()
     {
-        if (!Gate::allows('isAdmin')) {
-            abort(404);
-        }
         $users = Auth::user();
         return view('admin.detail')->with('users', $users);
     }
