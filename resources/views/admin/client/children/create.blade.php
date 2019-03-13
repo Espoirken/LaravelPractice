@@ -20,14 +20,6 @@
                             <input type="date" name="birthdate" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="level">Level</label>
-                            <select class="form-control" name="level">
-                                <option value="" hidden></option>
-                                <option value="Admin">Admin</option>
-                                <option value="Coach">Coach</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
                             <label for="batting">Batting</label>
                             <select class="form-control" name="batting">
                                 <option value="" hidden></option>
@@ -49,21 +41,12 @@
                             <label for="condition">Special or Medical Condition</label>
                             <input type="text" name="condition" class="form-control">
                         </div>
-                        @can('isAdmin')
-                        <div class="form-group">
-                            <label for="expiration">Expiration</label>
-                            <input type="datetime-local" name="expiration" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="credits">Credits</label>
-                            <input type="text" name="credits" class="form-control">
-                        </div>
-                        @endcan
-                        <div class="form-group">
+                        @include('admin.client.children.terms')
+                        {{-- <div class="form-group">
                             <div class="text-center">
                                 <button class="btn btn-success" type="submit">Add Child</button>
                             </div>
-                        </div>
+                        </div> --}}
                     </form>
                 </div>
             </div>

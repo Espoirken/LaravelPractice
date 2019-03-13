@@ -6,10 +6,10 @@
         <div class="col-lg-8 offset-lg-2">
             <div class="card">
                 <div class="card-body">
-                    {{-- <a href="{{ route('client')}}" class="btn btn-sm btn-primary float-right"><i class="fa fa-search"></i> Show all books</a> --}}
+                    <a href="{{ route('clients')}}" class="btn btn-sm btn-primary float-right"><i class="fa fa-arrow-left"></i> Back</a>
                     <div class="card-title"><h2>Create a new Client</h2></div>
                     <hr>
-                    <form action="{{ route('client.store') }}" id="event_create" method="POST">
+                    <form action="{{ route('client.store') }}" id="user_create" method="POST">
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label for="username">Username</label>

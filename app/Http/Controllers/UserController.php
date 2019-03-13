@@ -75,7 +75,7 @@ class UserController extends Controller
         $client->last_name = $request->last_name;
         $client->landline = $request->landline;
         $client->mobile = $request->mobile;
-        $client->expiration = Carbon::parse($client->expiration);
+        $client->expiration = Carbon::parse($request->expiration);
         $client->status = 'Active';
         $client->save();
         toastr()->success('Client was created successfully!');
@@ -169,6 +169,12 @@ class UserController extends Controller
         $client->delete();
         toastr()->success('Client was deleted successfully!');
         return redirect('admin/clients');
+    }
+
+    public function view($id)
+    {
+        $client = User::find($id);
+        return view('admin.client.client_detail')->with('client', $client);
     }
 
     public function detail()

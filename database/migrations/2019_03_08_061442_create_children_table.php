@@ -20,11 +20,10 @@ class CreateChildrenTable extends Migration
             $table->string('credits')->default(0);
             $table->dateTime('expiration')->nullable();
             $table->string('birthdate');
-            $table->string('level');
+            $table->string('level')->nullable();
             $table->string('batting');
             $table->string('throwing_hand');
             $table->string('special_medical_condition');
-            $table->string('attend')->nullable();
             $table->string('status')->default('Active');
             $table->timestamps();
         });

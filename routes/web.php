@@ -17,7 +17,7 @@
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
 
 //Client Controller
@@ -61,9 +61,14 @@ Route::any('/client/search', [
     'as' => 'client.search',
 ]);
 
-Route::get('/client/view/{id}', [
+Route::get('/client/detail/{id}', [
     'uses' => 'UserController@show',
     'as' => 'client.show',
+]);
+
+Route::get('/client/view/{id}', [
+    'uses' => 'UserController@view',
+    'as' => 'client.view',
 ]);
 
 //Children Controller

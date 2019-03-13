@@ -110,63 +110,7 @@
     </div>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/additional-methods.min.js"></script>
-   <script>
-    $(document).ready(function () {
-    $('#child_create').validate({
-        rules: {
-            name: {
-                required: true
-            },
-            birthdate: {
-                required: true,
-            },
-            level: {
-                required: true,
-            },
-            batting: {
-                required: true,
-            },
-            throwing_hand: {
-                required: true,
-            },
-            condition: {
-                required: true,
-            },
-        }
-    });
-    $('#client_create').validate({
-        rules: {
-            username: {
-                required: true
-            },
-            email: {
-                required: true,
-            },
-            password: {
-                required: true,
-            },
-            first_name: {
-                required: true,
-            },
-            last_name: {
-                required: true,
-            },
-            landline: {
-                required: true,
-            },
-            mobile: {
-                required: true,
-            },
-            expiration: {
-                required: true,
-            },
-            status: {
-                required: true,
-            },
-        }
-    });
-});
-</script>
+    @include('inc.jqueryvalidate')
 @toastr_render
 </body>
 </html>

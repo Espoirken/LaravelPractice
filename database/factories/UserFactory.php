@@ -22,10 +22,10 @@ $factory->define(User::class, function (Faker $faker) {
         'first_name' => $faker->firstNameMale,
         'middle_name' => $faker->firstNameMale,
         'last_name' => $faker->lastName,
-        'birthdate' => $faker->date($format = 'Y-m-d', $max = 'now'),
+        'birthdate' => $faker->dateTimeBetween($startDate = '-30 years', $endDate = '-5 years', $timezone = 'Asia/Manila'),
         'landline' => '123322',
         'mobile' => '09123123',
-        'expiration' => $faker->date($format = 'Y-m-d', $max = 'now'),
+        'expiration' => $faker->dateTimeBetween($startDate = 'now', $endDate = '2 years', $timezone = 'Asia/Manila'),
         'status' => 'Active',
         'roles' => 'Admin',
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password

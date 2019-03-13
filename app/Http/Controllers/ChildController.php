@@ -58,21 +58,18 @@ class ChildController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'birthdate' => 'required',
-            'level' => 'required',
             'batting' => 'required',
             'throwing_hand' => 'required',
             'condition' => 'required',
+            'terms' => 'required|confirmed',
         ]);
         $user = Auth::user();
         $child = new Child;
         $child->name = $request->name;
         $child->user_id = $user->id;
         $child->birthdate = $request->birthdate;
-        $child->level = $request->level;
         $child->batting = $request->batting;
         $child->throwing_hand = $request->throwing_hand;
-        $child->expiration = Carbon::parse($request->expiration);
-        $child->credits = $request->credits;
         $child->special_medical_condition = $request->condition;
         $child->status = 'Active';
         $child->save();
@@ -115,7 +112,6 @@ class ChildController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'birthdate' => "required",
-            'level' => 'required',
             'batting' => 'required',
             'throwing_hand' => 'required',
             'condition' => 'required',

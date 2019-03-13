@@ -24,6 +24,7 @@
                     <tr>
                         <th>TITLE</th>
                         <th>DETAILS</th>
+                        <th>END DATE</th>
                         <th>STATUS</th>
                         <th>ATTEND</th>
                         @can('isAdmin')
@@ -38,6 +39,7 @@
                     <tr>
                         <td>{{$event->title}}</td>
                         <td>{{$event->detail}}</td>
+                        <td>{{$event->ended_at->timezone('Asia/Manila')->format('F d, Y - D  h:i:s A')}}</td>
                         <td>{{$event->status}}</td>
                         @can('isClient')
                         <td><a class="btn btn-sm btn-secondary" href="{{ route('event.attend', ['id' => $event->id ]) }}"><i class="fa fa-plus"></i> Attend</a></td>

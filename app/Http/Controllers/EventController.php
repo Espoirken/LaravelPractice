@@ -175,7 +175,7 @@ class EventController extends Controller
         }
         $child = Child::find($child_id);
         if($child->expiration < Carbon::now('Asia/Manila')){
-            toastr()->error('Your children has expired, please contact your administrator for renewal!');
+            toastr()->error('Your children has expired, please contact your administrator!');
             return redirect()->back();
         }
         if($child->credits <= 0){
@@ -188,7 +188,6 @@ class EventController extends Controller
             $child->events()->attach($event_id,['attend' => 'Joined']);
         }
         $child->decrement('credits', 1);
-        $child->attend = $request->attend;
         $child->save();
         return redirect()->back();
     }
@@ -200,7 +199,6 @@ class EventController extends Controller
         }
         $child = Child::find($child_id);
         $child->increment('credits', 1);
-        $child->attend = $request->attend;
         $child->save();
         $child->events()->update(['attend' => 'Cancelled']);
         return redirect()->back();

@@ -19,27 +19,25 @@
             <div class="form-group row">
                 <label for="Detail" class="col-sm-2 col-form-label">Detail</label>
                 <div class="col-sm-10">
-                    <input type="text" readonly class="form-control-plaintext" value="{{$event->status}}">
+                    <input type="text" readonly class="form-control-plaintext" value="{{$event->detail}}">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="Status" class="col-sm-2 col-form-label">Status</label>
                 <div class="col-sm-10">
-                    <input type="text" readonly class="form-control-plaintext" value="{{$event->detail}}">
+                    <input type="text" readonly class="form-control-plaintext" value="{{$event->status}}">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="EndDate" class="col-sm-2 col-form-label">End Date</label>
                 <div class="col-sm-10">
-                @if ($event->ended_at > $now)
                     <input type="text" readonly class="form-control-plaintext" value="{{$event->ended_at}}">
-                @else
-                    <label class="form-control-plaintext">{{$event->ended_at}}  <span class="badge badge-danger">(This event has ended.)</span></label>
-                @endif
+                    {{-- <label class="form-control-plaintext">{{$event->ended_at}}  <span class="badge badge-danger">(This event has ended.)</span></label> --}}
                 </div>
             </div>
             <hr>
-            <h3>Attendees</h3>
+            <h3>Attendees</h3> 
+            <h5><label class="badge badge-default">Note: You can't join or cancel once the event registration has ended. </label></h5>
                 <table class="table">
                     <thead>
                         <tr>
@@ -50,10 +48,10 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if (count($children) > 0)
                         @foreach ($children as $child)
                         <tr>
                             <td>
-                                @if ($event->ended_at > $now)
                                 @if ($event->children()->where('child_id', $child->id)->get()->first() == NULL)
                                 <form action="{{ route('event.join', ['event_id' => $event->id, 'child_id' => $child->id ]) }}" method="POST">
                                     @csrf
@@ -73,13 +71,17 @@
                                     <input type="submit" class="btn btn-sm btn-success" class="form-control" value="Join">
                                 </form>
                                 @endif
-                                @endif
                             </td>
                             <td>{{$child->name}}</td>
                             <td>{{$child->credits}}</td>
                             <td>{{$child->expiration}}</td>
                         </tr>
                         @endforeach
+                        @else
+                        <tr>
+                            <th colspan="10" class="text-center">No children found</th>
+                        </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>

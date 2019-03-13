@@ -6,9 +6,10 @@
         <div class="col-lg-8 offset-lg-2">
             <div class="card">
                 <div class="card-body">
+                    <a href="{{ route('admin')}}" class="btn btn-sm btn-primary float-right"><i class="fa fa-arrow-left"></i> Back</a>
                     <div class="card-title"><h2>Create a new Admin</h2></div>
                     <hr>
-                    <form action="{{ route('admin.store') }}" id="event_create" method="POST">
+                    <form action="{{ route('admin.store') }}" id="user_create" method="POST">
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label for="username">Username</label>
@@ -25,7 +26,6 @@
                         <div class="form-group">
                             <label for="password">Confirm Password</label>
                             <input id="password-confirm" type="password" class="form-control" name="password_confirmation" >
-
                         </div>
                         <div class="form-group row">
                             <div class="col">
@@ -58,7 +58,7 @@
                         </div>
                         <div class="form-group">
                             <div class="text-center">
-                                <button class="btn btn-success" type="submit">Add Client</button>
+                                <button class="btn btn-success" type="submit">Add Admin</button>
                             </div>
                         </div>
                     </form>

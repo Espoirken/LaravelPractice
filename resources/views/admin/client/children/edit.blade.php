@@ -9,7 +9,7 @@
                     <a href="{{ url()->previous() }}" class="btn btn-sm btn-primary float-right"><i class="fa fa-arrow-left"></i> Back</a>
                     <div class="card-title"><h2>Edit Child</h2></div>
                     <hr>
-                    <form action="{{ route('child.update', ['id' => $child->id]) }}" id="client_create" method="POST">
+                    <form action="{{ route('child.update', ['id' => $child->id]) }}" id="child_create" method="POST">
                         {{ csrf_field() }}
                         @can('isClient')
                         <div class="form-group">

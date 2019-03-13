@@ -9,7 +9,7 @@
                     <a href="{{ route('clients')}}" class="btn btn-sm btn-primary float-right"><i class="fa fa-arrow-left"></i> Back</a>
                     <div class="card-title"><h2>Edit Client</h2></div>
                     <hr>
-                    <form action="{{ route('client.update',  ['id' => $client->id]) }}" id="event_create" method="POST">
+                    <form action="{{ route('client.update',  ['id' => $client->id]) }}" id="user_edit" method="POST">
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label for="username">Username</label>

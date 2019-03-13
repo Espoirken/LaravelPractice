@@ -9,7 +9,7 @@
                     <a href="{{ route('events')}}" class="btn btn-sm btn-primary float-right"><i class="fa fa-arrow-left"></i> Back</a>
                     <div class="card-title"><h2>Create a new Event</h2></div>
                     <hr>
-                    <form action="{{ route('event.store') }}" id="event_create" method="POST">
+                    <form action="{{ route('event.store') }}" id="event" method="POST">
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label for="title">Title</label>
