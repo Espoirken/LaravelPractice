@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Hash;
+use Gate;
 use Carbon\Carbon;
 
 class AdminController extends Controller
@@ -97,7 +98,36 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if (!Gate::allows('isAdmin')) {
+            abort(404);
+        }
+        $this->validate($request, [
+            'username' => 'required',
+            'email' => "email|unique:users,email,$id",
+            'first_name' => 'required',
+            'middle_name' => 'required',
+            'last_name' => 'required',
+            'landline' => 'required',
+            'mobile' => 'required',
+            'expiration' => 'required',
+            'status' => 'required',
+        ]);
+        $client = User::find($id);
+        $client->username = $request->username;
+        $client->email = $request->email;
+        if(!empty($request->password)){
+            $client->password = Hash::make($request->password);
+        }
+        $client->first_name = $request->first_name;
+        $client->middle_name = $request->middle_name;
+        $client->last_name = $request->last_name;
+        $client->landline = $request->landline;
+        $client->mobile = $request->mobile;
+        $client->expiration = Carbon::parse($client->expiration);
+        $client->status = $request->status;;
+        $client->save();
+        toastr()->success('Admin was updated successfully!');
+        return redirect('admin/list');
     }
 
     /**

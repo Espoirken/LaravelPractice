@@ -21,11 +21,11 @@
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" name="password" class="form-control" value="{{$admin->password}}">
+                            <input type="password" name="password" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="password">Confirm Password</label>
-                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" value="{{$admin->password}}" >
+                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
                         </div>
                         <div class="form-group row">
                             <div class="col">
@@ -63,7 +63,7 @@
                         </div>
                         <div class="form-group">
                             <div class="text-center">
-                                <button class="btn btn-success" type="submit">Update Client</button>
+                                <button class="btn btn-success" type="submit">Update Admin</button>
                             </div>
                         </div>
                     </form>

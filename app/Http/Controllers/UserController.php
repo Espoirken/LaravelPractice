@@ -151,7 +151,7 @@ class UserController extends Controller
         $client->status = $request->status;;
         $client->save();
         toastr()->success('Client was updated successfully!');
-        return redirect()->back();
+        return redirect('admin/clients');
     }
 
     /**
