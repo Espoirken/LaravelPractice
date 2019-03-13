@@ -17,7 +17,7 @@
                         </div>
                         <div class="form-group">
                             <label for="detail">Detail</label>
-                            <input type="text" name="detail" class="form-control" value="{{$event->detail}}">
+                            <textarea class="form-control" rows="3" name="detail">{{$event->detail}}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="ended_at">End Date</label>

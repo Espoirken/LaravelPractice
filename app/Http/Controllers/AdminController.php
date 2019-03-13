@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Auth;
 use Hash;
 use Gate;
 use Carbon\Carbon;
@@ -17,7 +18,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $admins = User::all()->where('roles', 'Admin');
+        $user = Auth::user();
+        $admins = User::all()->where('roles', 'Admin')->where('id', '!=', $user->id);
         return view('admin.index')->with('admins', $admins);
     }
 
