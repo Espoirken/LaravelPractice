@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Mail;
 use Auth;
 use Gate;
 use App\Event;
+use App\User;
 use App\Child;
+use App\Mail\EventMail;
 
 class EventController extends Controller
 {
@@ -56,6 +59,7 @@ class EventController extends Controller
         $event->detail = $request->detail;
         $event->status = $request->status;
         $event->save();
+        $this->mail($event->title, $event->detail);
         toastr()->success('Event was created successfully!');
         return redirect('admin/events');
     }
@@ -145,16 +149,6 @@ class EventController extends Controller
         $event = Event::find($id);
         $user = Auth::user();
         $children = $user->children;
-        // dd($events->children()->where('child_id', $id)->get()->first()->pivot->attend);
-        // $hasTask = $events->children()->where('event_id', $id)->exists();
-        // dd($hasTask);
-        // dd($children[0]->id);
-        // dd($events->children[0]);
-        // dd($event->children[0]->pivot->child_id == $id);
-        // $attend = Child::find($id)->events->pivot->attend;
-        // $children = Event::find($id)->children;
-        // dd(Child::find($id)->events[0]->pivot->attend);
-        // dd(Event::find($id)->children[0]->name);
         return view('admin.client.events.attend')->with('event', $event)
                                                 ->with('children', $children);
     }
@@ -195,5 +189,15 @@ class EventController extends Controller
         $child->save();
         $child->events()->update(['attend' => 'Cancelled']);
         return redirect()->back();
+    }
+
+    public function mail($title, $detail)
+    {
+        $users = User::all();
+        foreach ($users as $key => $user) {
+            $emails[] = $user->email;
+        }
+        Mail::to($emails)->send(new EventMail($title, $detail));
+        return 'Email was sent';
     }
 }

@@ -39,6 +39,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if (count($children) > 0)
                         @foreach ($children as $child)
                         <tr>
                             <td>{{$child->name}}</td>
@@ -46,6 +47,11 @@
                             <td>{{$child->expiration}}</td>
                         </tr>
                         @endforeach
+                        @else
+                        <tr>
+                            <th colspan="10" class="text-center">No attendees found</th>
+                        </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>
