@@ -173,12 +173,17 @@ class EventController extends Controller
         if (!Gate::allows('isClient')) {
             abort(404);
         }
+        $now = Carbon::now('Asia/Manila');
+        $event = Event::find($event_id);
+        if($event->ended_at < $now){
+            abort(404);
+        }
         $child = Child::find($child_id);
         if($child->expiration == NULL ){
             toastr()->error('Your children does not have expiration and credits yet, please contact your administrator!');
             return redirect()->back();
         }
-        if($child->expiration < Carbon::now('Asia/Manila')){
+        if($child->expiration < $now){
             toastr()->error('Your children has expired, please contact your administrator!');
             return redirect()->back();
         }

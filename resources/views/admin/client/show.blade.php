@@ -35,6 +35,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @if (count($users->children)> 0)
                     @foreach ($users->children as $user)
                     <tr>
                         <td>{{$user->name}}</td>
@@ -51,6 +52,11 @@
                         @endcan
                     </tr>
                     @endforeach
+                    @else
+                    <tr>
+                        <th colspan="10" class="text-center">No children found</th>
+                    </tr>
+                    @endif
                 </tbody>
             </table>
         </div>

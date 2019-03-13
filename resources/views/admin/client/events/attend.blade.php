@@ -52,6 +52,7 @@
                         @foreach ($children as $child)
                         <tr>
                             <td>
+                                @if ($event->ended_at > $now)
                                 @if ($event->children()->where('child_id', $child->id)->get()->first() == NULL)
                                 <form action="{{ route('event.join', ['event_id' => $event->id, 'child_id' => $child->id ]) }}" method="POST">
                                     @csrf
@@ -70,6 +71,7 @@
                                     <input type="text" hidden name="attend" value="Joined">
                                     <input type="submit" class="btn btn-sm btn-success" class="form-control" value="Join">
                                 </form>
+                                @endif
                                 @endif
                             </td>
                             <td>{{$child->name}}</td>
