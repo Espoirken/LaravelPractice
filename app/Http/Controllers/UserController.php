@@ -128,7 +128,6 @@ class UserController extends Controller
         $this->validate($request, [
             'username' => 'required',
             'email' => "email|unique:users,email,$id",
-            'password' => 'required|confirmed|min:6',
             'first_name' => 'required',
             'middle_name' => 'required',
             'last_name' => 'required',
@@ -140,7 +139,9 @@ class UserController extends Controller
         $client = User::find($id);
         $client->username = $request->username;
         $client->email = $request->email;
-        $client->password = Hash::make($request->password);
+        if(!empty($request->password)){
+            $client->password = Hash::make($request->password);
+        }
         $client->first_name = $request->first_name;
         $client->middle_name = $request->middle_name;
         $client->last_name = $request->last_name;

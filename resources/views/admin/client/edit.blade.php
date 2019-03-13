@@ -21,11 +21,11 @@
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" name="password" class="form-control" value="{{$client->password}}">
+                            <input type="password" name="password" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="password">Confirm Password</label>
-                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" value="{{$client->password}}" >
+                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
                         </div>
                         <div class="form-group row">
                             <div class="col">
