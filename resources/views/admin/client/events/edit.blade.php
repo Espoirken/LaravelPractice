@@ -20,6 +20,10 @@
                             <input type="text" name="detail" class="form-control" value="{{$event->detail}}">
                         </div>
                         <div class="form-group">
+                            <label for="ended_at">End Date</label>
+                            <input type="datetime-local" name="ended_at" class="form-control">
+                        </div>
+                        <div class="form-group">
                             <label for="status">Status</label>
                             <select class="form-control" name="status">
                                 <option value="{{$event->status}}" hidden>{{$event->status}}</option>

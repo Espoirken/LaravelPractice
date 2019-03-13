@@ -11,21 +11,31 @@
             </div>
             </div>
             <div class="form-group row">
-                <label for="staticEmail" class="col-sm-2 col-form-label">Title</label>
+                <label for="Title" class="col-sm-2 col-form-label">Title</label>
                 <div class="col-sm-10">
                     <input type="text" readonly class="form-control-plaintext" value="{{$event->title}}">
                 </div>
             </div>
             <div class="form-group row">
-                <label for="staticEmail" class="col-sm-2 col-form-label">Detail</label>
+                <label for="Detail" class="col-sm-2 col-form-label">Detail</label>
                 <div class="col-sm-10">
                     <input type="text" readonly class="form-control-plaintext" value="{{$event->status}}">
                 </div>
             </div>
             <div class="form-group row">
-                <label for="staticEmail" class="col-sm-2 col-form-label">Status</label>
+                <label for="Status" class="col-sm-2 col-form-label">Status</label>
                 <div class="col-sm-10">
                     <input type="text" readonly class="form-control-plaintext" value="{{$event->detail}}">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="EndDate" class="col-sm-2 col-form-label">End Date</label>
+                <div class="col-sm-10">
+                @if ($event->ended_at > $now)
+                    <input type="text" readonly class="form-control-plaintext" value="{{$event->ended_at}}">
+                @else
+                    <label class="form-control-plaintext">{{$event->ended_at}}  <span class="badge badge-danger">(This event has ended.)</span></label>
+                @endif
                 </div>
             </div>
             <hr>
@@ -43,7 +53,7 @@
                         @foreach ($children as $child)
                         <tr>
                             <td>
-                                @if ($child->credits > 0)
+                                @if ($event->ended_at > $now)
                                 @if ($event->children()->where('child_id', $child->id)->get()->first() == NULL)
                                 <form action="{{ route('event.join', ['event_id' => $event->id, 'child_id' => $child->id ]) }}" method="POST">
                                     @csrf

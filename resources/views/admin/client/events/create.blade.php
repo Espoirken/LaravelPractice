@@ -20,6 +20,10 @@
                             <textarea class="form-control" rows="3" name="detail"></textarea>
                         </div>
                         <div class="form-group">
+                            <label for="ended_at">End date</label>
+                            <input type="datetime-local" name="ended_at" class="form-control">
+                        </div>
+                        <div class="form-group">
                             <label for="status">Status</label>
                             <select class="form-control" name="status">
                                 <option value="Active">Active</option>

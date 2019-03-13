@@ -10,6 +10,7 @@ use App\Event;
 use App\User;
 use App\Child;
 use App\Mail\EventMail;
+use Carbon\Carbon;
 
 class EventController extends Controller
 {
@@ -52,12 +53,14 @@ class EventController extends Controller
             'title' => 'required',
             'detail' => 'required',
             'status' => 'required',
+            'ended_at' => 'required',
         ]);
 
         $event = new Event;
         $event->title = $request->title;
         $event->detail = $request->detail;
         $event->status = $request->status;
+        $event->ended_at = Carbon::parse($request->ended_at);
         $event->save();
         $this->mail($event->title, $event->detail);
         toastr()->success('Event was created successfully!');
@@ -106,11 +109,13 @@ class EventController extends Controller
             'title' => 'required',
             'detail' => 'required',
             'status' => 'required',
+            'ended_at' => 'required',
         ]);
         $event = Event::find($id);
         $event->title = $request->title;
         $event->detail = $request->detail;
         $event->status = $request->status;
+        $event->ended_at = Carbon::parse($request->ended_at);
         $event->save();
         toastr()->success('Event was updated successfully!');
         return redirect('admin/events');
@@ -149,8 +154,10 @@ class EventController extends Controller
         $event = Event::find($id);
         $user = Auth::user();
         $children = $user->children;
+        $now = Carbon::now('Asia/Manila');
         return view('admin.client.events.attend')->with('event', $event)
-                                                ->with('children', $children);
+                                                ->with('children', $children)
+                                                ->with('now', $now);
     }
 
     public function attendees($id)
@@ -165,8 +172,16 @@ class EventController extends Controller
     {     
         if (!Gate::allows('isClient')) {
             abort(404);
-        }  
+        }
         $child = Child::find($child_id);
+        if($child->expiration < Carbon::now('Asia/Manila')){
+            toastr()->error('Your children has expired, please contact your administrator for renewal!');
+            return redirect()->back();
+        }
+        if($child->credits <= 0){
+            toastr()->error('Insufficient credits!');
+            return redirect()->back();
+        }
         if($child->events()->where('event_id', $event_id)->exists()){
             $child->events()->update(['attend' => 'Joined']);
         } else {
