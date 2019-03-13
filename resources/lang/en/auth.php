@@ -15,6 +15,7 @@ return [
 
     'failed' => 'These credentials do not match our records.',
     'expired' => 'These credentials was expired, please contact your administrator.',
+    'inactive' => 'These credentials was inactive, please contact your administrator.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
 ];
