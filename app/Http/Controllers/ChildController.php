@@ -122,6 +122,8 @@ class ChildController extends Controller
         $child->level = $request->level;
         $child->batting = $request->batting;
         $child->throwing_hand = $request->throwing_hand;
+        $child->expiration = $request->expiration;
+        $child->credits = $request->credits;
         $child->special_medical_condition = $request->condition;
         $child->status = 'Active';
         $child->save();

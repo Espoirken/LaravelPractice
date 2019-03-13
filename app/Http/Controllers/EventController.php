@@ -174,6 +174,10 @@ class EventController extends Controller
             abort(404);
         }
         $child = Child::find($child_id);
+        if($child->expiration == NULL ){
+            toastr()->error('Your children does not have expiration and credits yet, please contact your administrator!');
+            return redirect()->back();
+        }
         if($child->expiration < Carbon::now('Asia/Manila')){
             toastr()->error('Your children has expired, please contact your administrator!');
             return redirect()->back();
