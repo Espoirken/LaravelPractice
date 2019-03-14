@@ -40,7 +40,11 @@
                         <td>{{$event->title}}</td>
                         <td>{{$event->detail}}</td>
                         <td>{{$event->ended_at->timezone('Asia/Manila')->format('F d, Y - D  h:i:s A')}}</td>
+                        @if ($event->ended_at > $now)
                         <td>{{$event->status}}</td>
+                        @else
+                        <td>Ended</td>
+                        @endif
                         @can('isClient')
                         <td><a class="btn btn-sm btn-secondary" href="{{ route('event.attend', ['id' => $event->id ]) }}"><i class="fa fa-plus"></i> Attend</a></td>
                         @else
