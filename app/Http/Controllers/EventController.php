@@ -164,10 +164,12 @@ class EventController extends Controller
 
     public function attendees($id)
     {      
+        $now = Carbon::now('Asia/Manila');
         $event = Event::findOrFail($id);
         $children = $event->children;
         return view('admin.client.events.attendees')->with('event', $event)
-                                                ->with('children', $children);
+                                                ->with('children', $children)
+                                                ->with('now', $now);
     }
 
     public function join(Request $request, $event_id, $child_id)
