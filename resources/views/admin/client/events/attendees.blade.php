@@ -19,7 +19,7 @@
             <div class="form-group row">
                 <label for="staticEmail" class="col-sm-2 col-form-label">Detail</label>
                 <div class="col-sm-10">
-                    <input type="text" readonly class="form-control-plaintext" value="{{$event->status}}">
+                    <input type="text" readonly class="form-control-plaintext" value="{{$event->detail}}">
                 </div>
             </div>
             <div class="form-group row">
@@ -31,7 +31,7 @@
             <div class="form-group row">
                 <label for="staticEmail" class="col-sm-2 col-form-label">Status</label>
                 <div class="col-sm-10">
-                    <input type="text" readonly class="form-control-plaintext" value="{{$event->detail}}">
+                    <input type="text" readonly class="form-control-plaintext" value="{{$event->status}}">
                 </div>
             </div>
             <hr>

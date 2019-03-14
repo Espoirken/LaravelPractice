@@ -20,15 +20,25 @@ Auth::routes();
 // Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
 
+Route::get('/', [
+    'uses' => 'UserController@detail',
+    'as' => 'detail',
+]);
+
+Route::get('/profile/edit/{id}', [
+    'uses' => 'UserController@edit_profile',
+    'as' => 'profile.edit',
+]);
+
+Route::post('/profile/update/{id}', [
+    'uses' => 'UserController@update_profile',
+    'as' => 'profile.update',
+]);
+
 //Client Controller
 Route::get('/clients', [
     'uses' => 'UserController@index',
     'as' => 'clients',
-]);
-
-Route::get('/', [
-    'uses' => 'UserController@detail',
-    'as' => 'detail',
 ]);
 
 Route::get('/client/create', [

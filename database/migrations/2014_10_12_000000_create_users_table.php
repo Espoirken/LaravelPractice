@@ -20,10 +20,10 @@ class CreateUsersTable extends Migration
             $table->string('middle_name');
             $table->string('last_name');
             $table->string('email')->unique();
-            $table->string('birthdate')->nullable();
+            $table->date('birthdate')->nullable();
             $table->string('landline');
             $table->string('mobile');
-            $table->dateTime('expiration');
+            $table->dateTime('expiration')->nullable();
             $table->string('status');
             $table->string('roles')->default('Client');
             $table->timestamp('email_verified_at')->nullable();

@@ -128,7 +128,7 @@ class ChildController extends Controller
         $child->status = 'Active';
         $child->save();
         toastr()->success('Child was updated successfully!');
-        return redirect()->back();
+        return redirect(url()->previous());
     }
 
     /**

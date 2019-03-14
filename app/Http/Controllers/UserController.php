@@ -180,7 +180,9 @@ class UserController extends Controller
     public function detail()
     {
         $users = Auth::user();
-        return view('admin.detail')->with('users', $users);
+        $birthdate = Carbon::parse($users->birthdate);
+        return view('admin.detail')->with('users', $users)
+                                    ->with('birthdate', $birthdate);
     }
     
     public function search(Request $request)
@@ -196,5 +198,40 @@ class UserController extends Controller
         ->orWhere('status', 'like', '%' . request('search') . '%')
         ->paginate(10);
         return view('admin.client.index')->with('clients', $clients);
+    }
+
+    public function edit_profile($id)
+    {
+        $users = Auth::user();
+        $birthdate = Carbon::parse($users->birthdate);
+        return view('admin.edit_profile')->with('users', $users)
+                                        ->with('birthdate', $birthdate);
+    }
+
+    public function update_profile(Request $request, $id)
+    {
+        $this->validate($request, [
+            'username' => 'required',
+            'email' => "email|unique:users,email,$id",
+            'first_name' => 'required',
+            'middle_name' => 'required',
+            'last_name' => 'required',
+            'landline' => 'required',
+            'mobile' => 'required',
+        ]);
+        $users = User::find($id);
+        $users->username = $request->username;
+        if(!empty($request->password)){
+            $users->password = Hash::make($request->password);
+        }
+        $users->first_name = $request->first_name;
+        $users->middle_name = $request->middle_name;
+        $users->last_name = $request->last_name;
+        $users->landline = $request->landline;
+        $users->mobile = $request->mobile;
+        $users->email = $request->email;
+        $users->save();
+        toastr()->success('Account was updated successfully!');
+        return redirect()->back();
     }
 }

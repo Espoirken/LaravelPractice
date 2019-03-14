@@ -19,15 +19,36 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label for="staticEmail" class="col-sm-2 col-form-label">Expiration</label>
+                <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
                 <div class="col-sm-10">
-                    <input type="text" readonly class="form-control-plaintext" value="{{$users->expiration->timezone('Asia/Singapore')->format('F d, Y')}}">
+                    <input type="email" readonly class="form-control-plaintext" value="{{$users->email}}">
                 </div>
             </div>
             <div class="form-group row">
-                <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+                <label for="staticEmail" class="col-sm-2 col-form-label">Birthdate</label>
                 <div class="col-sm-10">
-                    <input type="text" readonly class="form-control-plaintext" value="{{$users->email}}">
+                    <input type="text" readonly class="form-control-plaintext" value="{{$birthdate->format('F d, Y')}}">
+                </div>
+            </div>
+            @if (empty($users->expiration))
+            @else
+            <div class="form-group row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Expiration</label>
+                <div class="col-sm-10">
+                <input type="text" readonly class="form-control-plaintext" value="{{$users->expiration->timezone('Asia/Manila')->format('F d, Y')}}">
+                </div>
+            </div>
+            @endif
+            <div class="form-group row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Landline</label>
+                <div class="col-sm-10">
+                    <input type="email" readonly class="form-control-plaintext" value="{{$users->landline}}">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Mobile</label>
+                <div class="col-sm-10">
+                    <input type="email" readonly class="form-control-plaintext" value="{{$users->mobile}}">
                 </div>
             </div>
         </div>

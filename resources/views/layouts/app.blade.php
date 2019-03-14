@@ -17,7 +17,6 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @toastr_css
@@ -53,7 +52,7 @@
                             <a class="nav-link" href="{{ route('clients')}}"><i class="fa fa-users" aria-hidden="true"></i> Clients</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin') }}"><i class="fa fa-list" aria-hidden="true"></i>List of Admins</a>
+                            <a class="nav-link" href="{{ route('admin') }}"><i class="fa fa-list" aria-hidden="true"></i>Admins</a>
                         </li>
                         @endcan
                         @can('isCoach')
@@ -87,12 +86,12 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('profile.edit', ['id' => $user->id]) }}">Edit Profile</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
