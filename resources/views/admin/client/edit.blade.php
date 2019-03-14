@@ -51,7 +51,7 @@
                         </div>
                         <div class="form-group">
                             <label for="expiration">Expiration</label>
-                            <input type="text" name="expiration" class="form-control" value="{{$client->expiration}}">
+                            <input type="text" name="expiration" id="expiration" class="form-control" value="{{$client->expiration}}" required>
                         </div>
                         <div class="form-group">
                             <label for="status">Status</label>

@@ -216,6 +216,7 @@ class UserController extends Controller
             'first_name' => 'required',
             'middle_name' => 'required',
             'last_name' => 'required',
+            'birthdate' => 'required',
             'landline' => 'required',
             'mobile' => 'required',
         ]);
@@ -228,6 +229,7 @@ class UserController extends Controller
         $users->middle_name = $request->middle_name;
         $users->last_name = $request->last_name;
         $users->landline = $request->landline;
+        $users->birthdate = $request->birthdate;
         $users->mobile = $request->mobile;
         $users->email = $request->email;
         $users->save();

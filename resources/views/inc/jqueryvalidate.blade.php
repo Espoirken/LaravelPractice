@@ -49,9 +49,6 @@ $(document).ready(function () {
             expiration: {
                 required: true,
             },
-            status: {
-                required: true,
-            },
         }
     });
     $('#user_edit').validate({
@@ -75,9 +72,6 @@ $(document).ready(function () {
                 required: true,
             },
             expiration: {
-                required: true,
-            },
-            status: {
                 required: true,
             },
         }

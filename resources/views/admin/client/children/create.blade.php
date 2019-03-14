@@ -17,7 +17,7 @@
                         </div>
                         <div class="form-group">
                             <label for="birthdate">Date of Birth</label>
-                            <input type="date" name="birthdate" class="form-control">
+                            <input type="date" id="birthdate" name="birthdate" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="batting">Batting</label>

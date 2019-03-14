@@ -105,7 +105,7 @@
                             <label for="expiration" class="col-md-4 col-form-label text-md-right">{{ __('Expiration') }}</label>
 
                             <div class="col-md-6">
-                                <input id="expiration" type="datetime-local" class="form-control" name="expiration" >
+                                <input id="expiration" type="datetime-local" class="form-control" name="expiration" required>
                             </div>
                         </div>
 

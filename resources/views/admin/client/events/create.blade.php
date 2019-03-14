@@ -21,7 +21,7 @@
                         </div>
                         <div class="form-group">
                             <label for="ended_at">End date</label>
-                            <input type="datetime-local" name="ended_at" class="form-control">
+                            <input id="expiration" name="ended_at" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="status">Status</label>

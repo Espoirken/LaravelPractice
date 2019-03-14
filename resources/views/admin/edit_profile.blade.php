@@ -38,10 +38,11 @@
                     <input type="email" class="form-control" name="email" value="{{$users->email}}">
                 </div>
             </div>
+
             <div class="form-group row">
                 <label for="staticEmail" class="col-sm-2 col-form-label">Birthdate</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="birthdate" value="{{$birthdate->format('F d, Y')}}">
+                    <input type="text" id="birthdate" class="form-control" name="birthdate" value="{{$birthdate}}">
                 </div>
             </div>
             <div class="form-group row">
