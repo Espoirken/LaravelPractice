@@ -19,6 +19,8 @@ class CreateChildrenTable extends Migration
             $table->string('name');
             $table->string('credits')->default(0);
             $table->dateTime('expiration')->nullable();
+            $table->string('gender');
+            $table->string('sport');
             $table->string('birthdate');
             $table->string('level')->nullable();
             $table->string('batting');

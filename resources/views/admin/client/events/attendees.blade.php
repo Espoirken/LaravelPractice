@@ -45,6 +45,7 @@
                         <tr>
                             <th>NAME</th>
                             <th>LEVEL</th>
+                            <th>AGE</th>
                             <th>CREDITS</th>
                             <th>EXPIRATION</th>
                         </tr>
@@ -55,6 +56,7 @@
                         <tr>
                             <td><a href="{{ route('child.edit', ['id' => $child->id ])}}">{{$child->name}}</a></td>
                             <td>{{$child->level}}</td>
+                            <td>{{$datetoday->diffInYears(\Carbon\Carbon::parse($child->birthdate))}}</td>
                             <td>{{$child->credits}}</td>
                             <td>{{\Carbon\Carbon::parse($child->expiration)->format('F d, Y - D  h:i:s A')}}</td>
                         </tr>

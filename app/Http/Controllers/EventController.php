@@ -167,9 +167,11 @@ class EventController extends Controller
         $now = Carbon::now('Asia/Manila');
         $event = Event::findOrFail($id);
         $children = $event->children;
+        $datetoday = Carbon::parse($now->toDateString()); 
         return view('admin.client.events.attendees')->with('event', $event)
                                                 ->with('children', $children)
-                                                ->with('now', $now);
+                                                ->with('now', $now)
+                                                ->with('datetoday', $datetoday);
     }
 
     public function join(Request $request, $event_id, $child_id)

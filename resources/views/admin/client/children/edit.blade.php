@@ -18,7 +18,7 @@
                         </div>
                         <div class="form-group">
                             <label for="birthdate">Date of Birth</label>
-                            <input type="date" id="birthdate" name="birthdate" class="form-control" value="{{$child->birthdate}}">
+                        <input type="date" id="birthdate" name="birthdate" class="form-control" value="{{$child->birthdate}}">
                         </div>
                         <div class="form-group">
                             <label for="status">Level</label>

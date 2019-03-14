@@ -41,7 +41,7 @@
                         <td>{{$user->name}}</td>
                         <td>{{$user->credits}}<td>
                         <td>{{\Carbon\Carbon::parse($user->expiration)->format('F d, Y - D  h:i:s A')}}</td>
-                        <td>{{$user->birthdate}}</td>
+                        <td>{{\Carbon\Carbon::parse($user->birthdate)->format('F d, Y')}}</td>
                         <td>{{$user->level}}</td>
                         <td>{{$user->batting}}</td>
                         <td>{{$user->throwing_hand}}</td>
