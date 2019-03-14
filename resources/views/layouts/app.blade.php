@@ -106,6 +106,22 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/additional-methods.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script type="text/javascript">
+        $("#polo_check").click(function(){
+            if($('input[type=checkbox]').prop('checked')){
+                $("#polo").removeAttr('readonly');
+            } else {
+                $("#polo").attr('readonly', 'true');
+            }
+            
+        });
+    $(document).ready(function(){
+        if($("#polo").val() != ""){
+            $("#polo").removeAttr('readonly');
+            $("#polo_check").attr('checked', 'checked');
+        }
+    });
+    </script>
     @include('inc.datetimepicker')
     @include('inc.consent')
     @include('inc.jqueryvalidate')

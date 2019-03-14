@@ -50,9 +50,17 @@
                             <label for="mobile">Mobile Number</label>
                             <input type="text" name="mobile" class="form-control">
                         </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="polo_check">
+                            <label class="form-check-label" for="polo_check">Manila Polo Club Member?</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="mobile">Manila Polo Club Member ID</label>
+                            <input type="text" name="polo_club_id" id="polo" class="form-control" readonly>
+                        </div>
                         <div class="form-group">
                             <label for="expiration">Expiration</label>
-                            <input type="datetime-local" name="expiration" class="form-control">
+                            <input type="datetime-local" name="expiration" id="expiration" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="status">Status</label>

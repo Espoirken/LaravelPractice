@@ -49,6 +49,14 @@
                             <label for="mobile">Mobile Number</label>
                             <input type="text" name="mobile" class="form-control" value="{{$client->mobile}}"> 
                         </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="polo_check">
+                            <label class="form-check-label" for="exampleCheck1">Manila Polo Club Member?</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="mobile">Manila Polo Club Member ID</label>
+                            <input type="text" name="polo_club_id" id="polo" class="form-control" value="{{$client->polo_club_id}}" readonly>
+                        </div>
                         <div class="form-group">
                             <label for="expiration">Expiration</label>
                             <input type="text" name="expiration" id="expiration" class="form-control" value="{{$client->expiration}}" required>

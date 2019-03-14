@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->date('birthdate')->nullable();
             $table->string('landline');
             $table->string('mobile');
+            $table->string('polo_club_id')->nullable();
             $table->dateTime('expiration')->nullable();
             $table->string('status');
             $table->string('roles')->default('Client');

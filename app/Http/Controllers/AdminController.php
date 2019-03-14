@@ -61,11 +61,11 @@ class AdminController extends Controller
         $client->last_name = $request->last_name;
         $client->landline = $request->landline;
         $client->mobile = $request->mobile;
-        $client->expiration = Carbon::createFromFormat('Y/m/d', '9999/99/99')->timestamp;
+        $client->roles = 'Admin';
         $client->status = 'Active';
         $client->save();
-        toastr()->success('Client was created successfully!');
-        return redirect('admin/clients');
+        toastr()->success('Admin was created successfully!');
+        return redirect('admin/list');
     }
 
     /**
@@ -126,7 +126,7 @@ class AdminController extends Controller
         $client->landline = $request->landline;
         $client->mobile = $request->mobile;
         $client->expiration = Carbon::parse($request->expiration);
-        $client->status = $request->status;;
+        $client->status = $request->status;
         $client->save();
         toastr()->success('Admin was updated successfully!');
         return redirect('admin/list');

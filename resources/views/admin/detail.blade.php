@@ -51,6 +51,14 @@
                     <input type="email" readonly class="form-control-plaintext" value="{{$users->mobile}}">
                 </div>
             </div>
+            @can('isClient')
+            <div class="form-group row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Polo Club Member ID</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" value="{{$users->polo_club_id}}">
+                </div>
+            </div>
+            @endcan
         </div>
     </div>
 </div>

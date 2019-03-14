@@ -25,6 +25,7 @@
                         <th>USERNAME</th>
                         <th>NAME</th>
                         <th>EMAIL</th>
+                        <th>MANILA POLO CLUB MEMBER ID</th>
                         <th>STATUS</th>
                         <th>DETAILS</th>
                         <th>CHILDREN</th>
@@ -41,6 +42,7 @@
                         <td>{{$client->username}}</td>
                         <td>{{$client->first_name}} {{$client->middle_name}} {{$client->last_name}}</td>
                         <td>{{$client->email}}</td>
+                        <td>{{$client->polo_club_id}}</td>
                         <td>{{$client->status}}</td>
                         <td><a class="btn btn-sm btn-link" href="{{ route('client.view', ['id' => $client->id ])}}"><i class="fa fa-search"></i> View</a></td>
                         <td><a class="btn btn-sm btn-primary" href="{{ route('client.show', ['id' => $client->id ])}}"><i class="fa fa-search"></i> Show Children</a></td>

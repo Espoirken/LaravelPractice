@@ -75,6 +75,7 @@ class UserController extends Controller
         $client->last_name = $request->last_name;
         $client->landline = $request->landline;
         $client->mobile = $request->mobile;
+        $client->polo_club_id = $request->polo_club_id;
         $client->expiration = Carbon::parse($request->expiration);
         $client->status = 'Active';
         $client->save();
@@ -147,6 +148,7 @@ class UserController extends Controller
         $client->last_name = $request->last_name;
         $client->landline = $request->landline;
         $client->mobile = $request->mobile;
+        $client->polo_club_id = $request->polo_club_id;
         $client->expiration = Carbon::parse($client->expiration);
         $client->status = $request->status;;
         $client->save();

@@ -76,7 +76,7 @@
                             <label for="status">Level</label>
                             <select class="form-control" name="level">
                                 @php
-                                    $levels = array("Admin", "Coach");
+                                    $levels = array("1", "2", "3");
                                 @endphp
                                 @foreach ($levels as $level)
                                 @if ($child->level == $level)
@@ -123,7 +123,7 @@
                         </div>
                         <div class="form-group">
                             <label for="expiration">Expiration</label>
-                            <input type="text" name="expiration" class="form-control" value="{{$child->expiration}}">
+                            <input type="text" name="expiration" id="expiration" class="form-control" value="{{$child->expiration}}">
                         </div>
                         <div class="form-group">
                             <label for="credits">Credits</label>
