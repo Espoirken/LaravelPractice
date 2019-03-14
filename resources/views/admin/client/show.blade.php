@@ -4,16 +4,16 @@
     <div class="card">
         <div class="card-body">
             <div class="row">
-            <div class="col-lg-3"><h2 class="card-title">Children of {{$users->first_name}} {{$users->middle_name}} {{$users->last_name}}</h2></div>
-            <div class="col-lg-5">
-            <form class="form-inline" action="{{ route('client.search')}}" method="POST">
+            <div class="col-lg-8"><h2 class="card-title">Children of {{$users->first_name}} {{$users->middle_name}} {{$users->last_name}}</h2></div>
+            {{-- <div class="col-lg-5">
+            <form class="form-inline" action="{{ route('child.search')}}" method="POST">
                 <div class="form-group">
                     @csrf
                     <input type="text" name="search" class="form-control mx-sm-3" style="width:600px" placeholder="Search a child...">
                     <input type="submit" class="btn btn-primary" class="form-control" value="Search">
                 </div>
             </form>
-            </div>
+            </div> --}}
             <div class="col-lg-1 offset-lg-3"><a href="{{ route('clients')}}"  class="btn btn-sm btn-primary float-right"><i class="fa fa-arrow-left"></i> Back</a></div>
             </div>
             <table class="table">
@@ -22,7 +22,7 @@
                         <th>NAME</th>
                         <th>CREDITS</th>
                         <th></th>
-                        <th>EXPIRATION </th>
+                        <th>CREDITS EXPIRATION </th>
                         <th>DATE OF BIRTH</th>
                         <th>LEVEL</th>
                         <th>BATTING</th>
@@ -40,7 +40,7 @@
                     <tr>
                         <td>{{$user->name}}</td>
                         <td>{{$user->credits}}<td>
-                        <td>{{$user->expiration}}</td>
+                        <td>{{\Carbon\Carbon::parse($user->expiration)->format('F d, Y - D  h:i:s A')}}</td>
                         <td>{{$user->birthdate}}</td>
                         <td>{{$user->level}}</td>
                         <td>{{$user->batting}}</td>

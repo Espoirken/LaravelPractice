@@ -58,7 +58,7 @@
                             <input type="text" name="polo_club_id" id="polo" class="form-control" value="{{$client->polo_club_id}}" readonly>
                         </div>
                         <div class="form-group">
-                            <label for="expiration">Expiration</label>
+                            <label for="expiration">Account Expiration</label>
                             <input type="text" name="expiration" id="expiration" class="form-control" value="{{$client->expiration}}" required>
                         </div>
                         <div class="form-group">

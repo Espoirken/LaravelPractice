@@ -19,7 +19,6 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>USERNAME</th>
                         <th>NAME</th>
                         <th>EMAIL</th>
@@ -32,7 +31,6 @@
                     @if (count($admins) > 0)
                     @foreach ($admins as $admin)
                     <tr>
-                        <td>{{$admin->id}}</td>
                         <td>{{$admin->username}}</td>
                         <td>{{$admin->first_name}} {{$admin->middle_name}} {{$admin->last_name}}</td>
                         <td>{{$admin->email}}</td>

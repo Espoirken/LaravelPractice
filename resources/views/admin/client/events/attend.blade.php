@@ -31,7 +31,7 @@
             <div class="form-group row">
                 <label for="EndDate" class="col-sm-2 col-form-label">End Date</label>
                 <div class="col-sm-10">
-                    <input type="text" readonly class="form-control-plaintext" value="{{$event->ended_at}}">
+                    <input type="text" readonly class="form-control-plaintext" value="{{$event->ended_at->format('F d, Y - D  h:i:s A')}}">
                     {{-- <label class="form-control-plaintext">{{$event->ended_at}}  <span class="badge badge-danger">(This event has ended.)</span></label> --}}
                 </div>
             </div>
@@ -76,7 +76,7 @@
                             </td>
                             <td>{{$child->name}}</td>
                             <td>{{$child->credits}}</td>
-                            <td>{{$child->expiration}}</td>
+                            <td>{{\Carbon\Carbon::parse($child->expiration)->format('F d, Y - D  h:i:s A')}}</td>
                         </tr>
                         @endforeach
                         @else

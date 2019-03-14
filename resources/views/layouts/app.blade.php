@@ -53,7 +53,7 @@
                             <a class="nav-link" href="{{ route('clients')}}"><i class="fa fa-users" aria-hidden="true"></i> Clients</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin') }}"><i class="fa fa-list" aria-hidden="true"></i>Admins</a>
+                            <a class="nav-link" href="{{ route('admin') }}"><i class="fa fa-list" aria-hidden="true"></i> Admins</a>
                         </li>
                         @endcan
                         @can('isCoach')
@@ -82,10 +82,10 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('profile.edit', ['id' => $user->id]) }}">Edit Profile</a>
+                                    <a class="dropdown-item" href="{{ route('profile.edit', ['id' => $user->id]) }}"><i class="fa fa-edit" ></i> Edit Profile</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                                     document.getElementById('logout-form').submit();"><i class="fa fa-sign-out" ></i>
                                         {{ __('Logout') }}
                                     </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

@@ -44,6 +44,7 @@
                     <thead>
                         <tr>
                             <th>NAME</th>
+                            <th>LEVEL</th>
                             <th>CREDITS</th>
                             <th>EXPIRATION</th>
                         </tr>
@@ -52,9 +53,10 @@
                         @if (count($children) > 0)
                         @foreach ($children as $child)
                         <tr>
-                            <td>{{$child->name}}</td>
+                            <td><a href="{{ route('child.edit', ['id' => $child->id ])}}">{{$child->name}}</a></td>
+                            <td>{{$child->level}}</td>
                             <td>{{$child->credits}}</td>
-                            <td>{{$child->expiration}}</td>
+                            <td>{{\Carbon\Carbon::parse($child->expiration)->format('F d, Y - D  h:i:s A')}}</td>
                         </tr>
                         @endforeach
                         @else

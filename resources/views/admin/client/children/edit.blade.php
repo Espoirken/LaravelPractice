@@ -122,7 +122,7 @@
                             <input type="text" name="condition" class="form-control" value="{{$child->special_medical_condition}}" readonly>
                         </div>
                         <div class="form-group">
-                            <label for="expiration">Expiration</label>
+                            <label for="expiration">Credits Expiration</label>
                             <input type="text" name="expiration" id="expiration" class="form-control" value="{{$child->expiration}}">
                         </div>
                         <div class="form-group">

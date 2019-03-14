@@ -50,10 +50,6 @@
                             <input type="text" name="mobile" class="form-control" value="{{$admin->mobile}}"> 
                         </div>
                         <div class="form-group">
-                            <label for="expiration">Expiration</label>
-                            <input type="text" name="expiration" class="form-control" value="{{$admin->expiration}}">
-                        </div>
-                        <div class="form-group">
                             <label for="status">Status</label>
                             <select class="form-control" name="status">
                                 <option value="{{$admin->status}}" hidden>{{$admin->status}}</option>
