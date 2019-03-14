@@ -11,16 +11,17 @@ use App\Event;
 class EventMail extends Mailable
 {
     use Queueable, SerializesModels;
-    public $title, $detail;
+    public $title, $detail, $id;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($title, $detail)
+    public function __construct($title, $detail, $id)
     {
         $this->title = $title;
         $this->detail = $detail;
+        $this->id = $id;
     }
 
     /**

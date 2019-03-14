@@ -91,7 +91,7 @@ class UserController extends Controller
     public function show($id)
     {
         if (Gate::allows('isAdmin')||Gate::allows('isCoach')) {
-            $users = User::find($id);
+            $users = User::findOrFail($id);
             return view('admin.client.show')->with('users', $users);
         }
         abort(404);
@@ -109,7 +109,7 @@ class UserController extends Controller
         if (!Gate::allows('isAdmin')) {
             abort(404);
         }
-        $client = User::find($id);
+        $client = User::findOrFail($id);
         return view('admin.client.edit')->with('client', $client);
     }
 
@@ -136,7 +136,7 @@ class UserController extends Controller
             'expiration' => 'required',
             'status' => 'required',
         ]);
-        $client = User::find($id);
+        $client = User::findOrFail($id);
         $client->username = $request->username;
         $client->email = $request->email;
         if(!empty($request->password)){
@@ -165,7 +165,7 @@ class UserController extends Controller
         if (!Gate::allows('isAdmin')) {
             abort(404);
         }
-        $client = User::find($id);
+        $client = User::findOrFail($id);
         $client->delete();
         toastr()->success('Client was deleted successfully!');
         return redirect('admin/clients');
@@ -173,7 +173,7 @@ class UserController extends Controller
 
     public function view($id)
     {
-        $client = User::find($id);
+        $client = User::findOrFail($id);
         return view('admin.client.client_detail')->with('client', $client);
     }
 
@@ -220,7 +220,7 @@ class UserController extends Controller
             'landline' => 'required',
             'mobile' => 'required',
         ]);
-        $users = User::find($id);
+        $users = User::findOrFail($id);
         $users->username = $request->username;
         if(!empty($request->password)){
             $users->password = Hash::make($request->password);

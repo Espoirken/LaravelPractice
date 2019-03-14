@@ -96,7 +96,7 @@ class ChildController extends Controller
      */
     public function edit($id)
     {
-        $child = Child::find($id);
+        $child = Child::findOrFail($id);
         return view('admin.client.children.edit')->with('child', $child);
     }
 
@@ -116,7 +116,7 @@ class ChildController extends Controller
             'throwing_hand' => 'required',
             'condition' => 'required',
         ]);
-        $child = Child::find($id);
+        $child = Child::findOrFail($id);
         $child->name = $request->name;
         $child->birthdate = $request->birthdate;
         $child->level = $request->level;
@@ -142,7 +142,7 @@ class ChildController extends Controller
         if (!Gate::allows('isClient')) {
             abort(404);
         }
-        $user = Child::find($id);
+        $user = Child::findOrFail($id);
         $user->delete();
         toastr()->success('Child was deleted successfully!');
         return redirect('admin/children');

@@ -1,5 +1,4 @@
 <div>
     <h1>Hi, a new event was created!</h1>
-    <p>Title: {{$title}}</p>
-    <p>Details: {{$detail}}</p>
+    <p>Title: <a href="{{ url('/admin/event/attend/'. $id ) }}">{{$title}}</a></p>
 </div>

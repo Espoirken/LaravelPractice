@@ -87,7 +87,7 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        $admin = User::find($id);
+        $admin = User::findOrFail($id);
         return view('admin.edit')->with('admin', $admin);
     }
 
@@ -114,7 +114,7 @@ class AdminController extends Controller
             'expiration' => 'required',
             'status' => 'required',
         ]);
-        $client = User::find($id);
+        $client = User::findOrFail($id);
         $client->username = $request->username;
         $client->email = $request->email;
         if(!empty($request->password)){
@@ -140,7 +140,7 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         $user->delete();
         toastr()->success('Admin was deleted successfully!');
         return redirect('admin/list');

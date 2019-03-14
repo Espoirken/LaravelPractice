@@ -64,7 +64,7 @@ class EventController extends Controller
         $event->status = $request->status;
         $event->ended_at = Carbon::parse($request->ended_at);
         $event->save();
-        $this->mail($event->title, $event->detail);
+        $this->mail($event->title, $event->detail, $event->id);
         toastr()->success('Event was created successfully!');
         return redirect('admin/events');
     }
@@ -91,7 +91,7 @@ class EventController extends Controller
         if (!Gate::allows('isAdmin')) {
             abort(404);
         }
-        $event = Event::find($id);
+        $event = Event::findOrFail($id);
         return view('admin.client.events.edit')->with('event', $event);
     }
 
@@ -113,7 +113,7 @@ class EventController extends Controller
             'status' => 'required',
             'ended_at' => 'required',
         ]);
-        $event = Event::find($id);
+        $event = Event::findOrFail($id);
         $event->title = $request->title;
         $event->detail = $request->detail;
         $event->status = $request->status;
@@ -134,7 +134,7 @@ class EventController extends Controller
         if (!Gate::allows('isAdmin')) {
             abort(404);
         }
-        $event = Event::find($id);
+        $event = Event::findOrFail($id);
         $event->delete();
         toastr()->success('Event was deleted successfully!');
         return redirect('admin/events');
@@ -153,7 +153,7 @@ class EventController extends Controller
         if (!Gate::allows('isClient')) {
             abort(404);
         }
-        $event = Event::find($id);
+        $event = Event::findOrFail($id);
         $user = Auth::user();
         $children = $user->children;
         $now = Carbon::now('Asia/Manila');
@@ -164,7 +164,7 @@ class EventController extends Controller
 
     public function attendees($id)
     {      
-        $event = Event::find($id);
+        $event = Event::findOrFail($id);
         $children = $event->children;
         return view('admin.client.events.attendees')->with('event', $event)
                                                 ->with('children', $children);
@@ -176,11 +176,11 @@ class EventController extends Controller
             abort(404);
         }
         $now = Carbon::now('Asia/Manila');
-        $event = Event::find($event_id);
+        $event = Event::findOrFail($event_id);
         if($event->ended_at < $now){
             abort(404);
         }
-        $child = Child::find($child_id);
+        $child = Child::findOrFail($child_id);
         if($child->expiration == NULL ){
             toastr()->error('Your children does not have expiration and credits yet, please contact your administrator!');
             return redirect()->back();
@@ -208,20 +208,20 @@ class EventController extends Controller
         if (!Gate::allows('isClient')) {
             abort(404);
         }
-        $child = Child::find($child_id);
+        $child = Child::findOrFail($child_id);
         $child->increment('credits', 1);
         $child->save();
         $child->events()->update(['attend' => 'Cancelled']);
         return redirect()->back();
     }
 
-    public function mail($title, $detail)
+    public function mail($title, $detail, $id)
     {
         $users = User::all();
         foreach ($users as $key => $user) {
             $emails[] = $user->email;
         }
-        Mail::to($emails)->send(new EventMail($title, $detail));
+        Mail::to($emails)->send(new EventMail($title, $detail, $id));
         return 'Email was sent';
     }
 }
