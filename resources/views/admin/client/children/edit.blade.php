@@ -155,7 +155,7 @@
                         </div>
                         @else
                         <div class="form-group">
-                            <label for="expiration">Expiration</label>
+                            <label for="expiration">Credits Expiration</label>
                             <input type="text" name="expiration" class="form-control" value="{{$child->expiration}}" readonly>
                         </div>
                         <div class="form-group">

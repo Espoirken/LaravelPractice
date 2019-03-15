@@ -59,7 +59,7 @@
                             <input type="text" name="polo_club_id" id="polo" class="form-control" readonly>
                         </div>
                         <div class="form-group">
-                            <label for="expiration">Expiration</label>
+                            <label for="expiration">Account Expiration</label>
                             <input type="datetime-local" name="expiration" id="expiration" class="form-control" required>
                         </div>
                         <div class="form-group">
