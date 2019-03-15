@@ -50,6 +50,7 @@
                     <thead>
                         <tr>
                             <th>NAME</th>
+                            <th>LIST OF ATTENDED EVENTS</th>
                             <th>LEVEL</th>
                             <th>AGE</th>
                             <th>CREDITS</th>
@@ -77,6 +78,7 @@
                             <td>{{$child->name}}</td>
                             @endif
                             @endif
+                            <td><a class="btn btn-sm btn-light" href="{{ route('child.attended', ['id' => $child->id ])}}"><i class="fa fa-search"></i> Show</a></td>
                             <td>{{$child->level}}</td>
                             <td>{{$datetoday->diffInYears(\Carbon\Carbon::parse($child->birthdate))}}</td>
                             <td>{{$child->credits}}</td>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Child;
 use App\User;
+use App\Event;
 use Gate;
 use Carbon\Carbon;
 
@@ -179,4 +180,11 @@ class ChildController extends Controller
         return view('admin.client.children.index')->with('children', $children);
     }
     
+    public function attended($id)
+    {      
+        $child = Child::find($id);
+        $events = Event::paginate(10);
+        return view('admin.client.events.attended')->with('events', $events)
+                                                ->with('child', $child);
+    }
 }

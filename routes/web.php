@@ -11,7 +11,7 @@
 |
 */
 
-// Auth::routes();
+Auth::routes();
 
 // Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -121,6 +121,11 @@ Route::get('/child/delete/{id}', [
 Route::any('/child/search', [
     'uses' => 'ChildController@search',
     'as' => 'child.search',
+]);
+
+Route::any('/child/attended/{id}', [
+    'uses' => 'ChildController@attended',
+    'as' => 'child.attended',
 ]);
 
 //Event Controller
