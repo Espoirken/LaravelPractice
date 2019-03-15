@@ -50,7 +50,7 @@
                     <thead>
                         <tr>
                             <th>NAME</th>
-                            <th>LIST OF ATTENDED EVENTS</th>
+                            <th>EVENTS ATTENDED</th>
                             <th>LEVEL</th>
                             <th>AGE</th>
                             <th>CREDITS</th>

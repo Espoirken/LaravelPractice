@@ -28,6 +28,7 @@
                         <th>BATTING</th>
                         <th>THROWING HAND</th>
                         <th>SPECIAL OR MEDICAL CONDITION</th>
+                        <th>EVENTS ATTENDED</th>
                         <th>EDIT</th>
                         @can('isClient')
                         <th>DELETE</th>
@@ -46,6 +47,7 @@
                         <td>{{$user->batting}}</td>
                         <td>{{$user->throwing_hand}}</td>
                         <td>{{$user->special_medical_condition}}</td>
+                        <td><a class="btn btn-sm btn-light" href="{{ route('child.attended', ['id' => $user->id ])}}"><i class="fa fa-search"></i> Show</a></td>
                         <td><a class="btn btn-sm btn-primary" href="{{ route('child.edit', ['id' => $user->id ])}}"><i class="fa fa-edit"></i> Edit</a></td>
                         @can('isClient')
                         <td><a class="btn btn-sm btn-danger" href="{{ route('child.delete', ['id' => $user->id])}}" onclick="return confirm('Are you sure?')"><i class="fa fa-trash" aria-hidden="true"></i> Trash</a></td>

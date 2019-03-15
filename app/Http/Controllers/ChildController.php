@@ -183,7 +183,7 @@ class ChildController extends Controller
     public function attended($id)
     {      
         $child = Child::find($id);
-        $events = Event::paginate(10);
+        $events = Event::paginate(20);
         return view('admin.client.events.attended')->with('events', $events)
                                                 ->with('child', $child);
     }

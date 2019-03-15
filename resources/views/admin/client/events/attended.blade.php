@@ -5,9 +5,9 @@
         <div class="card-body">
             <div class="row">
             @if ($child->nickname != NULL)
-            <div class="col-lg-8"><h2 class="card-title">List of Attended Events by {{$child->nickname}}</h2></div>
+            <div class="col-lg-8"><h2 class="card-title">List of Events Attended by {{$child->nickname}}</h2></div>
             @else                
-            <div class="col-lg-8"><h2 class="card-title">List of Attended Events by {{$child->name}}</h2></div>
+            <div class="col-lg-8"><h2 class="card-title">List of Events Attended by {{$child->name}}</h2></div>
             @endif
             @can('isAdmin')
             @endcan
