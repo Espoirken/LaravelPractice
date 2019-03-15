@@ -23,14 +23,13 @@
                 <thead>
                     <tr>
                         <th>TITLE</th>
-                        <th>DETAILS</th>
                         <th>START DATE</th>
                         <th>END DATE</th>
-                        <th>STATUS</th>
-                        <th>ATTEND</th>
+                        <th>REGISTRATION<br>PERIOD</th>
+                        <th width="9%">ATTEND</th>
                         @can('isAdmin')
-                        <th>EDIT</th>
-                        <th>CANCEL</th>
+                        <th width="8%">EDIT</th>
+                        <th width="8%">CANCEL</th>
                         @endcan
                     </tr>
                 </thead>
@@ -39,7 +38,6 @@
                     @foreach ($events as $event)
                     <tr>
                         <td>{{$event->title}}</td>
-                        <td>{{$event->detail}}</td>
                         <td>{{$event->created_at->timezone('Asia/Manila')->format('F d, Y - D  h:i:s A')}}</td>
                         <td>{{$event->ended_at->timezone('Asia/Manila')->format('F d, Y - D  h:i:s A')}}</td>
                         @if ($event->status == 'Cancelled')

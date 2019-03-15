@@ -24,7 +24,7 @@ class EventController extends Controller
     public function index()
     {
         $now = Carbon::now('Asia/Manila');
-        $events = Event::orderBy('status', 'asc')->paginate(10);
+        $events = Event::paginate(10);
         return view('admin.client.events.index')->with('events', $events)
                                                 ->with('now', $now);
     }
