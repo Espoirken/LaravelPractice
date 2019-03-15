@@ -50,6 +50,13 @@
                             <input type="text" name="mobile" class="form-control">
                         </div>
                         <div class="form-group">
+                            <label for="roles">Role</label>
+                            <select class="form-control" name="roles">
+                                <option value="Admin">Admin</option>
+                                <option value="Coach">Coach</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="status">Status</label>
                             <select class="form-control" name="status">
                                 <option value="Active">Active</option>
@@ -58,7 +65,7 @@
                         </div>
                         <div class="form-group">
                             <div class="text-center">
-                                <button class="btn btn-success" type="submit">Add Admin</button>
+                                <button class="btn btn-success" type="submit">Add User</button>
                             </div>
                         </div>
                     </form>

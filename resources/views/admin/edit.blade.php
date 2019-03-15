@@ -50,6 +50,14 @@
                             <input type="text" name="mobile" class="form-control" value="{{$admin->mobile}}"> 
                         </div>
                         <div class="form-group">
+                            <label for="roles">Role</label>
+                            <select class="form-control" name="roles">
+                                <option value="{{$admin->roles}}" hidden>{{$admin->roles}}</option>
+                                <option value="Admin">Admin</option>
+                                <option value="Coach">Coach</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="status">Status</label>
                             <select class="form-control" name="status">
                                 <option value="{{$admin->status}}" hidden>{{$admin->status}}</option>
@@ -59,7 +67,7 @@
                         </div>
                         <div class="form-group">
                             <div class="text-center">
-                                <button class="btn btn-success" type="submit">Update Admin</button>
+                                <button class="btn btn-success" type="submit">Update User</button>
                             </div>
                         </div>
                     </form>

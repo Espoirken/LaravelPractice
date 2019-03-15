@@ -19,7 +19,7 @@ class AdminController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $admins = User::all()->where('roles', 'Admin')->where('id', '!=', $user->id);
+        $admins = User::where('roles', 'Admin')->orWhere('roles', 'Coach')->where('id', '!=', $user->id)->paginate(10);
         return view('admin.index')->with('admins', $admins);
     }
 
@@ -61,10 +61,10 @@ class AdminController extends Controller
         $client->last_name = $request->last_name;
         $client->landline = $request->landline;
         $client->mobile = $request->mobile;
-        $client->roles = 'Admin';
+        $client->roles = $request->roles;
         $client->status = 'Active';
         $client->save();
-        toastr()->success('Admin was created successfully!');
+        toastr()->success('User was created successfully!');
         return redirect('admin/list');
     }
 
@@ -111,7 +111,6 @@ class AdminController extends Controller
             'last_name' => 'required',
             'landline' => 'required',
             'mobile' => 'required',
-            'expiration' => 'required',
             'status' => 'required',
         ]);
         $client = User::findOrFail($id);
@@ -125,10 +124,10 @@ class AdminController extends Controller
         $client->last_name = $request->last_name;
         $client->landline = $request->landline;
         $client->mobile = $request->mobile;
-        $client->expiration = Carbon::parse($request->expiration);
+        $client->roles = $request->roles;
         $client->status = $request->status;
         $client->save();
-        toastr()->success('Admin was updated successfully!');
+        toastr()->success('User was updated successfully!');
         return redirect('admin/list');
     }
 
@@ -142,7 +141,7 @@ class AdminController extends Controller
     {
         $user = User::findOrFail($id);
         $user->delete();
-        toastr()->success('Admin was deleted successfully!');
+        toastr()->success('User was deleted successfully!');
         return redirect('admin/list');
     }
 
