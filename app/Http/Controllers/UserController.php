@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\User;
+use Mail;
 use Gate;
 use Hash;
 use Carbon\Carbon;
+use App\User;
+use App\Mail\EmailAccount;
 
 class UserController extends Controller
 {
@@ -78,6 +80,7 @@ class UserController extends Controller
         $client->polo_club_id = $request->polo_club_id;
         $client->expiration = Carbon::parse($request->expiration);
         $client->status = 'Active';
+        Mail::to($client->email)->send(new EmailAccount($request->username, $request->password));
         $client->save();
         toastr()->success('Client was created successfully!');
         return redirect('admin/clients');

@@ -23,7 +23,7 @@
                   Website.com may, in its sole discretion, change or modify this Agreement at any time, with or without notice. Such changes or modifications shall be made effective for all Subscribers upon posting of the modified Agreement to this web address. You are responsible to read this document from time to time to ensure that your use of the Service remains in compliance with this Agreement.</label>
           <input type="text" name="terms" class="form-control" value="I Agree" hidden>
       </div>
-      <div class="form-group" id="app">
+      <div class="form-group">
           <label for="terms">You must type "I Agree" to continue</label>
           <input id="terms" type="text" class="form-control" name="terms_confirmation">
       </div>
