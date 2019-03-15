@@ -61,9 +61,21 @@
                         @foreach ($children as $child)
                         <tr>
                             @if ($child->user_id == $user->id)
+                            @if ($child->nickname != NULL)
+                            <td><a href="{{ route('child.edit', ['id' => $child->id ])}}">{{$child->nickname}}</a></td>
+                            @else
                             <td><a href="{{ route('child.edit', ['id' => $child->id ])}}">{{$child->name}}</a></td>
+                            @endif
+                            @else
+                            @if(Gate::check('isAdmin') || Gate::check('isCoach'))
+                            @if ($child->nickname != NULL)
+                            <td><a href="{{ route('child.edit', ['id' => $child->id ])}}">{{$child->nickname}}</a></td>
+                            @else
+                            <td><a href="{{ route('child.edit', ['id' => $child->id ])}}">{{$child->name}}</a></td>
+                            @endif
                             @else
                             <td>{{$child->name}}</td>
+                            @endif
                             @endif
                             <td>{{$child->level}}</td>
                             <td>{{$datetoday->diffInYears(\Carbon\Carbon::parse($child->birthdate))}}</td>

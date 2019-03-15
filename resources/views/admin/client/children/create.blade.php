@@ -16,6 +16,10 @@
                             <input type="text" name="name" class="form-control">
                         </div>
                         <div class="form-group">
+                            <label for="nickname">Nickname</label>
+                            <input type="text" name="nickname" class="form-control">
+                        </div>
+                        <div class="form-group">
                             <label for="birthdate">Date of Birth</label>
                             <input type="date" id="birthdate" name="birthdate" class="form-control">
                         </div>
@@ -24,7 +28,7 @@
                             <select class="form-control" name="gender">
                                 <option value="" hidden></option>
                                 <option value="Male">Male</option>
-                                <option value="Male">Female</option>
+                                <option value="Female">Female</option>
                             </select>
                         </div>
                         <div class="form-group">

@@ -17,6 +17,26 @@
                             <input type="text" name="name" class="form-control" value="{{$child->name}}">
                         </div>
                         <div class="form-group">
+                            <label for="nickname">Nickname</label>
+                            <input type="text" name="nickname" class="form-control" value="{{$child->nickname}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="batting">Gender</label>
+                            <select class="form-control" name="gender">
+                                <option value="{{$child->gender}}" hidden>{{$child->gender}}</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="batting">Sport</label>
+                            <select class="form-control" name="sport">
+                                <option value="{{$child->sport}}" hidden>{{$child->sport}}</option>
+                                <option value="Baseball">Baseball</option>
+                                <option value="Softball">Softball</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="birthdate">Date of Birth</label>
                         <input type="date" id="birthdate" name="birthdate" class="form-control" value="{{$child->birthdate}}">
                         </div>
@@ -65,6 +85,10 @@
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" name="name" class="form-control" value="{{$child->name}}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Nickname</label>
+                            <input type="text" name="nickname" class="form-control" value="{{$child->nickname}}" readonly>
                         </div>
                         <div class="form-group">
                             <label for="birthdate">Date of Birth</label>

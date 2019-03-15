@@ -69,6 +69,7 @@ class ChildController extends Controller
         $user = Auth::user();
         $child = new Child;
         $child->name = $request->name;
+        $child->nickname = $request->nickname;
         $child->user_id = $user->id;
         $child->birthdate = $request->birthdate;
         $child->gender = $request->gender;
@@ -101,8 +102,17 @@ class ChildController extends Controller
      */
     public function edit($id)
     {
+        $user = Auth::user();
         $child = Child::findOrFail($id);
-        return view('admin.client.children.edit')->with('child', $child);
+        
+        if(Gate::allows('isCoach') || Gate::allows('isAdmin')){
+            return view('admin.client.children.edit')->with('child', $child);
+        } else {
+            if($user->id != $child->user_id){
+                abort(404);
+            }
+            return view('admin.client.children.edit')->with('child', $child);
+        }
     }
 
     /**
@@ -123,6 +133,7 @@ class ChildController extends Controller
         ]);
         $child = Child::findOrFail($id);
         $child->name = $request->name;
+        $child->nickname = $request->nickname;
         $child->birthdate = $request->birthdate;
         $child->gender = $request->gender;
         $child->sport = $request->sport;

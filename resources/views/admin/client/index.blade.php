@@ -19,7 +19,6 @@
             @endcan
             </div>
             <table class="table">
-                
                 <thead>
                     <tr>
                         <th>USERNAME</th>

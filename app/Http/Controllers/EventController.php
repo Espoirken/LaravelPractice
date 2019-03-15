@@ -22,7 +22,7 @@ class EventController extends Controller
     public function index()
     {
         $now = Carbon::now('Asia/Manila');
-        $events = Event::paginate(10);
+        $events = Event::orderBy('status', 'asc')->paginate(10);
         return view('admin.client.events.index')->with('events', $events)
                                                 ->with('now', $now);
     }
@@ -131,8 +131,16 @@ class EventController extends Controller
             abort(404);
         }
         $event = Event::findOrFail($id);
-        $event->delete();
-        toastr()->success('Event was deleted successfully!');
+        $now = Carbon::now('Asia/Manila');
+        if($event->status == 'Cancelled' || $event->ended_at < $now){
+            abort(404);
+        }
+        foreach ($event->children as $key => $child) {
+            Child::where('id', [$child->id])->increment('credits', 1);
+        }
+        $event->status = 'Cancelled';
+        $event->save();
+        toastr()->success('Event was cancelled successfully!');
         return redirect('admin/events');
     }
 
@@ -165,8 +173,6 @@ class EventController extends Controller
         $children = $event->children;
         $user = Auth::user();
         $datetoday = Carbon::parse($now->toDateString()); 
-        // dd($user->children()->where('user_id', $user->id)->get()->first()->id);
-        // dd($users->children[0]->id);
         return view('admin.client.events.attendees')->with('event', $event)
                                                 ->with('children', $children)
                                                 ->with('now', $now)

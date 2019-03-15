@@ -17,6 +17,7 @@ class CreateChildrenTable extends Migration
             $table->bigIncrements('id');
             $table->string('user_id');
             $table->string('name');
+            $table->string('nickname')->nullable();
             $table->string('credits')->default(0);
             $table->dateTime('expiration')->nullable();
             $table->string('gender');

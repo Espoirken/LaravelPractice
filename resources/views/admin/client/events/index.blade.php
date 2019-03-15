@@ -30,7 +30,7 @@
                         <th>ATTEND</th>
                         @can('isAdmin')
                         <th>EDIT</th>
-                        <th>DELETE</th>
+                        <th>CANCEL</th>
                         @endcan
                     </tr>
                 </thead>
@@ -42,10 +42,12 @@
                         <td>{{$event->detail}}</td>
                         <td>{{$event->created_at->timezone('Asia/Manila')->format('F d, Y - D  h:i:s A')}}</td>
                         <td>{{$event->ended_at->timezone('Asia/Manila')->format('F d, Y - D  h:i:s A')}}</td>
-                        @if ($event->ended_at > $now)
+                        @if ($event->status == 'Cancelled')
+                        <td><label class="form-control-plaintext badge badge-danger">Cancelled</label> </td>
+                        @elseif($event->ended_at > $now)
                         <td><label class="form-control-plaintext badge badge-success">Ongoing</label> </td>
                         @else
-                        <td><label class="form-control-plaintext badge badge-danger">Ended</label> </td>
+                        <td><label class="form-control-plaintext badge badge-danger ">Ended</label> </td>
                         @endif
                         @can('isClient')
                         @if ($event->ended_at > $now)
@@ -58,7 +60,11 @@
                         @endcan
                         @can('isAdmin')
                         <td><a class="btn btn-sm btn-primary" href="{{ route('event.edit', ['id' => $event->id ])}}"><i class="fa fa-edit"></i> Edit</a></td>
-                        <td><a class="btn btn-sm btn-danger" href="{{ route('event.delete', ['id' => $event->id])}}" onclick="return confirm('Are you sure?')"><i class="fa fa-trash" aria-hidden="true"></i> Trash</a></td>
+                        @if ($event->status == 'Cancelled' || $event->ended_at < $now)
+                        <td></td>
+                        @else
+                        <td><a class="btn btn-sm btn-danger" href="{{ route('event.delete', ['id' => $event->id])}}" onclick="return confirm('Are you sure?')"><i class="fa fa-ban" aria-hidden="true"></i> Cancel</a></td>
+                        @endif
                         @endcan
                     </tr>
                     @endforeach
