@@ -23,6 +23,18 @@
                 </div>
             </div>
             <div class="form-group row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Allowed Joinees</label>
+                <div class="col-sm-10">
+                    @if (empty($joinee))
+                        <label class="form-control-plaintext">Everyone</label>
+                    @else
+                    @foreach ($joinee as $list)
+                        <label class="form-control-plaintext">{{$list->name}}</label>
+                    @endforeach
+                    @endif
+                </div>
+            </div>
+            <div class="form-group row">
                 <label for="Status" class="col-sm-2 col-form-label">Status</label>
                 <div class="col-sm-10">
                     @if ($event->ended_at > $now)
@@ -61,6 +73,8 @@
                     <tbody>
                         @if (count($children) > 0)
                         @foreach ($children as $child)
+                        @for ($i = 0; $i < $count; $i++)
+                        @if($joinee[$i]->id == $child->id)
                         <tr>
                             @if ($event->ended_at > $now)
                             <td>
@@ -92,6 +106,8 @@
                             @else
                             <td>{{\Carbon\Carbon::parse($child->expiration)->format('F d, Y - D  h:i:s A')}}</td>
                             @endif
+                        @endif
+                        @endfor
                         </tr>
                         @endforeach
                         @else

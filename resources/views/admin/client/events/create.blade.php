@@ -20,6 +20,15 @@
                             <textarea class="form-control" rows="3" name="detail"></textarea>
                         </div>
                         <div class="form-group">
+                            <label for="joinees">Allowed Joinees</label>
+                            <select class="js-example-basic-multiple form-control" name="joinees[]" multiple="multiple" placeholder="test">
+                                @foreach ($children as $child)
+                                <option value="{{$child->id}}">{{$child->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
                             <label for="ended_at">End date</label>
                             <input id="expiration" name="ended_at" class="form-control" required>
                         </div>

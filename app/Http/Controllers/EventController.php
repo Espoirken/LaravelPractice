@@ -13,6 +13,7 @@ use App\Mail\EventMail;
 use App\Mail\EventUpdate;
 use App\Mail\CancelEvent;
 use Carbon\Carbon;
+use function Opis\Closure\unserialize;
 
 class EventController extends Controller
 {
@@ -39,7 +40,8 @@ class EventController extends Controller
         if (!Gate::allows('isAdmin')) {
             abort(404);
         }
-        return view('admin.client.events.create');
+        $children = Child::all();
+        return view('admin.client.events.create')->with('children', $children);
     }
 
     /**
@@ -62,6 +64,7 @@ class EventController extends Controller
         $event = new Event;
         $event->title = $request->title;
         $event->detail = $request->detail;
+        $event->joinees = serialize($request->joinees);
         $event->ended_at = Carbon::parse($request->ended_at);
         $event->save();
         $this->mail($event->title, $event->detail, $event->id);
@@ -120,6 +123,7 @@ class EventController extends Controller
         Mail::to($emails)->send(new EventUpdate($event->title, $event->detail, $event->ended_at, $request->title, $request->detail, $request->ended_at));
         $event->title = $request->title;
         $event->detail = $request->detail;
+        $event->joinees = serialize($request->joinees);
         $event->ended_at = Carbon::parse($request->ended_at);
         $event->save();
         
@@ -173,12 +177,22 @@ class EventController extends Controller
             abort(404);
         }
         $event = Event::findOrFail($id);
+        $joinees = unserialize($event->joinees);
+        $joinee = [];
+        if(!empty($joinees)){
+            foreach ($joinees as $key => $list) {
+                $joinee[] = Child::find($list);
+            }
+        }
+        $count = count($joinee);
         $user = Auth::user();
         $children = $user->children;
         $now = Carbon::now('Asia/Manila');
         return view('admin.client.events.attend')->with('event', $event)
                                                 ->with('children', $children)
-                                                ->with('now', $now);
+                                                ->with('now', $now)
+                                                ->with('joinee', $joinee)
+                                                ->with('count', $count);
     }
 
     public function attendees($id)
@@ -187,12 +201,17 @@ class EventController extends Controller
         $event = Event::findOrFail($id);
         $children = $event->children;
         $user = Auth::user();
+        $joinees = unserialize($event->joinees);
+        foreach ($joinees as $key => $list) {
+            $joinee[] = Child::find($list);
+        }
         $datetoday = Carbon::parse($now->toDateString()); 
         return view('admin.client.events.attendees')->with('event', $event)
                                                 ->with('children', $children)
                                                 ->with('now', $now)
                                                 ->with('datetoday', $datetoday)
-                                                ->with('user', $user);
+                                                ->with('user', $user)
+                                                ->with('joinee', $joinee);
     }
 
     public function join(Request $request, $event_id, $child_id)

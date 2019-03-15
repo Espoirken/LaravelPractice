@@ -19,6 +19,15 @@
                             <label for="detail">Detail</label>
                             <textarea class="form-control" rows="3" name="detail">{{$event->detail}}</textarea>
                         </div>
+                        {{-- <p>{{dd(unserialize($event->joinees))}}</p> --}}
+                        <div class="form-group">
+                            <label for="joinees">Allowed Joinees</label>
+                            <select class="js-example-basic-multiple form-control" name="joinees[]" multiple="multiple" placeholder="test">
+                                @foreach (unserialize($event->joinees) as $test)
+                                <option value="{{$test}}">{{$test}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         <div class="form-group">
                             <label for="ended_at">End Date</label>
                             <input id="expiration" name="ended_at" class="form-control" value="{{$event->ended_at}}" required>

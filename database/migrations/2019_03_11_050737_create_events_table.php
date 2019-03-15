@@ -17,6 +17,7 @@ class CreateEventsTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->longText('detail');
+            $table->string('joinees')->nullable();
             $table->dateTime('ended_at')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();
