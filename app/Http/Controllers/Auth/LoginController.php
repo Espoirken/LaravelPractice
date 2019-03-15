@@ -42,4 +42,48 @@ class LoginController extends Controller
     {        
         return ['username' => $request->{$this->username()}, 'password' => $request->password];
     }
+
+    /**
+     * The user has been authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function authenticated(Request $request, $user)
+    {
+        if ($user->expiration != NULL) {
+            if($user->expiration->lt(Carbon::now('Asia/Manila'))) {
+                Auth::logout($request);
+                throw ValidationException::withMessages([
+                    $this->username() => [trans('auth.expired')],
+                ]);
+            } 
+        }
+
+        if($user->status == 'Inactive') {
+            Auth::logout($request);
+            throw ValidationException::withMessages([
+                $this->username() => [trans('auth.inactive')],
+            ]);
+        } 
+        
+        if($user->roles == 'Admin') {
+            return redirect()->intended('admin/events');
+        } 
+
+        if($user->roles == 'Client') {
+            return redirect()->intended('admin/events');
+        }
+    }
+
+    /**
+     * Get the login username to be used by the controller.
+     *
+     * @return string
+     */
+    public function username()
+    {
+        return 'username';
+    }
 }
