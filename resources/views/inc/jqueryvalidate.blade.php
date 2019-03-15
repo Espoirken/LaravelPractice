@@ -11,6 +11,12 @@ $(document).ready(function () {
             batting: {
                 required: true,
             },
+            gender: {
+                required: true,
+            },
+            sport: {
+                required: true,
+            },
             throwing_hand: {
                 required: true,
             },

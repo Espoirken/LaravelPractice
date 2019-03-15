@@ -10,6 +10,7 @@ use App\Event;
 use App\User;
 use App\Child;
 use App\Mail\EventMail;
+use App\Mail\CancelEvent;
 use Carbon\Carbon;
 
 class EventController extends Controller
@@ -135,9 +136,18 @@ class EventController extends Controller
         if($event->status == 'Cancelled' || $event->ended_at < $now){
             abort(404);
         }
+        
         foreach ($event->children as $key => $child) {
             Child::where('id', [$child->id])->increment('credits', 1);
+            // dd($child->name);
+            User::find($child->user->id);
+            $name[] = $child->name;
+            $credits[] = $child->credits;
+            $emails[] = $child->user->email;
         }
+        // dd(array_unique($credits));
+        Mail::to(array_unique($emails))->send(new CancelEvent($name, $credits, $event->title));
+        
         $event->status = 'Cancelled';
         $event->save();
         toastr()->success('Event was cancelled successfully!');

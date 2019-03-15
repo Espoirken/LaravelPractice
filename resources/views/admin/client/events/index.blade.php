@@ -59,7 +59,7 @@
                         <td><a class="btn btn-sm btn-secondary" href="{{ route('event.attendees', ['id' => $event->id ]) }}"><i class="fa fa-search"></i> Attendees</a></td>
                         @endcan
                         @can('isAdmin')
-                        <td><a class="btn btn-sm btn-primary" href="{{ route('event.edit', ['id' => $event->id ])}}"><i class="fa fa-edit"></i> Edit</a></td>
+                        <td ><a class="btn btn-sm btn-primary" href="{{ route('event.edit', ['id' => $event->id ])}}"><i class="fa fa-edit"></i> Edit</a></td>
                         @if ($event->status == 'Cancelled' || $event->ended_at < $now)
                         <td></td>
                         @else
