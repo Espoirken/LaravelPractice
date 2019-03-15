@@ -3,9 +3,10 @@
 <div class="container-fluid">
     <div class="card">
     <div class="card-header">
-            <h3 class="card-title">Account Information of {{$client->username}}</h3>
+        <h3 class="card-title">Account Information of {{$client->username}}</h3>
     </div>
-        <div class="card-body">
+    <div class="card-body">
+            <a href="{{ route('clients')}}" class="btn btn-sm btn-primary float-right"><i class="fa fa-arrow-left"></i> Back</a>
             <div class="form-group row">
                 <label for="staticEmail" class="col-sm-2 col-form-label">Username</label>
                 <div class="col-sm-10">
