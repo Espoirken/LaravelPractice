@@ -20,6 +20,22 @@
                             <input type="date" id="birthdate" name="birthdate" class="form-control">
                         </div>
                         <div class="form-group">
+                            <label for="batting">Gender</label>
+                            <select class="form-control" name="gender">
+                                <option value="" hidden></option>
+                                <option value="Male">Male</option>
+                                <option value="Male">Female</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="batting">Sport</label>
+                            <select class="form-control" name="sport">
+                                <option value="" hidden></option>
+                                <option value="Baseball">Baseball</option>
+                                <option value="Softball">Softball</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="batting">Batting</label>
                             <select class="form-control" name="batting">
                                 <option value="" hidden></option>
@@ -42,11 +58,6 @@
                             <input type="text" name="condition" class="form-control">
                         </div>
                         @include('admin.client.children.terms')
-                        {{-- <div class="form-group">
-                            <div class="text-center">
-                                <button class="btn btn-success" type="submit">Add Child</button>
-                            </div>
-                        </div> --}}
                     </form>
                 </div>
             </div>

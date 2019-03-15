@@ -50,7 +50,7 @@
                             <a class="nav-link" href="{{ route('events')}}"><i class="fa fa-address-book" aria-hidden="true"></i> Events</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('clients')}}"><i class="fa fa-users" aria-hidden="true"></i> Client</a>
+                            <a class="nav-link" href="{{ route('clients')}}"><i class="fa fa-users" aria-hidden="true"></i> Parent</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin') }}"><i class="fa fa-list" aria-hidden="true"></i> Admin</a>
@@ -61,7 +61,7 @@
                             <a class="nav-link" href="{{ route('events')}}"><i class="fa fa-address-book" aria-hidden="true"></i> Event</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('clients')}}"><i class="fa fa-users" aria-hidden="true"></i> Client</a>
+                            <a class="nav-link" href="{{ route('clients')}}"><i class="fa fa-users" aria-hidden="true"></i> Parent</a>
                         </li>
                         @endcan
                     </ul>
@@ -112,6 +112,7 @@
                 $("#polo").removeAttr('readonly');
             } else {
                 $("#polo").attr('readonly', 'true');
+                $("#polo").val('');
             }
             
         });

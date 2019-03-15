@@ -28,7 +28,10 @@ class ChildController extends Controller
         }
         $user = Auth::user();
         $children = $user->children;
-        return view('admin.client.children.index')->with('children', $children);
+        $now = Carbon::now('Asia/Manila');
+        $datetoday = Carbon::parse($now->toDateString()); 
+        return view('admin.client.children.index')->with('children', $children)
+                                                    ->with('datetoday', $datetoday);
     }
 
     /**
@@ -68,6 +71,8 @@ class ChildController extends Controller
         $child->name = $request->name;
         $child->user_id = $user->id;
         $child->birthdate = $request->birthdate;
+        $child->gender = $request->gender;
+        $child->sport = $request->sport;
         $child->batting = $request->batting;
         $child->throwing_hand = $request->throwing_hand;
         $child->special_medical_condition = $request->condition;
@@ -119,6 +124,8 @@ class ChildController extends Controller
         $child = Child::findOrFail($id);
         $child->name = $request->name;
         $child->birthdate = $request->birthdate;
+        $child->gender = $request->gender;
+        $child->sport = $request->sport;
         $child->level = $request->level;
         $child->batting = $request->batting;
         $child->throwing_hand = $request->throwing_hand;

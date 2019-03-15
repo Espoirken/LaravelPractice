@@ -54,14 +54,12 @@ class EventController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'detail' => 'required',
-            'status' => 'required',
             'ended_at' => 'required',
         ]);
 
         $event = new Event;
         $event->title = $request->title;
         $event->detail = $request->detail;
-        $event->status = $request->status;
         $event->ended_at = Carbon::parse($request->ended_at);
         $event->save();
         $this->mail($event->title, $event->detail, $event->id);
@@ -110,13 +108,11 @@ class EventController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'detail' => 'required',
-            'status' => 'required',
             'ended_at' => 'required',
         ]);
         $event = Event::findOrFail($id);
         $event->title = $request->title;
         $event->detail = $request->detail;
-        $event->status = $request->status;
         $event->ended_at = Carbon::parse($request->ended_at);
         $event->save();
         toastr()->success('Event was updated successfully!');
@@ -167,11 +163,15 @@ class EventController extends Controller
         $now = Carbon::now('Asia/Manila');
         $event = Event::findOrFail($id);
         $children = $event->children;
+        $user = Auth::user();
         $datetoday = Carbon::parse($now->toDateString()); 
+        // dd($user->children()->where('user_id', $user->id)->get()->first()->id);
+        // dd($users->children[0]->id);
         return view('admin.client.events.attendees')->with('event', $event)
                                                 ->with('children', $children)
                                                 ->with('now', $now)
-                                                ->with('datetoday', $datetoday);
+                                                ->with('datetoday', $datetoday)
+                                                ->with('user', $user);
     }
 
     public function join(Request $request, $event_id, $child_id)
@@ -186,11 +186,11 @@ class EventController extends Controller
         }
         $child = Child::findOrFail($child_id);
         if($child->expiration == NULL ){
-            toastr()->error('Your children does not have expiration and credits yet, please contact your administrator!');
+            toastr()->error('Your child does not have credits expiration yet, please contact your administrator!');
             return redirect()->back();
         }
         if($child->expiration < $now){
-            toastr()->error('Your children has expired, please contact your administrator!');
+            toastr()->error('Your child\'s credits has expired, please contact your administrator!');
             return redirect()->back();
         }
         if($child->credits <= 0){
@@ -204,6 +204,7 @@ class EventController extends Controller
         }
         $child->decrement('credits', 1);
         $child->save();
+        toastr()->success('Your child has joined successfully!');
         return redirect()->back();
     }
 

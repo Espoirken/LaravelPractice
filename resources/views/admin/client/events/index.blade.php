@@ -24,6 +24,7 @@
                     <tr>
                         <th>TITLE</th>
                         <th>DETAILS</th>
+                        <th>START DATE</th>
                         <th>END DATE</th>
                         <th>STATUS</th>
                         <th>ATTEND</th>
@@ -39,14 +40,19 @@
                     <tr>
                         <td>{{$event->title}}</td>
                         <td>{{$event->detail}}</td>
+                        <td>{{$event->created_at->timezone('Asia/Manila')->format('F d, Y - D  h:i:s A')}}</td>
                         <td>{{$event->ended_at->timezone('Asia/Manila')->format('F d, Y - D  h:i:s A')}}</td>
                         @if ($event->ended_at > $now)
-                        <td>{{$event->status}}</td>
+                        <td><label class="form-control-plaintext badge badge-success">Ongoing</label> </td>
                         @else
-                        <td>Ended</td>
+                        <td><label class="form-control-plaintext badge badge-danger">Ended</label> </td>
                         @endif
                         @can('isClient')
+                        @if ($event->ended_at > $now)
                         <td><a class="btn btn-sm btn-secondary" href="{{ route('event.attend', ['id' => $event->id ]) }}"><i class="fa fa-plus"></i> Attend</a></td>
+                        @else
+                        <td><a class="btn btn-sm btn-secondary" href="{{ route('event.attendees', ['id' => $event->id ]) }}"><i class="fa fa-search"></i> Attendees</a></td>
+                        @endif
                         @else
                         <td><a class="btn btn-sm btn-secondary" href="{{ route('event.attendees', ['id' => $event->id ]) }}"><i class="fa fa-search"></i> Attendees</a></td>
                         @endcan

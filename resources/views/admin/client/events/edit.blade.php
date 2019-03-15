@@ -24,14 +24,6 @@
                             <input id="expiration" name="ended_at" class="form-control" value="{{$event->ended_at}}" required>
                         </div>
                         <div class="form-group">
-                            <label for="status">Status</label>
-                            <select class="form-control" name="status">
-                                <option value="{{$event->status}}" hidden>{{$event->status}}</option>
-                                <option value="Active">Active</option>
-                                <option value="Inactive">Inactive</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
                             <div class="text-center">
                                 <button class="btn btn-success" type="submit">Update Event</button>
                             </div>

@@ -24,13 +24,6 @@
                             <input id="expiration" name="ended_at" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label for="status">Status</label>
-                            <select class="form-control" name="status">
-                                <option value="Active">Active</option>
-                                <option value="Inactive">Inactive</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
                             <div class="text-center">
                                 <button class="btn btn-success" type="submit">Add Event</button>
                             </div>

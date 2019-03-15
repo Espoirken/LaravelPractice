@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-body">
                     <a href="{{ route('clients')}}" class="btn btn-sm btn-primary float-right"><i class="fa fa-arrow-left"></i> Back</a>
-                    <div class="card-title"><h2>Create a new Client</h2></div>
+                    <div class="card-title"><h2>Create a new Parent</h2></div>
                     <hr>
                     <form action="{{ route('client.store') }}" id="user_create" method="POST">
                         {{ csrf_field() }}
@@ -71,7 +71,7 @@
                         </div>
                         <div class="form-group">
                             <div class="text-center">
-                                <button class="btn btn-success" type="submit">Add Client</button>
+                                <button class="btn btn-success" type="submit">Add Parent</button>
                             </div>
                         </div>
                     </form>

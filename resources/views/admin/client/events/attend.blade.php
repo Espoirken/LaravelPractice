@@ -25,14 +25,23 @@
             <div class="form-group row">
                 <label for="Status" class="col-sm-2 col-form-label">Status</label>
                 <div class="col-sm-10">
-                    <input type="text" readonly class="form-control-plaintext" value="{{$event->status}}">
+                    @if ($event->ended_at > $now)
+                    <label class="form-control-plaintext">Ongoing</label>
+                    @else
+                    <label class="form-control-plaintext">Ended</label>
+                    @endif
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="EndDate" class="col-sm-2 col-form-label">Start Date</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" value="{{$event->created_at->format('F d, Y - D  h:i:s A')}}">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="EndDate" class="col-sm-2 col-form-label">End Date</label>
                 <div class="col-sm-10">
                     <input type="text" readonly class="form-control-plaintext" value="{{$event->ended_at->format('F d, Y - D  h:i:s A')}}">
-                    {{-- <label class="form-control-plaintext">{{$event->ended_at}}  <span class="badge badge-danger">(This event has ended.)</span></label> --}}
                 </div>
             </div>
             <hr>
@@ -41,18 +50,20 @@
                 <table class="table">
                     <thead>
                         <tr>
+                            @if ($event->ended_at > $now)
                             <th>ATTEND</th>
+                            @endif
                             <th>NAME</th>
                             <th>CREDITS</th>
-                            <th>EXPIRATION</th>
+                            <th>CREDITS EXPIRATION</th>
                         </tr>
                     </thead>
                     <tbody>
                         @if (count($children) > 0)
                         @foreach ($children as $child)
                         <tr>
+                            @if ($event->ended_at > $now)
                             <td>
-                                @if ($event->ended_at > $now)
                                 @if ($event->children()->where('child_id', $child->id)->get()->first() == NULL)
                                 <form action="{{ route('event.join', ['event_id' => $event->id, 'child_id' => $child->id ]) }}" method="POST">
                                     @csrf
@@ -72,11 +83,15 @@
                                     <input type="submit" class="btn btn-sm btn-success" class="form-control" value="Join">
                                 </form>
                                 @endif
-                                @endif
                             </td>
+                            @endif
                             <td>{{$child->name}}</td>
                             <td>{{$child->credits}}</td>
+                            @if ($child->expiration == NULL)
+                            <td>Not set</td>
+                            @else
                             <td>{{\Carbon\Carbon::parse($child->expiration)->format('F d, Y - D  h:i:s A')}}</td>
+                            @endif
                         </tr>
                         @endforeach
                         @else

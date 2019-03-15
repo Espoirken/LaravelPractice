@@ -21,8 +21,10 @@
                 <thead>
                     <tr>
                         <th>NAME</th>
+                        <th>AGE</th>
+                        <th>SPORT</th>
                         <th>CREDITS</th>
-                        <th>EXPIRATION</th>
+                        <th>CREDITS EXPIRATION</th>
                         <th>LEVEL</th>
                         <th>BATTING</th>
                         <th>THROWING HAND</th>
@@ -36,6 +38,8 @@
                     @foreach ($children as $child)
                     <tr>
                         <td>{{$child->name}}</td>
+                        <td>{{$datetoday->diffInYears(\Carbon\Carbon::parse($child->birthdate))}}</td>
+                        <td>{{$child->sport}}</td>
                         <td>{{$child->credits}}</td>
                         <td>{{$child->expiration}}</td>
                         <td>{{$child->level}}</td>

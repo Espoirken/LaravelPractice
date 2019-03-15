@@ -4,7 +4,7 @@
     <div class="card">
         <div class="card-body">
             <div class="row">
-            <div class="col-lg-3"><h2 class="card-title">Client Management</h2></div>
+            <div class="col-lg-3"><h2 class="card-title">Parent Management</h2></div>
             <div class="col-lg-5">
             <form class="form-inline" action="{{ route('client.search')}}" method="POST">
                 <div class="form-group">
@@ -15,7 +15,7 @@
             </form>
             </div>
             @can('isAdmin')
-            <div class="col-lg-1 offset-lg-3"><a href="{{ route('client.create')}}"  class="btn btn-sm btn-success float-right"><i class="fa fa-plus"></i> Create a New Client</a></div>
+            <div class="col-lg-1 offset-lg-3"><a href="{{ route('client.create')}}"  class="btn btn-sm btn-success float-right"><i class="fa fa-plus"></i> Create a New Parent</a></div>
             @endcan
             </div>
             <table class="table">

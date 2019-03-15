@@ -23,6 +23,12 @@
                 </div>
             </div>
             <div class="form-group row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Start Date</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" value="{{$event->created_at->timezone('Asia/Manila')->format('F d, Y - D  h:i:s A')}}">
+                </div>
+            </div>
+            <div class="form-group row">
                 <label for="staticEmail" class="col-sm-2 col-form-label">End Date</label>
                 <div class="col-sm-10">
                     <input type="text" readonly class="form-control-plaintext" value="{{$event->ended_at->timezone('Asia/Manila')->format('F d, Y - D  h:i:s A')}}">
@@ -34,7 +40,7 @@
                     @if ($event->ended_at < $now)
                     Ended
                     @else
-                    <input type="text" readonly class="form-control-plaintext" value="{{$event->status}}">
+                    Active
                     @endif
                 </div>
             </div>
@@ -47,14 +53,18 @@
                             <th>LEVEL</th>
                             <th>AGE</th>
                             <th>CREDITS</th>
-                            <th>EXPIRATION</th>
+                            <th>CREDITS EXPIRATION</th>
                         </tr>
                     </thead>
                     <tbody>
                         @if (count($children) > 0)
                         @foreach ($children as $child)
                         <tr>
+                            @if ($child->user_id == $user->id)
                             <td><a href="{{ route('child.edit', ['id' => $child->id ])}}">{{$child->name}}</a></td>
+                            @else
+                            <td>{{$child->name}}</td>
+                            @endif
                             <td>{{$child->level}}</td>
                             <td>{{$datetoday->diffInYears(\Carbon\Carbon::parse($child->birthdate))}}</td>
                             <td>{{$child->credits}}</td>
