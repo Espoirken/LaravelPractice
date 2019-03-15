@@ -3,18 +3,18 @@
 <div class="container-fluid">
     <div class="card">
         <div class="card-body">
-            <div class="row">
-            <div class="col-lg-3"><h2 class="card-title">List of Admins</h2></div>
-            <div class="col-lg-5">
-            <form class="form-inline" action="{{ route('admin.search')}}" method="POST">
-                <div class="form-group">
-                    @csrf
-                    <input type="text" name="search" class="form-control mx-sm-3" style="width:600px" placeholder="Search an admin...">
-                    <input type="submit" class="btn btn-primary" class="form-control" value="Search">
+            <div class="row pb-5">
+                <div class="col-sm"><h2 class="card-title">List of Admins</h2></div>
+                <div class="col-sm">
+                    <form class="form-inline" action="{{ route('admin.search')}}" method="POST">
+                        <div class="form-group">
+                            @csrf
+                            <input type="text" name="search" class="form-control mx-sm-3" style="" placeholder="Search an admin...">
+                            <input type="submit" class="btn btn-primary" class="form-control" value="Search">
+                        </div>
+                    </form>
                 </div>
-            </form>
-            </div>
-            <div class="col-lg-1 offset-lg-3"><a href="{{ route('admin.create')}}"  class="btn btn-sm btn-success float-right"><i class="fa fa-plus"></i> Create a New Admin</a></div>
+                <div class="col-sm"><a href="{{ route('admin.create')}}"  class="btn btn-sm btn-success float-right"><i class="fa fa-plus"></i> Create a New Admin</a></div>
             </div>
             <table class="table">
                 <thead>
