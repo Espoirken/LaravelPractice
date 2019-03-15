@@ -10,6 +10,7 @@ use App\Event;
 use App\User;
 use App\Child;
 use App\Mail\EventMail;
+use App\Mail\EventUpdate;
 use App\Mail\CancelEvent;
 use Carbon\Carbon;
 
@@ -112,10 +113,16 @@ class EventController extends Controller
             'ended_at' => 'required',
         ]);
         $event = Event::findOrFail($id);
+        $users = User::all();
+        foreach ($users as $key => $user) {
+            $emails[] = $user->email;
+        }
+        Mail::to($emails)->send(new EventUpdate($event->title, $event->detail, $event->ended_at, $request->title, $request->detail, $request->ended_at));
         $event->title = $request->title;
         $event->detail = $request->detail;
         $event->ended_at = Carbon::parse($request->ended_at);
         $event->save();
+        
         toastr()->success('Event was updated successfully!');
         return redirect('admin/events');
     }
@@ -139,13 +146,11 @@ class EventController extends Controller
         
         foreach ($event->children as $key => $child) {
             Child::where('id', [$child->id])->increment('credits', 1);
-            // dd($child->name);
             User::find($child->user->id);
             $name[] = $child->name;
             $credits[] = $child->credits;
             $emails[] = $child->user->email;
         }
-        // dd(array_unique($credits));
         Mail::to(array_unique($emails))->send(new CancelEvent($name, $credits, $event->title));
         
         $event->status = 'Cancelled';

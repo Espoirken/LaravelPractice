@@ -30,6 +30,6 @@ class CancelEvent extends Mailable
      */
     public function build()
     {
-        return $this->view('admin.client.events.cancel_event_email');
+        return $this->view('admin.client.events.email.cancel_event_email');
     }
 }
