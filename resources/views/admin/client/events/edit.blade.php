@@ -22,12 +22,14 @@
                         <div class="form-group">
                             <label for="joinees">Allowed Joinees</label>
                             <select class="js-example-basic-multiple form-control" id="joinee" name="joinees[]" multiple="multiple" placeholder="test">
+                                @if ($joinees != NULL)
                                 @foreach ($joinees as $joinee)
                                     <option value="{{$joinee->id}}" selected>{{$joinee->name}}</option>
                                 @endforeach
                                 @foreach ($all as $child)
                                     <option value="{{$child->id}}">{{$child->name}}</option>
                                 @endforeach
+                                @endif
                             </select>
                         </div>
                         <div class="form-group">

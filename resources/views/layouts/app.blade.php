@@ -108,41 +108,11 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/additional-methods.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script type="text/javascript">
-    $(document).ready(function() {
-        $('.js-example-basic-multiple').select2({
-            placeholder: "  Select a user.."
-        });
-    });
-    $('#joinee').select2({
-        templateSelection: function (data, container) {
-            $(data.element).attr('data-custom-attribute', data.customValue);
-            return data.text;
-        }
-    });
-
-    $('#joinee').find(':selected').data('custom-attribute');
-    </script>
-    <script type="text/javascript">
-        $("#polo_check").click(function(){
-            if($('input[type=checkbox]').prop('checked')){
-                $("#polo").removeAttr('readonly');
-            } else {
-                $("#polo").attr('readonly', 'true');
-                $("#polo").val('');
-            }
-            
-        });
-    $(document).ready(function(){
-        if($("#polo").val() != ""){
-            $("#polo").removeAttr('readonly');
-            $("#polo_check").attr('checked', 'checked');
-        }
-    });
-    </script>
-    @include('inc.datetimepicker')
-    @include('inc.consent')
-    @include('inc.jqueryvalidate')
+    <script type="text/javascript" src="{{ asset('js/joinees.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/polo_check.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/datetimepicker.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/consent.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jqueryvalidate.js') }}"></script>
 @toastr_render
 </body>
 </html>

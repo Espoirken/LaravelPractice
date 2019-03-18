@@ -1,4 +1,3 @@
-<script type="text/javascript">
 $(document).ready(function () {
     $('#child_create').validate({
         rules: {
@@ -95,4 +94,3 @@ $(document).ready(function () {
         }
     });
 });
-</script>
