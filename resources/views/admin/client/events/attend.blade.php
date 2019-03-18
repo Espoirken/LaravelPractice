@@ -72,29 +72,21 @@
                     </thead>
                     <tbody>
                         @if (count($children) > 0)
-                        @foreach ($children as $child)
-                        @for ($i = 0; $i < $count; $i++)
-                        @if($joinee[$i]->id == $child->id)
+                        @foreach ($array as $child)
                         <tr>
                             @if ($event->ended_at > $now)
                             <td>
-                                @if ($event->children()->where('child_id', $child->id)->get()->first() == NULL)
+                                @if ($event->children()->where('child_id', $child->id)->get()->first() == NULL || $event->children()->where('child_id', $child->id)->get()->first()->pivot->attend == 'Cancelled')
                                 <form action="{{ route('event.join', ['event_id' => $event->id, 'child_id' => $child->id ]) }}" method="POST">
                                     @csrf
                                     <input type="text" hidden name="attend" value="Joined">
                                     <input type="submit" class="btn btn-sm btn-success" class="form-control" value="Join">
                                 </form>
-                                @elseif ($event->children()->where('child_id', $child->id)->get()->first()->pivot->attend == 'Joined')
+                                @else
                                 <form action="{{ route('event.cancel', ['event_id' => $event->id, 'child_id' => $child->id ]) }}" method="POST">
                                     @csrf
                                     <input type="text" hidden name="attend" value="Cancelled">
                                     <input type="submit" class="btn btn-sm btn-default" class="form-control" value="Cancel">
-                                </form>
-                                @else
-                                <form action="{{ route('event.join', ['event_id' => $event->id, 'child_id' => $child->id ]) }}" method="POST">
-                                    @csrf
-                                    <input type="text" hidden name="attend" value="Joined">
-                                    <input type="submit" class="btn btn-sm btn-success" class="form-control" value="Join">
                                 </form>
                                 @endif
                             </td>
@@ -106,8 +98,6 @@
                             @else
                             <td>{{\Carbon\Carbon::parse($child->expiration)->format('F d, Y - D  h:i:s A')}}</td>
                             @endif
-                        @endif
-                        @endfor
                         </tr>
                         @endforeach
                         @else

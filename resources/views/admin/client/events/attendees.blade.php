@@ -25,9 +25,13 @@
             <div class="form-group row">
                 <label for="staticEmail" class="col-sm-2 col-form-label">Allowed Joinees</label>
                 <div class="col-sm-10">
-                    @foreach ($joinee as $list)
-                        <label class="form-control-plaintext">{{$list->name}}</label>
-                    @endforeach
+                    @if ($joinee != NULL)
+                        @foreach ($joinee as $list)
+                            <label class="form-control-plaintext">{{$list->name}}</label>
+                        @endforeach
+                    @else
+                        <label class="form-control-plaintext">Everyone</label>
+                    @endif
                 </div>
             </div>
             <div class="form-group row">

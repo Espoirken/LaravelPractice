@@ -147,7 +147,7 @@ class EventController extends Controller
         if($event->status == 'Cancelled' || $event->ended_at < $now){
             abort(404);
         }
-        
+        if((count($event->children) > 0)){
         foreach ($event->children as $key => $child) {
             Child::where('id', [$child->id])->increment('credits', 1);
             User::find($child->user->id);
@@ -156,7 +156,7 @@ class EventController extends Controller
             $emails[] = $child->user->email;
         }
         Mail::to(array_unique($emails))->send(new CancelEvent($name, $credits, $event->title));
-        
+        }
         $event->status = 'Cancelled';
         $event->save();
         toastr()->success('Event was cancelled successfully!');
@@ -177,22 +177,28 @@ class EventController extends Controller
             abort(404);
         }
         $event = Event::findOrFail($id);
+        $user = Auth::user();
+        $children = $user->children;
         $joinees = unserialize($event->joinees);
         $joinee = [];
+        $child = [];
         if(!empty($joinees)){
             foreach ($joinees as $key => $list) {
                 $joinee[] = Child::find($list);
             }
         }
-        $count = count($joinee);
-        $user = Auth::user();
-        $children = $user->children;
+        if(!empty($children)){
+            foreach ($children as $key => $kids) {
+                $child[] = $kids;
+            }
+        }
+        $array = array_intersect($child,$joinee);
         $now = Carbon::now('Asia/Manila');
         return view('admin.client.events.attend')->with('event', $event)
                                                 ->with('children', $children)
                                                 ->with('now', $now)
                                                 ->with('joinee', $joinee)
-                                                ->with('count', $count);
+                                                ->with('array', $array);
     }
 
     public function attendees($id)
@@ -201,9 +207,12 @@ class EventController extends Controller
         $event = Event::findOrFail($id);
         $children = $event->children;
         $user = Auth::user();
+        $joinee = [];
         $joinees = unserialize($event->joinees);
-        foreach ($joinees as $key => $list) {
-            $joinee[] = Child::find($list);
+        if(!empty($joinees)){
+            foreach ($joinees as $key => $list) {
+                $joinee[] = Child::find($list);
+            }
         }
         $datetoday = Carbon::parse($now->toDateString()); 
         return view('admin.client.events.attendees')->with('event', $event)
