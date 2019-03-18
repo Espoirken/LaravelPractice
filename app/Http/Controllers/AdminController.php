@@ -148,13 +148,16 @@ class AdminController extends Controller
     public function search(Request $request)
     {       
         //bug
-        $user = User::where('roles', 'Admin');
-        $admins = $user->where('username', 'like', '%' . request('search') . '%')
-        ->orWhere('first_name', 'like', '%' . request('search') . '%')
-        ->orWhere('middle_name', 'like', '%' . request('search') . '%')
-        ->orWhere('last_name', 'like', '%' . request('search') . '%')
-        ->orWhere('email', 'like', '%' . request('search') . '%')
-        ->orWhere('status', 'like', '%' . request('search') . '%')
+        $qs = request('search');
+        $user = User::whereIn('roles', array('Admin', 'Coach'));
+        $admins = $user->where(function($q) use ($qs){
+            $q->where('username', 'like', '%' . request('search') . '%')
+            ->orWhere('first_name', 'like', '%' . request('search') . '%')
+            ->orWhere('middle_name', 'like', '%' . request('search') . '%')
+            ->orWhere('last_name', 'like', '%' . request('search') . '%')
+            ->orWhere('email', 'like', '%' . request('search') . '%')
+            ->orWhere('status', 'like', '%' . request('search') . '%');
+        })        
         ->paginate(10);
         return view('admin.index')->with('admins', $admins);
     }

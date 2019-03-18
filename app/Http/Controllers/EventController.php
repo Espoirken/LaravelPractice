@@ -187,7 +187,9 @@ class EventController extends Controller
         $events = Event::where('title', 'like', '%' . request('search') . '%')
         ->orWhere('detail', 'like', '%' . request('search') . '%')
         ->paginate(10);
-        return view('admin.client.events.index')->with('events', $events);
+        $now = Carbon::now('Asia/Manila');
+        return view('admin.client.events.index')->with('events', $events)
+                                                ->with('now', $now);
     }
 
     public function attend($id)

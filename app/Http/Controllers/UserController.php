@@ -195,12 +195,17 @@ class UserController extends Controller
         if (!Gate::allows('isAdmin')) {
             abort(404);
         }
-        $clients = User::where('username', 'like', '%' . request('search') . '%')
-        ->orWhere('first_name', 'like', '%' . request('search') . '%')
-        ->orWhere('middle_name', 'like', '%' . request('search') . '%')
-        ->orWhere('last_name', 'like', '%' . request('search') . '%')
-        ->orWhere('email', 'like', '%' . request('search') . '%')
-        ->orWhere('status', 'like', '%' . request('search') . '%')
+        $qs = request('search');
+        $clients = User::where('roles', 'Client')
+        ->where(function($q) use ($qs){
+            $q->where('username', 'like', '%' . $qs . '%')
+            ->orWhere('username', 'like', '%' . $qs . '%')
+            ->orWhere('first_name', 'like', '%' . $qs . '%')
+            ->orWhere('middle_name', 'like', '%' . $qs . '%')
+            ->orWhere('last_name', 'like', '%' . $qs . '%')
+            ->orWhere('email', 'like', '%' . $qs . '%')
+            ->orWhere('status', 'like', '%' . $qs . '%');
+        })
         ->paginate(10);
         return view('admin.client.index')->with('clients', $clients);
     }
