@@ -102,9 +102,8 @@ class EventController extends Controller
         foreach ($all_child as $key => $value) {
             $allchild[] = $value;
         }
+        
         $all = array_diff($allchild, $children);
-        // dd($all);
-
         $joinees = array_intersect($children, $allchild);
         return view('admin.client.events.edit')->with('event', $event)
                                                 ->with('children', $children)
