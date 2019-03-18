@@ -139,7 +139,7 @@ class EventController extends Controller
         foreach ($users as $key => $user) {
             $emails[] = $user->email;
         }
-        Mail::to($emails)->send(new EventUpdate($event->title, $event->detail, $event->ended_at, $request->title, $request->detail, $request->ended_at));
+        Mail::to($emails)->send(new EventUpdate($event->title, $event->detail, $event->ended_at, $event->joinees, $request->title, $request->detail, $request->ended_at,$request->joinees));
         $event->title = $request->title;
         $event->detail = $request->detail;
         $event->joinees = serialize($request->joinees);
