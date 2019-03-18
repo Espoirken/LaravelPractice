@@ -67,7 +67,7 @@ class EventController extends Controller
         $event->joinees = serialize($request->joinees);
         $event->ended_at = Carbon::parse($request->ended_at);
         $event->save();
-        $this->mail($event->title, $event->detail, $event->id);
+        $this->mail($event->title, $event->detail, $event->id, $event->joinees);
         toastr()->success('Event was created successfully!');
         return redirect('admin/events');
     }
@@ -288,13 +288,13 @@ class EventController extends Controller
         return redirect()->back();
     }
 
-    public function mail($title, $detail, $id)
+    public function mail($title, $detail, $id, $joinees)
     {
         $users = User::all();
         foreach ($users as $key => $user) {
             $emails[] = $user->email;
         }
-        Mail::to($emails)->send(new EventMail($title, $detail, $id));
+        Mail::to($emails)->send(new EventMail($title, $detail, $id, $joinees));
         return 'Email was sent';
     }
 }
