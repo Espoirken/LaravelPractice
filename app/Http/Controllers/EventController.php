@@ -95,7 +95,21 @@ class EventController extends Controller
             abort(404);
         }
         $event = Event::findOrFail($id);
-        return view('admin.client.events.edit')->with('event', $event);
+        foreach (unserialize($event->joinees) as $key => $joinees) {
+            $children[] = Child::find($joinees);
+        }
+        $all_child = Child::all();
+        foreach ($all_child as $key => $value) {
+            $allchild[] = $value;
+        }
+        $all = array_diff($allchild, $children);
+        // dd($all);
+
+        $joinees = array_intersect($children, $allchild);
+        return view('admin.client.events.edit')->with('event', $event)
+                                                ->with('children', $children)
+                                                ->with('all', $all)
+                                                ->with('joinees', $joinees);
     }
 
     /**

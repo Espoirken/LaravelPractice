@@ -114,6 +114,14 @@
             placeholder: "  Select a user.."
         });
     });
+    $('#joinee').select2({
+        templateSelection: function (data, container) {
+            $(data.element).attr('data-custom-attribute', data.customValue);
+            return data.text;
+        }
+    });
+
+    $('#joinee').find(':selected').data('custom-attribute');
     </script>
     <script type="text/javascript">
         $("#polo_check").click(function(){
