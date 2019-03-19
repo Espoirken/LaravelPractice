@@ -191,10 +191,7 @@ class UserController extends Controller
     }
     
     public function search(Request $request)
-    {       
-        if (!Gate::allows('isAdmin')) {
-            abort(404);
-        }
+    {
         $q_search = request('search');
         $clients = User::where('roles', 'Client')
         ->where(function($q) use ($q_search){
