@@ -213,7 +213,10 @@ class EventController extends Controller
                 $child[] = $kids;
             }
         }
-        $array = array_intersect($child,$joinee);
+        
+        $array = $child;
+        if( !empty($joinee) && !empty($child) ) $array = array_intersect($child,$joinee);
+        
         $now = Carbon::now('Asia/Manila');
         return view('admin.client.events.attend')->with('event', $event)
                                                 ->with('children', $children)
@@ -286,7 +289,10 @@ class EventController extends Controller
         $child = Child::findOrFail($child_id);
         $child->increment('credits', 1);
         $child->save();
-        $child->events()->update(['attend' => 'Cancelled']);
+        //delete attendee record
+        $event = Event::findOrFail($event_id);
+        $event->attendees()->where('child_id',$child_id)->delete();
+
         return redirect()->back();
     }
 

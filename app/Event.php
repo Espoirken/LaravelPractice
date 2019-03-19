@@ -11,4 +11,13 @@ class Event extends Model
     }
     protected $dates = ['ended_at'];
 
+
+    /**
+     * Get the attendees for the event
+     */
+    public function attendees()
+    {
+        return $this->hasMany('App\Attendee', 'event_id');
+    }
+
 }
