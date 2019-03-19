@@ -9,7 +9,7 @@
                     <form class="form-inline" action="{{ route('admin.search')}}" method="POST">
                         <div class="form-group">
                             @csrf
-                            <input type="text" name="search" class="form-control mx-sm-3" style="" placeholder="Search an admin...">
+                            <input type="text" value="{{ $q_search ?? '' }}" name="search" class="form-control mx-sm-3" style="" placeholder="Search an admin...">
                             <input type="submit" class="btn btn-primary" class="form-control" value="Search">
                         </div>
                     </form>

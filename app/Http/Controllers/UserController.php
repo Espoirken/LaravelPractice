@@ -195,19 +195,19 @@ class UserController extends Controller
         if (!Gate::allows('isAdmin')) {
             abort(404);
         }
-        $qs = request('search');
+        $q_search = request('search');
         $clients = User::where('roles', 'Client')
-        ->where(function($q) use ($qs){
-            $q->where('username', 'like', '%' . $qs . '%')
-            ->orWhere('username', 'like', '%' . $qs . '%')
-            ->orWhere('first_name', 'like', '%' . $qs . '%')
-            ->orWhere('middle_name', 'like', '%' . $qs . '%')
-            ->orWhere('last_name', 'like', '%' . $qs . '%')
-            ->orWhere('email', 'like', '%' . $qs . '%')
-            ->orWhere('status', 'like', '%' . $qs . '%');
+        ->where(function($q) use ($q_search){
+            $q->where('username', 'like', '%' . $q_search . '%')
+            ->orWhere('username', 'like', '%' . $q_search . '%')
+            ->orWhere('first_name', 'like', '%' . $q_search . '%')
+            ->orWhere('middle_name', 'like', '%' . $q_search . '%')
+            ->orWhere('last_name', 'like', '%' . $q_search . '%')
+            ->orWhere('email', 'like', '%' . $q_search . '%')
+            ->orWhere('status', 'like', '%' . $q_search . '%');
         })
         ->paginate(10);
-        return view('admin.client.index')->with('clients', $clients);
+        return view('admin.client.index',compact('clients', 'q_search'));
     }
 
     public function edit_profile($id)

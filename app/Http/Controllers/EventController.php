@@ -183,13 +183,13 @@ class EventController extends Controller
     }
 
     public function search(Request $request)
-    {       
-        $events = Event::where('title', 'like', '%' . request('search') . '%')
-        ->orWhere('detail', 'like', '%' . request('search') . '%')
+    {
+        $q_search = request('search');
+        $events = Event::where('title', 'like', '%' . $q_search . '%')
+        ->orWhere('detail', 'like', '%' . $q_search . '%')
         ->paginate(10);
         $now = Carbon::now('Asia/Manila');
-        return view('admin.client.events.index')->with('events', $events)
-                                                ->with('now', $now);
+        return view('admin.client.events.index', compact('events', 'now', 'q_search'));
     }
 
     public function attend($id)
