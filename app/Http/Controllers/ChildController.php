@@ -168,16 +168,23 @@ class ChildController extends Controller
     }
     
     public function search(Request $request)
-    {       
-        $children = Child::where('name', 'like', '%' . request('search') . '%')
-        ->orWhere('credits', 'like', '%' . request('search') . '%')
-        ->orWhere('expiration', 'like', '%' . request('search') . '%')
-        ->orWhere('level', 'like', '%' . request('search') . '%')
-        ->orWhere('batting', 'like', '%' . request('search') . '%')
-        ->orWhere('throwing_hand', 'like', '%' . request('search') . '%')
-        ->orWhere('special_medical_condition', 'like', '%' . request('search') . '%')
+    {
+        $user = Auth::user();
+        $now = Carbon::now('Asia/Manila');
+        $datetoday = Carbon::parse($now->toDateString());
+        $q_search = request('search');
+        $children = Child::where('user_id', $user->id)
+        ->where(function ($q) use ($q_search){
+            $q->where('name', 'like', '%' . $q_search . '%')
+            ->orWhere('credits', 'like', '%' . $q_search . '%')
+            ->orWhere('expiration', 'like', '%' . $q_search . '%')
+            ->orWhere('level', 'like', '%' . $q_search . '%')
+            ->orWhere('batting', 'like', '%' . $q_search . '%')
+            ->orWhere('throwing_hand', 'like', '%' . $q_search . '%')
+            ->orWhere('special_medical_condition', 'like', '%' . $q_search . '%');
+        })
         ->paginate(10);
-        return view('admin.client.children.index')->with('children', $children);
+        return view('admin.client.children.index', compact('children', 'q_search', 'datetoday'));
     }
     
     public function attended($id)
