@@ -64,7 +64,7 @@ class EventController extends Controller
         $event = new Event;
         $event->title = $request->title;
         $event->detail = $request->detail;
-        $event->joinees = serialize($request->joinees != null ? $request->joinees : array());
+        $event->joinees = $request->joinees != null ? serialize($request->joinees) : '';
         $event->ended_at = Carbon::parse($request->ended_at);
         $event->save();
         $this->mail($event->title, $event->detail, $event->id, $event->joinees, $event->ended_at->format('F d, Y'));
@@ -142,7 +142,7 @@ class EventController extends Controller
         Mail::to($emails)->send(new EventUpdate($event->title, $event->detail, $event->ended_at, $event->joinees, $request->title, $request->detail, $request->ended_at,$request->joinees));
         $event->title = $request->title;
         $event->detail = $request->detail;
-        $event->joinees = serialize($request->joinees);
+        $event->joinees = $request->joinees != null ? serialize($request->joinees) : '';
         $event->ended_at = Carbon::parse($request->ended_at);
         $event->save();
         

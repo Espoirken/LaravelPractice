@@ -27,10 +27,12 @@ class EventMail extends Mailable
         $this->joinees = $joinees;
         $this->registration_end_date = $registration_end_date;
         $children = [];
-        $attendees = unserialize($joinees);
-        foreach ($attendees as $key => $joinee) {
-            $children[] = Child::find($joinee);
-        }
+        if( !empty($joinees) ){
+            $attendees = unserialize($joinees);
+            foreach ($attendees as $key => $joinee) {
+                $children[] = Child::find($joinee);
+            }
+        }        
         $this->joinees = $children;
     }
 

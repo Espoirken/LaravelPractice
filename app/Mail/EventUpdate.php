@@ -34,10 +34,12 @@ class EventUpdate extends Mailable
             }
             $this->joinees = $children;
         }
-        
-        foreach ($updated_joinees as $key => $updated_child) {
-            $updated_children[] = Child::find($updated_child);
-        }
+        $updated_children = [];
+        if( !empty($updated_joinees) ){
+            foreach ($updated_joinees as $key => $updated_child) {
+                $updated_children[] = Child::find($updated_child);
+            }
+        }        
         $this->updated_joinees = $updated_children;
     }
 
