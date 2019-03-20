@@ -288,15 +288,17 @@ class EventController extends Controller
     }
 
     public function cancel(Request $request, $event_id, $child_id)
-    {       
-        if (!Gate::allows('isClient')) {
+    {
+        $event = Event::findOrFail($event_id);
+        //prevent multiple increment when canceling by checking if the child is really one of the joinees
+        if (!Gate::allows('isClient') || $event->attendees()->where('child_id',$child_id)->first() == null) {
             abort(404);
         }
         $child = Child::findOrFail($child_id);
         $child->increment('credits', 1);
         $child->save();
         //delete attendee record
-        $event = Event::findOrFail($event_id);
+        
         $event->attendees()->where('child_id',$child_id)->delete();
 
         return redirect()->back();
