@@ -41,11 +41,11 @@
                         <td>{{$event->created_at->timezone('Asia/Manila')->format('F d, Y - D  h:i:s A')}}</td>
                         <td>{{$event->ended_at->timezone('Asia/Manila')->format('F d, Y - D  h:i:s A')}}</td>
                         @if ($event->status == 'Cancelled')
-                                <td><label class="form-control-plaintext badge badge-danger">Cancelled</label> </td>
-                            @elseif($event->ended_at > $now)
-                                <td><label class="form-control-plaintext badge badge-success">Ongoing</label> </td>
-                            @else
-                                <td><label class="form-control-plaintext badge badge-danger ">Ended</label> </td>
+                            <td><label class="form-control-plaintext badge badge-danger">Cancelled</label> </td>
+                        @elseif($event->ended_at > $now)
+                            <td><label class="form-control-plaintext badge badge-success">Ongoing</label> </td>
+                        @else
+                            <td><label class="form-control-plaintext badge badge-danger ">Ended</label> </td>
                         @endif
                         @can('isClient')
                             @if ($event->status == "Cancelled")

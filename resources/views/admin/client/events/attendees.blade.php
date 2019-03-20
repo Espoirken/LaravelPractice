@@ -49,10 +49,12 @@
             <div class="form-group row">
                 <label for="staticEmail" class="col-sm-2 col-form-label">Status</label>
                 <div class="col-sm-10">
-                    @if ($event->ended_at < $now)
-                    Ended
+                    @if ($event->status == 'Cancelled')
+                        {{ $event->status }}
+                    @elseif ($event->ended_at < $now)
+                        Ended
                     @else
-                    Active
+                        Active
                     @endif
                 </div>
             </div>
