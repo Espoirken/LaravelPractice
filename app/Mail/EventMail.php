@@ -12,20 +12,23 @@ use App\Child;
 class EventMail extends Mailable
 {
     use Queueable, SerializesModels;
-    public $title, $detail, $id, $joinees;
+    public $title, $detail, $id, $joinees, $registration_end_date;
     
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($title, $detail, $id, $joinees)
+    public function __construct($title, $detail, $id, $joinees, $registration_end_date)
     {
         $this->title = $title;
         $this->detail = $detail;
         $this->id = $id;
         $this->joinees = $joinees;
-        foreach (unserialize($joinees) as $key => $joinee) {
+        $this->registration_end_date = $registration_end_date;
+        $children = [];
+        $attendees = unserialize($joinees);
+        foreach ($attendees as $key => $joinee) {
             $children[] = Child::find($joinee);
         }
         $this->joinees = $children;
