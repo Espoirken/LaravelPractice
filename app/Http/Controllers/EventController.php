@@ -190,6 +190,7 @@ class EventController extends Controller
         $q_search = request('search');
         $events = Event::where('title', 'like', '%' . $q_search . '%')
         ->orWhere('detail', 'like', '%' . $q_search . '%')
+        ->latest()
         ->paginate(10);
         $now = Carbon::now('Asia/Manila');
         return view('admin.client.events.index', compact('events', 'now', 'q_search'));
