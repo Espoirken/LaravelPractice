@@ -260,7 +260,7 @@ class EventController extends Controller
         }
         $now = Carbon::now('Asia/Manila');
         $event = Event::findOrFail($event_id);
-        if($event->ended_at < $now){
+        if($event->ended_at < $now || $event->attendees()->where('child_id',$child_id)->first() != null){
             abort(404);
         }
         $child = Child::findOrFail($child_id);
