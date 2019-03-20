@@ -47,7 +47,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label for="staticEmail" class="col-sm-2 col-form-label">Status</label>
+                <label for="staticEmail" class="col-sm-2 col-form-label">Registration Status</label>
                 <div class="col-sm-10">
                     @if ($event->status == 'Cancelled')
                         {{ $event->status }}
