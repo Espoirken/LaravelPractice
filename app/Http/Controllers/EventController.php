@@ -166,18 +166,21 @@ class EventController extends Controller
         if($event->status == 'Cancelled' || $event->ended_at < $now){
             abort(404);
         }
-        if((count($event->children) > 0)){
-        foreach ($event->children as $key => $child) {
-            Child::where('id', [$child->id])->increment('credits', 1);
-            User::find($child->user->id);
-            $name[] = $child->name;
-            $credits[] = $child->credits;
-            $emails[] = $child->user->email;
-        }
-        Mail::to(array_unique($emails))->send(new CancelEvent($name, $credits, $event->title));
-        }
+        
         $event->status = 'Cancelled';
         $event->save();
+
+        if((count($event->children) > 0)){
+            foreach ($event->children as $key => $child) {
+                Child::where('id', [$child->id])->increment('credits', 1);
+                User::find($child->user->id);
+                $name[] = $child->name;
+                $credits[] = $child->credits;
+                $emails[] = $child->user->email;
+            }
+            Mail::to(array_unique($emails))->send(new CancelEvent($name, $credits, $event->title));
+        }
+        
         toastr()->success('Event was cancelled successfully!');
         return redirect('admin/events');
     }
@@ -198,6 +201,8 @@ class EventController extends Controller
             abort(404);
         }
         $event = Event::findOrFail($id);
+
+        if( $event->status == "Cancelled" ) abort(404);
         $user = Auth::user();
         $children = $user->children;
         $joinees = unserialize($event->joinees);

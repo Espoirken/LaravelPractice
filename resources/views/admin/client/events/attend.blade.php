@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label for="Status" class="col-sm-2 col-form-label">Status</label>
+                <label for="Registration Status" class="col-sm-2 col-form-label">Registration Status</label>
                 <div class="col-sm-10">
                     @if ($event->ended_at > $now)
                     <label class="form-control-plaintext">Ongoing</label>

@@ -28,8 +28,8 @@
                         <th>REGISTRATION<br>PERIOD</th>
                         <th width="9%">ATTEND</th>
                         @can('isAdmin')
-                        <th width="8%">EDIT</th>
-                        <th width="8%">CANCEL</th>
+                            <th width="8%">EDIT</th>
+                            <th width="8%">CANCEL</th>
                         @endcan
                     </tr>
                 </thead>
@@ -41,28 +41,30 @@
                         <td>{{$event->created_at->timezone('Asia/Manila')->format('F d, Y - D  h:i:s A')}}</td>
                         <td>{{$event->ended_at->timezone('Asia/Manila')->format('F d, Y - D  h:i:s A')}}</td>
                         @if ($event->status == 'Cancelled')
-                        <td><label class="form-control-plaintext badge badge-danger">Cancelled</label> </td>
-                        @elseif($event->ended_at > $now)
-                        <td><label class="form-control-plaintext badge badge-success">Ongoing</label> </td>
-                        @else
-                        <td><label class="form-control-plaintext badge badge-danger ">Ended</label> </td>
+                                <td><label class="form-control-plaintext badge badge-danger">Cancelled</label> </td>
+                            @elseif($event->ended_at > $now)
+                                <td><label class="form-control-plaintext badge badge-success">Ongoing</label> </td>
+                            @else
+                                <td><label class="form-control-plaintext badge badge-danger ">Ended</label> </td>
                         @endif
                         @can('isClient')
-                        @if ($event->ended_at > $now)
-                        <td><a class="btn btn-sm btn-secondary" href="{{ route('event.attend', ['id' => $event->id ]) }}"><i class="fa fa-plus"></i> Attend</a></td>
-                        @else
-                        <td><a class="btn btn-sm btn-secondary" href="{{ route('event.attendees', ['id' => $event->id ]) }}"><i class="fa fa-search"></i> Attendees</a></td>
-                        @endif
+                            @if ($event->status == "Cancelled")
+                                <td></td>
+                            @elseif ($event->ended_at > $now)
+                                <td><a class="btn btn-sm btn-secondary" href="{{ route('event.attend', ['id' => $event->id ]) }}"><i class="fa fa-plus"></i> Attend</a></td>
+                            @else
+                                <td><a class="btn btn-sm btn-secondary" href="{{ route('event.attendees', ['id' => $event->id ]) }}"><i class="fa fa-search"></i> Attendees</a></td>
+                            @endif
                         @else
                         <td><a class="btn btn-sm btn-secondary" href="{{ route('event.attendees', ['id' => $event->id ]) }}"><i class="fa fa-search"></i> Attendees</a></td>
                         @endcan
                         @can('isAdmin')
-                        <td ><a class="btn btn-sm btn-primary" href="{{ route('event.edit', ['id' => $event->id ])}}"><i class="fa fa-edit"></i> Edit</a></td>
-                        @if ($event->status == 'Cancelled' || $event->ended_at < $now)
-                        <td></td>
-                        @else
-                        <td><a class="btn btn-sm btn-danger" href="{{ route('event.delete', ['id' => $event->id])}}" onclick="return confirm('Are you sure?')"><i class="fa fa-ban" aria-hidden="true"></i> Cancel</a></td>
-                        @endif
+                                <td ><a class="btn btn-sm btn-primary" href="{{ route('event.edit', ['id' => $event->id ])}}"><i class="fa fa-edit"></i> Edit</a></td>
+                            @if ($event->status == 'Cancelled' || $event->ended_at < $now)
+                                <td></td>
+                            @else
+                                <td><a class="btn btn-sm btn-danger" href="{{ route('event.delete', ['id' => $event->id])}}" onclick="return confirm('Are you sure?')"><i class="fa fa-ban" aria-hidden="true"></i> Cancel</a></td>
+                            @endif
                         @endcan
                     </tr>
                     @endforeach
