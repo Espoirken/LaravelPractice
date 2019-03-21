@@ -4,7 +4,7 @@
     <div class="card">
         <div class="card-body">
         <div>
-            <a href="{{ route('clients')}}" class="btn btn-sm btn-primary float-right">
+            <a href="{{ route('client.show', $child->user_id) }}" class="btn btn-sm btn-primary float-right">
                 <i class="fa fa-arrow-left"></i> Back
             </a>
         </div>
