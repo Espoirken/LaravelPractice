@@ -125,6 +125,8 @@ class ChildController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $isAdmin = Gate::allows('isAdmin');
+        $isCoach = Gate::allows('isCoach');
         $this->validate($request, [
             'name' => 'required',
             'birthdate' => "required",
@@ -138,11 +140,11 @@ class ChildController extends Controller
         $child->birthdate = $request->birthdate;
         $child->gender = $request->gender;
         $child->sport = $request->sport;
-        $child->level = $request->level;
+        $child->level = $isCoach ? $request->level: $child->level;
         $child->batting = $request->batting;
         $child->throwing_hand = $request->throwing_hand;
-        $child->expiration = $request->expiration;
-        $child->credits = $request->credits;
+        $child->expiration = $isAdmin ? $request->expiration : $child->expiration;
+        $child->credits = $isAdmin ? $request->credits : $child->credits;
         $child->special_medical_condition = $request->condition;
         $child->status = 'Active';
         $child->save();

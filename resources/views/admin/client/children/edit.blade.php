@@ -92,19 +92,11 @@
                         </div>
                         <div class="form-group">
                             <label for="batting">Gender</label>
-                            <select class="form-control" name="gender">
-                                <option value="{{$child->gender}}" hidden>{{$child->gender}}</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                            </select>
+                            <input type="text" name="gender" class="form-control" value="{{$child->gender}}" readonly>
                         </div>
                         <div class="form-group">
                             <label for="batting">Sport</label>
-                            <select class="form-control" name="sport">
-                                <option value="{{$child->sport}}" hidden>{{$child->sport}}</option>
-                                <option value="Baseball">Baseball</option>
-                                <option value="Softball">Softball</option>
-                            </select>
+                            <input type="text" name="sport" class="form-control" value="{{$child->sport}}" readonly>
                         </div>
                         <div class="form-group">
                             <label for="birthdate">Date of Birth</label>
