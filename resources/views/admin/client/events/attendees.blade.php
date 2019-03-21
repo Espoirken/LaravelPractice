@@ -4,6 +4,11 @@
     <div class="card">
     <div class="card-header">
         <h3 class="card-title">View Event</h3>
+        <div>
+            <a href="{{ route('events')}}" class="btn btn-sm btn-primary float-right">
+                <i class="fa fa-arrow-left"></i> Back
+            </a>
+        </div>
     </div>
         <div class="card-body">
             <div class="row">
