@@ -3,6 +3,11 @@
 <div class="container-fluid">
     <div class="card">
         <div class="card-body">
+        <div>
+            <a href="{{ route('clients')}}" class="btn btn-sm btn-primary float-right">
+                <i class="fa fa-arrow-left"></i> Back
+            </a>
+        </div>
             <div class="row">
             @if ($child->nickname != NULL)
             <div class="col-lg-8"><h2 class="card-title">List of Events Attended by {{$child->nickname}}</h2></div>
