@@ -60,6 +60,12 @@ $(document).ready(function () {
             username: {
                 required: true
             },
+            password: {
+                minlength: 6,
+            },
+            password_confirmation: {
+                equalTo: "#password"
+            },
             email: {
                 required: true,
             },

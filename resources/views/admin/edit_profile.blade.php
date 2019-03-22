@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+@include('inc.messages')
 <div class="container-fluid">
     <div class="card">
     <div class="card-header">
@@ -17,7 +18,13 @@
             <div class="form-group row">
                 <label for="staticEmail" class="col-sm-2 col-form-label">Password</label>
                 <div class="col-sm-10">
-                    <input type="text" name="password" class="form-control">
+                    <input id="password" type="password" name="password" class="form-control">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Confirm Password</label>
+                <div class="col-sm-10">
+                    <input type="password" name="password_confirmation" class="form-control">
                 </div>
             </div>
             <div class="form-group row">
