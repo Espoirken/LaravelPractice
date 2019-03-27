@@ -8,6 +8,11 @@
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
+                    @if(session('registration_success'))
+                        <div class="alert alert-success">
+                            <strong>{{session('registration_success')}}</strong>
+                        </div>
+                    @endif
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
@@ -62,6 +67,10 @@
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif
+                                |
+                                <a class="btn btn-link" href="{{ route('register') }}">
+                                    {{ __('Parent Registration') }}
+                                </a>
                             </div>
                         </div>
                     </form>
