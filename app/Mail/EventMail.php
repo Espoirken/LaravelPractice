@@ -43,6 +43,6 @@ class EventMail extends Mailable
      */
     public function build()
     {
-        return $this->view('admin.client.events.email.create_event_email');
+        return $this->subject('A New Event Has Been Posted')->view('admin.client.events.email.create_event_email');
     }
 }

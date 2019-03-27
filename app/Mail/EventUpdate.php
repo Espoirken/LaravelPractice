@@ -50,6 +50,6 @@ class EventUpdate extends Mailable
      */
     public function build()
     {
-        return $this->view('admin.client.events.email.update_event_email');
+        return $this->subject('An Event Has Been Modified')->view('admin.client.events.email.update_event_email');
     }
 }

@@ -141,9 +141,8 @@ class EventController extends Controller
 
             $users = User::all();
             foreach ($users as $key => $user) {
-                $emails[] = $user->email;
+                Mail::to($user->email)->send(new EventUpdate($event->title, $event->detail, $event->ended_at, $event->joinees, $request->title, $request->detail, $request->ended_at,$request->joinees));
             }
-            Mail::to($emails)->send(new EventUpdate($event->title, $event->detail, $event->ended_at, $event->joinees, $request->title, $request->detail, $request->ended_at,$request->joinees));
         }
         
         $event->title = $request->title;
@@ -184,7 +183,12 @@ class EventController extends Controller
                 $credits[] = $child->credits;
                 $emails[] = $child->user->email;
             }
-            Mail::to(array_unique($emails))->send(new CancelEvent($name, $credits, $event->title));
+
+            $unique_emails = array_unique($emails);
+            foreach ($unique_emails as $key => $unique_email) {
+                Mail::to($unique_email)->send(new CancelEvent($name, $credits, $event->title));
+            }
+            
         }
         
         toastr()->success('Event was cancelled successfully!');
@@ -314,9 +318,9 @@ class EventController extends Controller
     {
         $users = User::all();
         foreach ($users as $key => $user) {
-            $emails[] = $user->email;
+            Mail::to($user->email)->send(new EventMail($title, $detail, $id, $joinees, $registration_end_date));
         }
-        Mail::to($emails)->send(new EventMail($title, $detail, $id, $joinees, $registration_end_date));
+        
         return 'Email was sent';
     }
 }

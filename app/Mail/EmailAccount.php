@@ -30,6 +30,6 @@ class EmailAccount extends Mailable
      */
     public function build()
     {
-        return $this->view('admin.email_account');
+        return $this->subject('Account Successfully Created')->view('admin.email_account');
     }
 }
