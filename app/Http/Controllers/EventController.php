@@ -135,11 +135,17 @@ class EventController extends Controller
             'ended_at' => 'required',
         ]);
         $event = Event::findOrFail($id);
-        $users = User::all();
-        foreach ($users as $key => $user) {
-            $emails[] = $user->email;
+
+        if( ($event->title != $request->title) || ($event->detail != $request->detail) 
+            || ($event->ended_at != $request->ended_at) ){
+
+            $users = User::all();
+            foreach ($users as $key => $user) {
+                $emails[] = $user->email;
+            }
+            Mail::to($emails)->send(new EventUpdate($event->title, $event->detail, $event->ended_at, $event->joinees, $request->title, $request->detail, $request->ended_at,$request->joinees));
         }
-        Mail::to($emails)->send(new EventUpdate($event->title, $event->detail, $event->ended_at, $event->joinees, $request->title, $request->detail, $request->ended_at,$request->joinees));
+        
         $event->title = $request->title;
         $event->detail = $request->detail;
         $event->joinees = $request->joinees != null ? serialize($request->joinees) : '';

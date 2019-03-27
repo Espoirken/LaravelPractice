@@ -66,6 +66,7 @@ class ChildController extends Controller
             'throwing_hand' => 'required',
             'condition' => 'required',
             'terms' => 'required|confirmed',
+            'uniform_size' => 'required'
         ]);
         $user = Auth::user();
         $child = new Child;
@@ -79,6 +80,7 @@ class ChildController extends Controller
         $child->throwing_hand = $request->throwing_hand;
         $child->special_medical_condition = $request->condition;
         $child->status = 'Active';
+        $child->uniform_size = $request->uniform_size;
         $child->save();
         toastr()->success('Child was created successfully!');
         return redirect('admin/children');
@@ -147,6 +149,7 @@ class ChildController extends Controller
         $child->credits = $isAdmin ? $request->credits : $child->credits;
         $child->special_medical_condition = $request->condition;
         $child->status = 'Active';
+        $child->uniform_size = $request->uniform_size;
         $child->save();
         toastr()->success('Child was updated successfully!');
         return redirect()->back();
