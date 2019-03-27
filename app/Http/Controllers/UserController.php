@@ -240,6 +240,7 @@ class UserController extends Controller
         $users->birthdate = $request->birthdate;
         $users->mobile = $request->mobile;
         $users->email = $request->email;
+        $users->polo_club_id = $request->polo_club_id;
         $users->save();
         toastr()->success('Account was updated successfully!');
         return redirect()->back();

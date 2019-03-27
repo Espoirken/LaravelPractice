@@ -68,7 +68,7 @@
             <div class="form-group row">
                 <label for="staticEmail" class="col-sm-2 col-form-label">Manila Polo Club ID</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="mobile" value="{{$users->polo_club_id}}">
+                    <input type="text" class="form-control" name="polo_club_id" value="{{$users->polo_club_id}}">
                 </div>
             </div>
             @endcan
