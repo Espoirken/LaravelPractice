@@ -80,6 +80,24 @@
                             <label for="condition">Special or Medical Condition</label>
                             <input type="text" name="condition" class="form-control" value="{{$child->special_medical_condition}}">
                         </div>
+                        <div class="form-group">
+                            <label for="throwing_hand">Uniform Size</label>
+                            <select class="form-control" name="uniform_size">
+                                @php
+                                    $uniform_size = array("Small", "Medium", "Large", "Extra Large");
+                                @endphp 
+
+                                @foreach ($uniform_size as $size)
+                                    @php
+                                        $selected = "";
+                                    @endphp 
+                                    @if ( $child->uniform_size == $size)
+                                         @php $selected = "selected"; @endphp 
+                                    @endif  
+                                    <option value="{{$size}}" {{$selected}}>{{$size}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         @else
 
                         <div class="form-group">
@@ -134,6 +152,10 @@
                             <label for="condition">Special or Medical Condition</label>
                             <input type="text" name="condition" class="form-control" value="{{$child->special_medical_condition}}" readonly>
                         </div>
+                        <div class="form-group">
+                            <label for="condition">Uniform Size</label>
+                            <input type="text" name="uniform_size" class="form-control" value="{{$child->uniform_size}}" readonly>
+                        </div>
                         @endcan
 
                         @can('isAdmin')
@@ -152,6 +174,10 @@
                         <div class="form-group">
                             <label for="condition">Special or Medical Condition</label>
                             <input type="text" name="condition" class="form-control" value="{{$child->special_medical_condition}}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="condition">Uniform Size</label>
+                            <input type="text" name="uniform_size" class="form-control" value="{{$child->uniform_size}}" readonly>
                         </div>
                         <div class="form-group">
                             <label for="expiration">Credits Expiration</label>

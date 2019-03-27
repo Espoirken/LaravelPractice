@@ -61,6 +61,15 @@
                             <label for="condition">Special or Medical Condition</label>
                             <input type="text" name="condition" class="form-control">
                         </div>
+                        <div class="form-group">
+                            <label for="throwing_hand">Uniform Size</label>
+                            <select class="form-control" name="uniform_size">
+                                <option value="" hidden></option>
+                                <option value="Small">Small</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Large">Large</option>
+                            </select>
+                        </div>
                         @include('admin.client.children.terms')
                     </form>
                 </div>
