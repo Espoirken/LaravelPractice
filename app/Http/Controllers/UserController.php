@@ -170,8 +170,7 @@ class UserController extends Controller
         if (!Gate::allows('isAdmin')) {
             abort(404);
         }
-        $client = User::findOrFail($id);
-        $client->delete();
+        User::destroy($id);
         toastr()->success('Client was deleted successfully!');
         return redirect('admin/clients');
     }
