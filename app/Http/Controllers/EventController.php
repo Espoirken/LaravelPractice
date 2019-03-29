@@ -95,7 +95,7 @@ class EventController extends Controller
             abort(404);
         }
         $event = Event::findOrFail($id);
-        $list = Child::all();
+        $lists = Child::all();
         $children = [];
         $joinees = [];
         $all = [];
@@ -104,7 +104,7 @@ class EventController extends Controller
             foreach (unserialize($event->joinees) as $key => $joinees) {
                 $children[] = Child::find($joinees);
             }
-            foreach ($list as $key => $value) {
+            foreach ($lists as $key => $value) {
                 $allchild[] = $value;
             }
             $all = array_diff($allchild, $children);
@@ -114,7 +114,7 @@ class EventController extends Controller
                                                 ->with('children', $children)
                                                 ->with('all', $all)
                                                 ->with('joinees', $joinees)
-                                                ->with('list', $list);
+                                                ->with('lists', $lists);
     }
 
     /**

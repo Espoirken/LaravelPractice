@@ -62,7 +62,7 @@
                             <input type="text" name="condition" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="throwing_hand">Uniform Size</label>
+                            <label for="uniform-size">Uniform Size</label>
                             <select class="form-control" name="uniform_size">
                                 <option value="" hidden></option>
                                 <option value="Small">Small</option>
